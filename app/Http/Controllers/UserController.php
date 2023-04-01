@@ -5,10 +5,8 @@ use Inertia\Inertia;
 
 class UserController extends Controller
 {
-    public function show( $user = "Invitado" )
+    public function show( )
     {
-        return Inertia::render('Test', [
-          'user' => array( "name" => $user )
-        ]);
+        return  "DASHBOARD";
     }
 }

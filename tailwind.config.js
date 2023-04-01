@@ -2,7 +2,8 @@
 module.exports = {
   content: [
       './resources/css/app.css',
-      './resources/js/Pages/**/*.jsx'
+      './resources/**/*.blade.php',
+      './resources/**/*.jsx',
   ],
   theme: {
     extend: {},
