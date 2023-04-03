@@ -2,7 +2,7 @@ import React from "react";
 import { Inertia } from "@inertiajs/inertia";
 
 interface LoginInterface{
-    handleForm: (form:string) => string;
+    handleForm: (form:string) => void;
 }
 
 const LoginForm = (props:LoginInterface) => {

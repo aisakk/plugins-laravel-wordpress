@@ -2,7 +2,7 @@ import React from 'react';
 import { Inertia } from '@inertiajs/inertia';
 
 interface RegisterInterface{
-    handleForm: (form:string) => string;
+    handleForm: (form:string) => void;
 }
 const RegisterForm = (props:RegisterInterface) => {
   const [email, setEmail] = React.useState('');

@@ -1,35 +1,21 @@
-import React, { useState } from "react";
-import { Inertia } from "@inertiajs/inertia";
-
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm'
-import ResetPassword from './components/ResetPassword'
-
+import { useState } from "react";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
+import ResetPasswordForm from "./components/ResetPasswordForm";
 const Login = () => {
-    const [formulario, setFormulario] =useState('login')
-
-    function handleFormulario(formulario){
-        setFormulario(formulario)
-    }
-
-    return (
-        <div className="min-h-screen grid grid-cols-2 place-content-center content-center">
-            <div className="min-h-screen bg-[url('../js/dist/assets/circle-scatter-haikei.svg')] bg-no-repeat bg-cover">
+    const [formulario, setFormulario] = useState("login");
+    const mostrarFormulario = (formulario) => {
+        setFormulario(formulario);
+    };
+    return (<div className="min-h-screen grid grid-cols-2">
+            <div className="min-h-height bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-extrabold text-white flex justify-center items-center">
                 hola
             </div>
-            <div className="min-h-screen flex flex-col justify-center items-center">
-                {formulario === "login" && (
-                    <LoginForm handleForm={handleFormulario} />
-                )}
-                 {formulario === "register" && (
-                    <RegisterForm handleForm={handleFormulario} />
-                )}
-                 {formulario === "reset" && (
-                    <ResetPassword handleForm={handleFormulario} />
-                )}
+            <div className="flex flex-col justify-center items-center">
+                {formulario === "login" && (<LoginForm handleForm={mostrarFormulario}/>)}
+                 {formulario === "register" && (<RegisterForm handleForm={mostrarFormulario}/>)}
+                 {formulario === "reset" && (<ResetPasswordForm handleForm={mostrarFormulario}/>)}
             </div>
-        </div>
-    );
+        </div>);
 };
-
 export default Login;
