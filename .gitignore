@@ -17,4 +17,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/resources/js/dist/*
+/resources/css/app.css
 TODO
