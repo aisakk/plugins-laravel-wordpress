@@ -8,7 +8,7 @@ createInertiaApp({
     resolve: (name) =>
         resolvePageComponent(
             `./dist/${name}.jsx`,
-            import.meta.glob("./dist/**/*.jsx")
+            import.meta.glob("./dist/**/*.jsx"),
         ),
     setup({ el, App, props }) {
         createRoot(el).render(<App {...props} />);

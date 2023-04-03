@@ -6,7 +6,9 @@ module.exports = {
       './resources/**/*.jsx',
   ],
   theme: {
-    extend: {},
+    extend: {
+
+    },
   },
   plugins: [],
 }
