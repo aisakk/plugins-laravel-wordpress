@@ -16,4 +16,7 @@ class PagesController extends Controller
     public function settings(){
         return Inertia::render('Pages/Settings');
     }
+    public function details(){
+        return Inertia::render('Pages/Details');
+    }
 }

@@ -108,7 +108,7 @@ const DropdownMenu: VFC = () => {
 
                    <div className="bg-slate-100 p-2">
                      <Link
-                       href="/"
+                       href="/dashboard"
                        className="flow-root rounded-md px-4 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                      >
                        <span className="flex items-center">
