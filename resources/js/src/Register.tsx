@@ -2,8 +2,10 @@
 
 import React from 'react';
 import { Inertia } from '@inertiajs/inertia';
+import { usePage } from '@inertiajs/inertia-react';
 
 const Register = () => {
+const { errors } = usePage().props
   const [email, setEmail] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -39,6 +41,7 @@ const Register = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              {errors.email && <p className='text-red-400'>{errors.email}</p>}
             </div>
             <div>
               <label htmlFor="username" className="sr-only">
@@ -55,6 +58,7 @@ const Register = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
+              {errors.username && <p className='text-red-400'>{errors.username}</p>}
             </div>
             <div>
               <label htmlFor="password" className="sr-only">
@@ -72,6 +76,7 @@ const Register = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+            {errors.password && <p className='text-red-400'>{errors.password}</p>}
           </div>
 
           <div>

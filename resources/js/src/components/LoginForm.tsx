@@ -1,18 +1,24 @@
 import React from "react";
 import { Inertia } from "@inertiajs/inertia";
+import { usePage } from "@inertiajs/inertia-react";
+
+import axios from "axios";
 
 interface LoginInterface{
     handleForm: (form:string) => void;
 }
 
 const LoginForm = (props:LoginInterface) => {
+    const { errors } = usePage().props
+
     const [emailOrUsername, setEmailOrUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [remember, setRemember] = React.useState(false);
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
-        e.currentTarget.preventDefault();
-        Inertia.post("/login", { emailOrUsername, password, remember });
+        e.preventDefault();
+        //axios.post("login",{ emailOrUsername, password, remember }).then(res=>console.log(res))
+        Inertia.post("/login", { emailOrUsername,  password, remember });
     };
 
     return (
@@ -45,6 +51,7 @@ const LoginForm = (props:LoginInterface) => {
                                     setEmailOrUsername(e.target.value)
                                 }
                             />
+                        {errors.emailOrUsername && <p className="text-red-400">{errors.emailOrUsername}</p>}
                         </div>
                         <div>
                             <label htmlFor="password" className="sr-only">
@@ -61,6 +68,7 @@ const LoginForm = (props:LoginInterface) => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
+                             {errors.password && <p className="text-red-400">{errors.password}</p>}
                         </div>
                     </div>
 
@@ -80,10 +88,12 @@ const LoginForm = (props:LoginInterface) => {
                             >
                                 Recordar sesión
                             </label>
+                            {errors.remember && <p className="text-red-400">{errors.rember}</p>}
                         </div>
                     </div>
 
                     <div className="">
+                        {errors.error && <p className="text-red-400">{errors.error}</p>}
                         <button
                             type="submit"
                             className="group relative w-full  flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
