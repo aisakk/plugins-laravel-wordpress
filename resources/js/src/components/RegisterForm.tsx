@@ -1,17 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Inertia } from '@inertiajs/inertia';
+import { useForm } from "@inertiajs/inertia-react";
 
 interface RegisterInterface{
     handleForm: (form:string) => void;
 }
 const RegisterForm = (props:RegisterInterface) => {
-  const [email, setEmail] = React.useState('');
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+   const { data, setData, post, processing, errors } = useForm({
+        email_register: '',
+        username: '',
+        password_register: ''
+   })
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
-    Inertia.post('/register', { email, username, password });
+    post('/register');
   };
 
   return (
@@ -36,9 +39,10 @@ const RegisterForm = (props:RegisterInterface) => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Correo electrónico"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={data.email_register}
+                onChange={(e) => setData('email_register', e.target.value)}
               />
+              {errors.email_register && <p className='text-red-400'>{errors.email_register}</p>}
             </div>
             <div>
               <label htmlFor="username" className="sr-only">
@@ -52,9 +56,10 @@ const RegisterForm = (props:RegisterInterface) => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Nombre de usuario"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={data.username}
+                onChange={(e) => setData('username',e.target.value)}
               />
+                  {errors.username && <p className='text-red-400'>{errors.username}</p>}
             </div>
             <div>
               <label htmlFor="password" className="sr-only">
@@ -68,9 +73,10 @@ const RegisterForm = (props:RegisterInterface) => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Contraseña"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={data.password_register}
+                onChange={(e) => setData('password_register',e.target.value)}
               />
+                {errors.password_register && <p className='text-red-400'>{errors.password_register}</p>}
             </div>
           </div>
 
