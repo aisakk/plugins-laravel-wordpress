@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
+use Inertia\Inertia;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,4 +36,6 @@ Route::post('/password-reset/send', [PasswordResetController::class, 'sendResetE
 Route::get('/password-reset/{token}', [PasswordResetController::class, 'showUpdateForm'])->name('password-reset.update.show');
 Route::post('/password-reset/update', [PasswordResetController::class, 'updatePassword'])->name('password-reset.update');
 
-Route::get('dashboard', [UserController::class, 'show'])->name('dashboard');
+Route::get('dashboard', [PagesController::class, 'dashboard'])->name('dashboard');
+Route::get('domains', [PagesController::class, 'domains'])->name('domains');
+Route::get('settings', [PagesController::class, 'settings'])->name('settings');
