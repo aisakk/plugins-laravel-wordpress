@@ -74,7 +74,7 @@ const RadioGroupButton = () => {
                             checked ? 'bg-slate-50 border-primary' : 'bg-white border-slate-50'
                         } relative p-2 w-full h-20  border-2 rounded-lg p-2 shadow-md`}>
                             <div className={`flex h-full w-full justify-center items-center`}>
-                                <Icon name={ item.icon } size={12}  />
+                                <Icon name={ item.icon } size={25}  />
                             </div>
                             {checked && (
                                 <div className="absolute right-0 top-0 text-green-500">

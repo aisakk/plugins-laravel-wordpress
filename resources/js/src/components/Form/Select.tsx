@@ -1,14 +1,19 @@
-import { Fragment, useState,useEffect } from "react";
+import { Fragment, useState } from "react";
 import Icon from "./../Icon";
 import Label from "./../Form/Label";
+import { Listbox, Transition } from '@headlessui/react'
 
 interface Option {
-  id: number;
-  name: string;
+    name: string;
+    value: string;
+}
+interface Label {
+    name: string;
+    value: string;
 }
 
 interface SelectProps {
-  label: string;
+  label: Option[];
   responsive?: boolean;
   options: Option[];
 }
@@ -34,24 +39,10 @@ const Select: React.FC<SelectProps> = ({ label, responsive, options }) => {
     }
   };
 
-  const [Listbox, setListbox] = useState<any>();
-  const [Transition, setTransition] = useState<any>();
-
-  useEffect(() => {
-    import('@headlessui/react').then((module) => {
-      setListbox(() => module.Listbox);
-      setTransition(() => module.Transition);
-    });
-  }, []);
-
-  if (!Listbox || !Transition) {
-    return null;
-  }
-
   return (
     <div className="">
       <div className="flex justify-between items-center">
-          <Label>{ label }</Label>
+          <Label>{ label[0].name }</Label>
 
           { responsive && (
               <div className="flex gap-1 text-slate-400">
@@ -87,18 +78,18 @@ const Select: React.FC<SelectProps> = ({ label, responsive, options }) => {
               {options.map((option, index) => (
                 <Listbox.Option
                   key={index}
-                  className={({ active }: { active: boolean }) =>
+                  className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
                       active ? 'bg-primary text-white' : 'text-slate-500'
                     }`
                   }
                   value={option}
                 >
-                  {({ desktop }: { desktop: boolean } ) => (
+                  {({ active, selected } ) => (
                     <>
                       <span
                         className={`block truncate ${
-                          desktop ? 'font-medium' : 'font-normal'
+                            selected ? 'font-medium' : 'font-normal'
                         }`}
                       >
                         {option.name}
