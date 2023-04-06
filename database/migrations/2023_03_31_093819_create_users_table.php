@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('email_last_verification')->nullable();
             $table->string('remember_token', 255)->nullable();
             $table->string('verification_code')->nullable();
+
             $table->timestamps();
       });
     }

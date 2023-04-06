@@ -1,4 +1,4 @@
-import MainLayout from '../layouts/MainLayout';
+import NosideBarLayout from '../layouts/NoSideBarLayout';
 import Card from '../components/Card';
 import PluginCard from '../components/Plugin/Card';
 
@@ -80,7 +80,7 @@ const Dashboard: React.FC = () => {
     ];
 
     return (
-        <MainLayout >
+        <NosideBarLayout >
             <div className="pt-10">
                 <div className="mb-10 max-w-3xl text-center mx-auto px-8">
                     <h1 className="text-2xl font-bold mb-4">Plugins</h1>
@@ -97,7 +97,7 @@ const Dashboard: React.FC = () => {
                     ))}
                 </div>
             </div>
-        </MainLayout>
+        </NosideBarLayout>
     );
 }
 
