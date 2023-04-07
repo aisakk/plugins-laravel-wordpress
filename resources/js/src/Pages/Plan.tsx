@@ -1,3 +1,4 @@
+import MainLayout from '../layouts/MainLayout';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 
@@ -18,6 +19,7 @@ const Plan: React.FC = () => {
   }
 
   return (
+    <MainLayout>
         <div className="py-10">
             <div className="flex flex-wrap sm:flex-nowrap gap-y-6 sm:gap-6 items-center">
                 <div className="w-full sm:w-6/12">
@@ -190,6 +192,7 @@ const Plan: React.FC = () => {
                 </Card>
             </div>
         </div>
+    </MainLayout>
     );
 }
 

@@ -32,10 +32,11 @@ Route::get('/email-verification/{code}',  [AuthController::class, 'verify'])->na
 
 Route::middleware(['auth', 'verified-custom'])->group(function(){
     // Route::get('dashboard', [UserController::class, 'show'])->name('dashboard');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/domains', [DashboardController::class, 'domains'])->name('dashboard.domains');
+    Route::get('/licenses', [DashboardController::class, 'licenses'])->name('dashboard.licenses');
+    Route::get('/{licenseId}/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/{licenseId}/domains', [DashboardController::class, 'domains'])->name('dashboard.domains');
     Route::get('/{licenseId}/settings',[DashboardController::class,'settings'])->name('dashboard.settings');
-    Route::get('/details', [DashboardController::class, 'details'])->name('dashboard.details');
+    Route::get('/{licenseId}/details', [DashboardController::class, 'details'])->name('dashboard.details');
 });
 
 

@@ -14,33 +14,33 @@ const DrawerMenu: React.FC = () => {
   const [isShowing, setIsShowing] = useState(false);
   const items: MenuItem[] = [
     {
-      title: 'General',
+      title: 'Plan',
       icon: 'list-check',
-      link: '/settings',
+      link: '/1/dashboard',
       active: true,
     },
     {
       title: 'Domains',
       icon: 'global',
-      link: '/domains',
+      link: '/1/domains',
       active: false,
     },
     {
       title: 'Installation',
       icon: 'code',
-      link: '/settings',
+      link: '/1/details',
       active: false,
     },
-    {
-      title: 'Guides',
-      icon: 'play-circle',
-      link: '/settings',
-      active: false,
-    },
+    // {
+    //   title: 'Guides',
+    //   icon: 'play-circle',
+    //   link: '/1/11/settings',
+    //   active: false,
+    // },
     {
       title: 'Settings',
       icon: 'settings',
-      link: '/settings',
+      link: '/1/settings',
       active: false,
     },
   ];
