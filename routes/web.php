@@ -52,3 +52,5 @@ Route::get('dashboard', [PagesController::class, 'dashboard'])->name('dashboard'
 Route::get('domains', [PagesController::class, 'domains'])->name('domains');
 Route::get('settings', [PagesController::class, 'settings'])->name('settings');
 Route::get('details', [PagesController::class, 'details'])->name('details');
+
+Route::get("widget", [AuthController::class, 'widget']);

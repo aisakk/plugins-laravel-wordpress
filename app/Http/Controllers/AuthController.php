@@ -110,4 +110,8 @@ class AuthController extends Controller
             Auth::logout();
             return redirect('/');
       }
+
+      public function widget(){
+        return Inertia::render("WidgetExample");
+      }
 }
