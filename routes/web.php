@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailVerificationController;
-use App\Http\Controllers\PagesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
@@ -31,7 +31,11 @@ Route::get('/email-verification/{code}',  [AuthController::class, 'verify'])->na
 //Route::get('/email-verification', [EmailVerificationController::class, 'showEmailForm'])->name('email-verification.show');
 
 Route::middleware(['auth', 'verified-custom'])->group(function(){
-    Route::get('dashboard', [UserController::class, 'show'])->name('dashboard');
+    // Route::get('dashboard', [UserController::class, 'show'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/domains', [DashboardController::class, 'domains'])->name('dashboard.domains');
+    Route::get('/{licenseId}/settings',[DashboardController::class,'settings'])->name('dashboard.settings');
+    Route::get('/details', [DashboardController::class, 'details'])->name('dashboard.details');
 });
 
 
@@ -47,8 +51,3 @@ Route::get('/password-reset', [PasswordResetController::class, 'showResetForm'])
 Route::post('/password-reset/send', [PasswordResetController::class, 'sendResetEmail'])->name('password-reset.send');
 Route::get('/password-reset/{token}', [PasswordResetController::class, 'showUpdateForm'])->name('password-reset.update.show');
 Route::post('/password-reset/update', [PasswordResetController::class, 'updatePassword'])->name('password-reset.update');
-
-Route::get('dashboard', [PagesController::class, 'dashboard'])->name('dashboard');
-Route::get('domains', [PagesController::class, 'domains'])->name('domains');
-Route::get('settings', [PagesController::class, 'settings'])->name('settings');
-Route::get('details', [PagesController::class, 'details'])->name('details');
