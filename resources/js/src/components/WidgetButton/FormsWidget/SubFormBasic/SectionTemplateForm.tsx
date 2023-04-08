@@ -7,6 +7,7 @@ function SectionTemplateForm({dataJson, handleProperties}){
         phone: dataJson.phone,
         whatsapp: dataJson.whatsapp,
         facebook: dataJson.facebook,
+        email: dataJson.email,
         instagram: dataJson.instagram,
         link: dataJson.link,
         icon: dataJson.icon,
@@ -39,37 +40,37 @@ function SectionTemplateForm({dataJson, handleProperties}){
             <div className="containerLayout flex gap-14">
                 <div className="container-icon cursor-pointer flex flex-col items-center justify-center" onClick={()=>handleIcon("icon","facebook")}>
                     <div className="icon">
-                        <Icon name={"facebook"} size="40" />
+                        <Icon name={"facebook"} size={40} />
                     </div>
                     <span>Facebook</span>
                 </div>
                 <div className="container-icon cursor-pointer flex flex-col items-center justify-center" onClick={()=>handleIcon("icon","whatsapp")}>
                     <div className="icon">
-                        <Icon name={"whatsapp"} size="40" />
+                        <Icon name={"whatsapp"} size={40} />
                     </div>
                     <span>Whatsapp</span>
                 </div>
                 <div className="container-icon cursor-pointer flex flex-col items-center justify-center" onClick={()=>handleIcon("icon","instagram")}>
                     <div className="icon">
-                        <Icon name={"instagram"} size="40" />
+                        <Icon name={"instagram"} size={40} />
                     </div>
                     <span>Instagram</span>
                 </div>
                 <div className="container-icon cursor-pointer flex flex-col items-center justify-center" onClick={()=>handleIcon("icon","phone")}>
                     <div className="icon">
-                        <Icon name={"phone"} size="40" />
+                        <Icon name={"phone"} size={40} />
                     </div>
                     <span>phone</span>
                 </div>
                 <div className="container-icon cursor-pointer flex flex-col items-center justify-center" onClick={()=>handleIcon("icon","email")}>
                     <div className="icon">
-                        <Icon name={"email"} size="40" />
+                        <Icon name={"email"} size={40} />
                     </div>
                     <span>Email</span>
                 </div>
                 <div className="container-icon cursor-pointer flex flex-col items-center justify-center" onClick={()=>handleIcon("icon","link")}>
                     <div className="icon">
-                        <Icon name={"link"} size="40" />
+                        <Icon name={"link"} size={40} />
                     </div>
                     <span>Link</span>
                 </div>
