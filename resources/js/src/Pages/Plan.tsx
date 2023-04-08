@@ -7,8 +7,23 @@ import Card from '../components/Card';
 import Icon from '../components/Icon';
 import Badge from '../components/Badge';
 
-const Plan: React.FC = () => {
-  let [isOpen, setIsOpen] = useState(false);
+interface Item {
+    date: string;
+    code: string;
+    name: string;
+    expiration: string;
+    domains: string;
+    status: string;
+  }
+
+  interface LicenseProps {
+      license: Item;
+  }
+
+const Plan: React.FC<LicenseProps> = (props) =>{
+    const { license } = props;
+    console.log(license);
+    let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
     setIsOpen(false);
@@ -110,16 +125,16 @@ const Plan: React.FC = () => {
                             <div className="flex flex-wrap sm:flex-nowrap gap-y-6 mt-10">
                                 <div className="w-full sm:w-4/12">
                                     <h6 className="font-bold text-xs uppercase mb-2">License Key</h6>
-                                    <p>ASHK-SASA-AIOA</p>
+                                    <p>{license.code}</p>
                                 </div>
                                 <div className="w-full sm:w-4/12">
                                     <h6 className="font-bold text-xs uppercase mb-2">Renewal Date</h6>
-                                    <p>22 Dec 2023</p>
+                                    <p>{license.expiration}</p>
                                 </div>
                                 <div className="w-full sm:w-4/12">
                                     <h6 className="font-bold text-xs uppercase mb-2">Site Activations</h6>
                                     <div className="flex gap-2 items-center">
-                                        <p>3/10</p>
+                                        <p>1/10</p>
                                         <span className="bg-blue-100 py-1 px-4 rounded-xl font-bold text-primary text-xs">View Sites</span>
                                     </div>
                                 </div>
