@@ -12,12 +12,13 @@ interface MenuItem {
 
 const DrawerMenu: React.FC = () => {
   const [isShowing, setIsShowing] = useState(false);
+  const currentPath = window.location.pathname;
   const items: MenuItem[] = [
     {
       title: 'Plan',
       icon: 'list-check',
       link: '/1/dashboard',
-      active: true,
+      active: false,
     },
     {
       title: 'Domains',
@@ -88,7 +89,7 @@ const DrawerMenu: React.FC = () => {
         </div>
         <div className="flex flex-col gap-y-2 px-6 sm:px-2 py-10">
           {items.map((item) => (
-            <DrawerMenuItem key={item.title} item={item} />
+            <DrawerMenuItem key={item.title} item={{ ...item, active: currentPath === item.link }}  />
           ))}
         </div>
       </nav>

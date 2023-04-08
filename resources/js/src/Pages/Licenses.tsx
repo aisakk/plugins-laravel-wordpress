@@ -1,9 +1,11 @@
 import NosideBarLayout from '../layouts/NoSideBarLayout';
-import { Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/inertia-react';
 import Badge from '../components/Badge';
 import Card from '../components/Card';
 import Button from '../components/Form/Button';
 import Icon from '../components/Icon';
+
+
 
 interface Item {
   date: string;
@@ -14,18 +16,14 @@ interface Item {
   status: string;
 }
 
-const items: Item[] = [
-  {
-    date: '20 Nov 2022',
-    code: 'SAXAS-XYAZ-UIZL',
-    name: 'Optimized Chat button',
-    expiration: '20 Nov 2023',
-    domains: 'octonove.com',
-    status: 'Active',
-  },
-];
+interface LicensesProps {
+    licenses: Item[];
+}
 
-const Licenses: React.FC = () => {
+
+const Licenses: React.FC<LicensesProps> = (props) => {
+    const { licenses } = props;
+
   return (
         <NosideBarLayout>
             <div className="py-10 text-center">
@@ -55,7 +53,7 @@ const Licenses: React.FC = () => {
                         </div>
                     </div>
 
-                    { items.map((item) => (
+                    { licenses.map((item) => (
                         <div className="flex border-t border-slate-200 py-4 items-center">
                             <div className="w-3/12">
                                 <p>{ item.date }</p>

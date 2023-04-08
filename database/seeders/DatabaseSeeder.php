@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Helpers\PluginHelper;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +19,26 @@ class DatabaseSeeder extends Seeder
             'username' => 'testUser',
             'email' => 'user@example.com',
         ]);
+
+
+        $readmeFilePath = resource_path('plugins/readme.txt');
+        $plugin = PluginHelper::extractPluginName($readmeFilePath);
+        if ($plugin) {
+
+            $pluginCreated=\App\Models\Plugin::factory()->create([
+                'name' => $plugin->name,
+                'readme_path' => $readmeFilePath,
+            ]);
+
+            \App\Models\License::factory(3)->create([
+                'plugin_id'=>$pluginCreated->id
+            ]);
+
+        }
+
+
+        // else {return response('Error extracting plugin name', 400);}
+
+
     }
 }

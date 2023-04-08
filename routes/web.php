@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,3 +53,4 @@ Route::get('/password-reset', [PasswordResetController::class, 'showResetForm'])
 Route::post('/password-reset/send', [PasswordResetController::class, 'sendResetEmail'])->name('password-reset.send');
 Route::get('/password-reset/{token}', [PasswordResetController::class, 'showUpdateForm'])->name('password-reset.update.show');
 Route::post('/password-reset/update', [PasswordResetController::class, 'updatePassword'])->name('password-reset.update');
+
