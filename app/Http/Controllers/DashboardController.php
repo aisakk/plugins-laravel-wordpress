@@ -14,7 +14,7 @@ class DashboardController extends Controller
             return [
                 'date' => $license->created_at->format('d M Y'),
                 'code' => $license->licence_key,
-                'name' => 'Optimized Chat button, phone, social link by Octonove',
+                'name' => $license->plugin->name,
                 'expiration' => $license->expiration,
                 'domains' => $license->domain,
                 'status' => $license->status ? 'Active' : 'Inactive',

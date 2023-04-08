@@ -1,6 +1,6 @@
 import React from 'react';
-import DropdownMenu from '../DropdownMenu/index';
 import DropdownAccount from '../DropdownAccount/index';
+import MenuHorizontal from '../MenuHorizontal';
 import Icon from '../Icon';
 
 const TopNav: React.FC = () => {
@@ -9,7 +9,8 @@ const TopNav: React.FC = () => {
             <div className="flex justify-between items-center py-2 px-4">
                 <div className="flex gap-6 sm:pl-32">
                     <div className="hidden sm:block">
-                        <DropdownMenu />
+                        {/* <DropdownMenu /> */}
+                        <MenuHorizontal/>
                     </div>
                 </div>
 

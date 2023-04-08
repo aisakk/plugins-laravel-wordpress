@@ -53,4 +53,3 @@ Route::get('/password-reset', [PasswordResetController::class, 'showResetForm'])
 Route::post('/password-reset/send', [PasswordResetController::class, 'sendResetEmail'])->name('password-reset.send');
 Route::get('/password-reset/{token}', [PasswordResetController::class, 'showUpdateForm'])->name('password-reset.update.show');
 Route::post('/password-reset/update', [PasswordResetController::class, 'updatePassword'])->name('password-reset.update');
-
