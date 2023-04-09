@@ -6,6 +6,11 @@ import Button from '../components/Form/Button';
 import Icon from '../components/Icon';
 
 
+interface Domain{
+    id:number;
+    name:string;
+    active:boolean;
+}
 
 interface License {
     id:number;
@@ -13,7 +18,7 @@ interface License {
   code: string;
   pluginName: string;
   expiration: string;
-  domains: string;
+  domains: Domain[];
   status: string;
 }
 
@@ -24,6 +29,7 @@ interface LicensesProps {
 
 const Licenses: React.FC<LicensesProps> = (props) => {
     const { licenses } = props;
+    console.log(licenses)
 
   return (
         <NosideBarLayout>
@@ -69,7 +75,11 @@ const Licenses: React.FC<LicensesProps> = (props) => {
                                 <p>{ item.expiration }</p>
                             </div>
                             <div className="w-3/12">
-                                <p>{ item.domains }</p>
+                                {
+                                    item.domains.map((item)=>(
+                                        <p>{ item.name }</p>
+                                    ))
+                                }
                             </div>
                             <div className="w-2/12">
                                 <Badge background="bg-green-500">{ item.status }</Badge>

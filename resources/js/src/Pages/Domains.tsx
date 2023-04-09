@@ -8,6 +8,11 @@ import Button from '../components/Form/Button';
 import Input from '../components/Form/Input';
 import Icon from '../components/Icon';
 
+interface Domain{
+    id:number;
+    name:string;
+    active:boolean;
+}
 
 interface License {
     id:number;
@@ -15,7 +20,7 @@ interface License {
     code: string;
     pluginName: string;
     expiration: string;
-    domains: string;
+    domains: Domain[];
     status: string;
   }
 
@@ -24,35 +29,12 @@ interface License {
   }
 
 
-interface Item {
-  name: string;
-  code: string;
-  date: string;
-  domains: string;
-  status: string;
-}
 
-const items: Item[] = [
-  {
-    name: 'octonove.com',
-    code: 'SAXAS-XYAZ-UIZL',
-    date: '20 Nov 2023',
-    domains: 'octonove.com',
-    status: 'Active',
-  },
-];
+
 
 const Domains: React.FC<LicenseProps> = (props) => {
     const { license } = props;
-    const items = [
-        {
-            name: 'octonove.com',
-            code: 'SAXAS-XYAZ-UIZL',
-            date: '20 Nov 2023',
-            domains: 'octonove.com',
-            status: 'Active'
-        }
-    ]
+
 
     let [isOpenCreate, setIsOpenCreate] = useState(false)
     let [isOpenEdit, setIsOpenEdit] = useState(false)
@@ -174,13 +156,13 @@ const Domains: React.FC<LicenseProps> = (props) => {
                     </div>
                 </div>
 
-                { items.map((item) => (
-                    <div key={item.name} className="flex border-t border-slate-200 py-4 items-center">
+                { license.domains.map((item) => (
+                    <div key={item.id} className="flex border-t border-slate-200 py-4 items-center">
                         <div className="w-5/12">
                             <p>{ item.name }</p>
                         </div>
                         <div className="w-5/12">
-                            <Badge background="bg-green-500">{ item.status }</Badge>
+                            <Badge background="bg-green-500">{ item.active?'active':'inactive' }</Badge>
                         </div>
                         <div className="w-2/12">
                             <div className="flex justify-center gap-4">

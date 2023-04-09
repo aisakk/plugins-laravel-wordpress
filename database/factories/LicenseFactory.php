@@ -22,12 +22,11 @@ class LicenseFactory extends Factory
         // Get the current status and update the counter.
         $status = $this->statusCounter % 2;
         $this->statusCounter++;
-        return [
 
+        return [
             'licence_key' => strtoupper(fake()->bothify('?????-????-????')),
             'status' => $status,
             'expiration'=>fake()->dateTimeBetween('1 week', '+5 week'),
-            'domain'=>fake()->domainName(),
             'user_id'=>1,
         ];
     }

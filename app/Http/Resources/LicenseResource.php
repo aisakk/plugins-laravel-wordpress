@@ -23,7 +23,7 @@ class LicenseResource extends JsonResource
             'code' => $this->licence_key,
             'pluginName' => $this->plugin->name,
             'expiration' => $expirationDate,
-            'domains' => $this->domain,
+            'domains' => $this->domains,
             'status' => $this->status ? 'Active' : 'Inactive',
         ];
     }

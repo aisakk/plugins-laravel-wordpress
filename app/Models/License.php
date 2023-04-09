@@ -21,6 +21,11 @@ class License extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function domains()
+    {
+        return $this->hasMany(Domain::class);
+    }
+
     public function plugin()
     {
         return $this->belongsTo(Plugin::class);
