@@ -5,6 +5,19 @@ import Button from '../components/Form/Button';
 import RatingPercentage from '../components/Rating/Percentage';
 import Gallery from '../components/Gallery';
 import Tag from '../components/Tag';
+interface License {
+    id:number;
+    date: string;
+    code: string;
+    pluginName: string;
+    expiration: string;
+    domains: string;
+    status: string;
+  }
+
+  interface LicenseProps {
+      license: License;
+  }
 
 type Rating = {
   name: string;
@@ -51,7 +64,8 @@ type Plugin = {
   tags: PluginTag[];
 };
 
-const Details: React.FC = () => {
+const Details: React.FC<LicenseProps> = (props) => {
+    const { license } = props;
   const plugin: Plugin = {
     name: 'Optimized Chat button, phone, social link by Octonove',
     description: '',
@@ -448,7 +462,7 @@ const Details: React.FC = () => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout licenseId={license.id}>
         <div className="py-10">
                 <div className="py-10">
                 <div className="w-full">

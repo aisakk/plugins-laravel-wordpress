@@ -5,44 +5,44 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\License;
-use Carbon\Carbon;
+use App\Http\Resources\LicenseResource;
 
 class DashboardController extends Controller
 {
-    public function licenses(){
-        $licenses=License::all();
-        $licensesArray = $licenses->map(function ($license) {
-            $expirationDate = Carbon::createFromFormat('Y-m-d', $license->expiration)->format('d M Y');
-            return [
-                'date' => $license->created_at->format('d M Y'),
-                'code' => $license->licence_key,
-                'name' => $license->plugin->name,
-                'expiration' => $expirationDate,
-                'domains' => $license->domain,
-                'status' => $license->status ? 'Active' : 'Inactive',
-            ];
-        })->toArray();
+    public function licenses()
+    {
+        $licenses = License::all();
+        $licensesArray = LicenseResource::collection($licenses)->toArray(request());
 
-        return Inertia::render('Pages/Licenses',['licenses'=>$licensesArray]);
+        return Inertia::render('Pages/Licenses', ['licenses' => $licensesArray]);
     }
-    public function index($licenseId){
-        $license=License::findOrFail($licenseId);
-        $expirationDate = Carbon::createFromFormat('Y-m-d', $license->expiration)->format('d M Y');
-        $license->date = $license->created_at->format('d M Y');
-        $license->code = $license->licence_key;
-        $license->name = $license->plugin->name;
-        $license->expiration = $expirationDate;
-        $license->domains = $license->domain;
-        $license->status = $license->status ? 'Active' : 'Inactive';
-        return Inertia::render('Pages/Plan',['license'=>$license]);
+
+    public function index($licenseId)
+    {
+        $license = License::findOrFail($licenseId);
+        $licenseResource = (new LicenseResource($license))->toArray(request());
+
+        return Inertia::render('Pages/Plan', ['license' => $licenseResource]);
     }
-    public function domains(){
-        return Inertia::render('Pages/Domains');
+
+    public function domains($licenseId)
+    {
+        $license = License::findOrFail($licenseId);
+        $licenseResource = (new LicenseResource($license))->toArray(request());
+        return Inertia::render('Pages/Domains', ['license' => $licenseResource]);
     }
-    public function settings($licenseId){
-        return Inertia::render('Pages/Settings');
+
+    public function settings($licenseId)
+    {
+        $license = License::findOrFail($licenseId);
+        $licenseResource = (new LicenseResource($license))->toArray(request());
+        return Inertia::render('Pages/Settings', ['license' => $licenseResource]);
     }
-    public function details(){
-        return Inertia::render('Pages/Details');
+
+    public function details($licenseId)
+    {
+        $license = License::findOrFail($licenseId);
+        $licenseResource = (new LicenseResource($license))->toArray(request());
+        return Inertia::render('Pages/Details', ['license' => $licenseResource]);
     }
 }

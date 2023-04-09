@@ -10,38 +10,37 @@ interface MenuItem {
   active: boolean;
 }
 
-const DrawerMenu: React.FC = () => {
+interface DrawerMenuProps {
+  licenseId: number;
+}
+
+const DrawerMenu: React.FC<DrawerMenuProps> = (props) => {
+  const { licenseId } = props;
   const [isShowing, setIsShowing] = useState(false);
   const currentPath = window.location.pathname;
   const items: MenuItem[] = [
     {
       title: 'Plan',
       icon: 'list-check',
-      link: '/1/dashboard',
+      link: `/license/${licenseId}/dashboard`,
       active: false,
     },
     {
       title: 'Domains',
       icon: 'global',
-      link: '/1/domains',
+      link: `/license/${licenseId}/domains`,
       active: false,
     },
     {
       title: 'Installation',
       icon: 'code',
-      link: '/1/details',
+      link: `/license/${licenseId}/details`,
       active: false,
     },
-    // {
-    //   title: 'Guides',
-    //   icon: 'play-circle',
-    //   link: '/1/11/settings',
-    //   active: false,
-    // },
     {
       title: 'Settings',
       icon: 'settings',
-      link: '/1/settings',
+      link: `/license/${licenseId}/settings`,
       active: false,
     },
   ];

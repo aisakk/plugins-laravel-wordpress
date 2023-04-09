@@ -7,17 +7,18 @@ import Icon from '../components/Icon';
 
 
 
-interface Item {
+interface License {
+    id:number;
   date: string;
   code: string;
-  name: string;
+  pluginName: string;
   expiration: string;
   domains: string;
   status: string;
 }
 
 interface LicensesProps {
-    licenses: Item[];
+    licenses: License[];
 }
 
 
@@ -62,7 +63,7 @@ const Licenses: React.FC<LicensesProps> = (props) => {
                                 <p className="bg-slate-100 text-slate-600 rounded-xl py-1 px-4 font-bold inline-block">{ item.code }</p>
                             </div>
                             <div className="w-3/12">
-                                <p>{ item.name }</p>
+                                <p>{ item.pluginName }</p>
                             </div>
                             <div className="w-2/12">
                                 <p>{ item.expiration }</p>
@@ -74,7 +75,7 @@ const Licenses: React.FC<LicensesProps> = (props) => {
                                 <Badge background="bg-green-500">{ item.status }</Badge>
                             </div>
                             <div className="w-1/12">
-                                <Link href="/1/dashboard" className="flex justify-center">
+                                <Link href={'license/'+item.id+'/dashboard'} className="flex justify-center">
                                     <Button background="bg-white" padding="p-2"><Icon size={25} name="eye" /></Button>
                                 </Link>
                             </div>

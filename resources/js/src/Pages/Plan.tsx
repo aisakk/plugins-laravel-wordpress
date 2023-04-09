@@ -8,9 +8,10 @@ import Icon from '../components/Icon';
 import Badge from '../components/Badge';
 
 interface Item {
+    id:number;
     date: string;
     code: string;
-    name: string;
+    pluginName: string;
     expiration: string;
     domains: string;
     status: string;
@@ -22,7 +23,6 @@ interface Item {
 
 const Plan: React.FC<LicenseProps> = (props) =>{
     const { license } = props;
-    console.log(license);
     let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -34,7 +34,7 @@ const Plan: React.FC<LicenseProps> = (props) =>{
   }
 
   return (
-    <MainLayout>
+    <MainLayout licenseId={license.id}>
         <div className="py-10">
             <div className="flex flex-wrap sm:flex-nowrap gap-y-6 sm:gap-6 items-center">
                 <div className="w-full sm:w-6/12">
@@ -144,7 +144,7 @@ const Plan: React.FC<LicenseProps> = (props) =>{
                 </div>
                 <div className="w-full sm:w-6/12">
                     <Card>
-                        <h2 className="font-bold mb-4 text-xl">Octo Image Optimizer Premium</h2>
+                        <h2 className="font-bold mb-4 text-xl">{license.pluginName}</h2>
                         <ul className="mb-6">
                             <li className="flex items-center gap-2"><span className="text-primary"><Icon size={4} name="check-circle" /></span> Multiple keyphrases: Increase your SEO reach</li>
                             <li className="flex items-center gap-2"><span className="text-primary"><Icon size={4} name="check-circle" /></span> Superfast internal linking suggestions</li>

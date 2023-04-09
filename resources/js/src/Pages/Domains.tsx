@@ -8,6 +8,22 @@ import Button from '../components/Form/Button';
 import Input from '../components/Form/Input';
 import Icon from '../components/Icon';
 
+
+interface License {
+    id:number;
+    date: string;
+    code: string;
+    pluginName: string;
+    expiration: string;
+    domains: string;
+    status: string;
+  }
+
+  interface LicenseProps {
+      license: License;
+  }
+
+
 interface Item {
   name: string;
   code: string;
@@ -26,8 +42,8 @@ const items: Item[] = [
   },
 ];
 
-const Domains: React.FC = () => {
-
+const Domains: React.FC<LicenseProps> = (props) => {
+    const { license } = props;
     const items = [
         {
             name: 'octonove.com',
@@ -58,7 +74,7 @@ const Domains: React.FC = () => {
     }
 
     return (
-        <MainLayout>
+        <MainLayout licenseId={license.id}>
         <div className="py-10">
             <Card>
                 <div className="flex justify-between mb-6">

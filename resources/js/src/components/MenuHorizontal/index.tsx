@@ -48,30 +48,6 @@ const purchase: MenuItem[] = [
     },
 ];
 
-interface Product {
-  name: string;
-  description: string;
-  href: string;
-    icon: React.ElementType;
-}
-
-interface CallToAction {
-  name: string;
-  href: string;
-    icon: React.ElementType;
-}
-
-const products: Product[] = [
-  { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
-  { name: 'Engagement', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
-  { name: 'Security', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
-  { name: 'Integrations', description: 'Connect with third-party tools', href: '#', icon: SquaresPlusIcon },
-  { name: 'Automations', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
-];
-const callsToAction: CallToAction[] = [
-  { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
-  { name: 'Contact sales', href: '#', icon: PhoneIcon },
-];
 
 function classNames(...classes: (string | undefined | boolean)[]) {
   return classes.filter(Boolean).join(' ');
@@ -102,7 +78,7 @@ const Example: React.FC = () => {
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
 
 
-          <a href="/1/dashboard" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="/license/1/dashboard" className="text-sm font-semibold leading-6 text-gray-900">
             Dashboard
           </a>
           <Popover className="relative">
@@ -205,11 +181,11 @@ const Example: React.FC = () => {
                         />
                       </Disclosure.Button>
                       <Disclosure.Panel className="mt-2 space-y-2">
-                        {[...products, ...callsToAction].map((item) => (
+                        {purchase.map((item) => (
                           <Disclosure.Button
                             key={item.name}
                             as="a"
-                            href={item.href}
+                            href={item.link}
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                           >
                             {item.name}
