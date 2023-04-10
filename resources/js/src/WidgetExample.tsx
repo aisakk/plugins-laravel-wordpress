@@ -419,7 +419,10 @@ function WidgetExamples() {
 
             <FormButtons createButton={addButton} deleteButton={removeButton} dataButton={button}/>
             {json.contentButtons.map((item, index) => {
-            return <FormGeneralBasic
+            return <FormGeneralAdvanced key={index} dataJson={item} changeSelectionButtonProperties={changeSelectionButtonProperties} changeSelectionLabelProperties={changeSelectionLabelProperties} changeSelectionIconProperties={changeSelectionIconProperties} changeSelectionTemplateProperties={changeSelectionTemplateProperties}/>
+
+
+            {/* <FormGeneralBasic
                 key={index}
                 dataJson={item}
                 removeForm={removeButton}
@@ -427,7 +430,7 @@ function WidgetExamples() {
                 changeSelectionButtonPropertiesBasic={changeSelectionButtonPropertiesBasic}
                 changeSelectionLabelPropertiesBasic={changeSelectionLabelPropertiesBasic}
                 changeSelectionIconPropertiesBasic={changeSelectionIconPropertiesBasic}
-            />
+            /> */}
             /*<FormGeneralAdvanced key={index} dataJson={item} changeSelectionButtonProperties={changeSelectionButtonProperties} changeSelectionLabelProperties={changeSelectionLabelProperties} changeSelectionIconProperties={changeSelectionIconProperties} changeSelectionTemplateProperties={changeSelectionTemplateProperties}/>; */
         })}
 

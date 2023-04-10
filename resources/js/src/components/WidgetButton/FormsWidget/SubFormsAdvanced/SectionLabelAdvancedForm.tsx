@@ -88,13 +88,13 @@ function SectionLabelAdvancedForm({ dataJson, handleProperties }) {
                     <div className="flex justify-between">
                         <label className="font-bold text-sm pb-2">Font Size</label>
                         <button onClick={() => setDeviceFontSize("pc")}>
-                            <IconWidget name="desktop" color={`${deviceFontSize === "pc" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
+                            <IconWidget  stylesEmotionCss="" name="desktop" color={`${deviceFontSize === "pc" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
                         </button>
                         <button onClick={() => setDeviceFontSize("tablet")}>
-                            <IconWidget name="tablet" color={`${deviceFontSize === "tablet" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
+                            <IconWidget  stylesEmotionCss="" name="tablet" color={`${deviceFontSize === "tablet" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
                         </button>
                         <button onClick={() => setDeviceFontSize("movil")}>
-                             <IconWidget name="mobile" color={`${deviceFontSize === "movil" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
+                             <IconWidget stylesEmotionCss=""  name="mobile" color={`${deviceFontSize === "movil" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
 
                         </button>
                     </div>
@@ -118,15 +118,15 @@ function SectionLabelAdvancedForm({ dataJson, handleProperties }) {
                          <div className="flex gap-3 w-6/12">
                             <label className="font-bold text-sm pb-2">Border Radius</label>
                             <button onClick={() => setDeviceBorderRadius("pc")}>
-                             <IconWidget name="desktop" color={`${deviceBorderRadius === "pc" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
+                             <IconWidget stylesEmotionCss="" name="desktop" color={`${deviceBorderRadius === "pc" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
 
                             </button>
                             <button onClick={() => setDeviceBorderRadius("tablet")}>
-                             <IconWidget name="tablet" color={`${deviceBorderRadius === "tablet" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
+                             <IconWidget stylesEmotionCss="" name="tablet" color={`${deviceBorderRadius === "tablet" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
 
                             </button>
                             <button onClick={() => setDeviceBorderRadius("movil")}>
-                                <IconWidget name="mobile" color={`${deviceBorderRadius === "movil" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
+                                <IconWidget stylesEmotionCss="" name="mobile" color={`${deviceBorderRadius === "movil" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
 
                             </button>
                         </div>
@@ -213,14 +213,14 @@ function SectionLabelAdvancedForm({ dataJson, handleProperties }) {
                             <label className="font-bold text-sm pb-2">Margin</label>
                             <button onClick={() => setDeviceMargin("pc")}>
 
-                                <IconWidget name="desktop" color={`${deviceMargin === "pc" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
+                                <IconWidget stylesEmotionCss="" name="desktop" color={`${deviceMargin === "pc" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
                             </button>
                             <button onClick={() => setDeviceMargin("tablet")}>
-                              <IconWidget name="tablet" color={`${deviceMargin === "tablet" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
+                              <IconWidget stylesEmotionCss="" name="tablet" color={`${deviceMargin === "tablet" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
 
                             </button>
                             <button onClick={() => setDeviceMargin("movil")}>
-                              <IconWidget name="mobile" color={`${deviceMargin === "mobile" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
+                              <IconWidget stylesEmotionCss="" name="mobile" color={`${deviceMargin === "mobile" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
                             </button>
                         </div>
                         <div>
@@ -418,14 +418,14 @@ function SectionLabelAdvancedForm({ dataJson, handleProperties }) {
                                 Padding
                             </label>
                             <button onClick={() => setDevicePadding("pc")}>
-                                <IconWidget name="desktop" color={`${devicePadding === "pc" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
+                                <IconWidget stylesEmotionCss="" name="desktop" color={`${devicePadding === "pc" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
 
                             </button>
                             <button onClick={() => setDevicePadding("tablet")}>
-                             <IconWidget name="tablet" color={`${devicePadding === "tablet" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
+                             <IconWidget stylesEmotionCss="" name="tablet" color={`${devicePadding === "tablet" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
                             </button>
                             <button onClick={() => setDevicePadding("movil")}>
-                             <IconWidget name="mobile" color={`${devicePadding === "movil" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
+                             <IconWidget stylesEmotionCss="" name="mobile" color={`${devicePadding === "movil" ? "#5F5F5F" : "#E4E4E4"}`} size={16} />
                             </button>
                         </div>
                         <div>
