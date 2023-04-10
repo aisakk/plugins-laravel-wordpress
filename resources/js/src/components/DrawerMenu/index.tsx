@@ -10,37 +10,37 @@ interface MenuItem {
   active: boolean;
 }
 
-const DrawerMenu: React.FC = () => {
+interface DrawerMenuProps {
+  licenseId: number;
+}
+
+const DrawerMenu: React.FC<DrawerMenuProps> = (props) => {
+  const { licenseId } = props;
   const [isShowing, setIsShowing] = useState(false);
+  const currentPath = window.location.pathname;
   const items: MenuItem[] = [
     {
-      title: 'General',
+      title: 'Plan',
       icon: 'list-check',
-      link: '/settings',
-      active: true,
+      link: `/license/${licenseId}/dashboard`,
+      active: false,
     },
     {
       title: 'Domains',
       icon: 'global',
-      link: '/domains',
+      link: `/license/${licenseId}/domains`,
       active: false,
     },
     {
       title: 'Installation',
       icon: 'code',
-      link: '/settings',
-      active: false,
-    },
-    {
-      title: 'Guides',
-      icon: 'play-circle',
-      link: '/settings',
+      link: `/license/${licenseId}/details`,
       active: false,
     },
     {
       title: 'Settings',
       icon: 'settings',
-      link: '/settings',
+      link: `/license/${licenseId}/settings`,
       active: false,
     },
   ];
@@ -88,7 +88,7 @@ const DrawerMenu: React.FC = () => {
         </div>
         <div className="flex flex-col gap-y-2 px-6 sm:px-2 py-10">
           {items.map((item) => (
-            <DrawerMenuItem key={item.title} item={item} />
+            <DrawerMenuItem key={item.title} item={{ ...item, active: currentPath === item.link }}  />
           ))}
         </div>
       </nav>

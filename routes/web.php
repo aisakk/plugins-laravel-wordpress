@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailVerificationController;
-use App\Http\Controllers\PagesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,7 +32,12 @@ Route::get('/email-verification/{code}',  [AuthController::class, 'verify'])->na
 //Route::get('/email-verification', [EmailVerificationController::class, 'showEmailForm'])->name('email-verification.show');
 
 Route::middleware(['auth', 'verified-custom'])->group(function(){
-    Route::get('dashboard', [UserController::class, 'show'])->name('dashboard');
+    // Route::get('dashboard', [UserController::class, 'show'])->name('dashboard');
+    Route::get('/licenses', [DashboardController::class, 'licenses'])->name('dashboard.licenses');
+    Route::get('/license/{licenseId}/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/license/{licenseId}/domains', [DashboardController::class, 'domains'])->name('dashboard.domains');
+    Route::get('/license/{licenseId}/settings',[DashboardController::class,'settings'])->name('dashboard.settings');
+    Route::get('/license/{licenseId}/details', [DashboardController::class, 'details'])->name('dashboard.details');
 });
 
 

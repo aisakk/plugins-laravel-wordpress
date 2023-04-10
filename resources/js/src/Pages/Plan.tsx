@@ -1,3 +1,4 @@
+import MainLayout from '../layouts/MainLayout';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 
@@ -6,8 +7,23 @@ import Card from '../components/Card';
 import Icon from '../components/Icon';
 import Badge from '../components/Badge';
 
-const Plan: React.FC = () => {
-  let [isOpen, setIsOpen] = useState(false);
+interface Item {
+    id:number;
+    date: string;
+    code: string;
+    pluginName: string;
+    expiration: string;
+    domains: string;
+    status: string;
+  }
+
+  interface LicenseProps {
+      license: Item;
+  }
+
+const Plan: React.FC<LicenseProps> = (props) =>{
+    const { license } = props;
+    let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
     setIsOpen(false);
@@ -18,6 +34,7 @@ const Plan: React.FC = () => {
   }
 
   return (
+    <MainLayout licenseId={license.id}>
         <div className="py-10">
             <div className="flex flex-wrap sm:flex-nowrap gap-y-6 sm:gap-6 items-center">
                 <div className="w-full sm:w-6/12">
@@ -108,16 +125,16 @@ const Plan: React.FC = () => {
                             <div className="flex flex-wrap sm:flex-nowrap gap-y-6 mt-10">
                                 <div className="w-full sm:w-4/12">
                                     <h6 className="font-bold text-xs uppercase mb-2">License Key</h6>
-                                    <p>ASHK-SASA-AIOA</p>
+                                    <p>{license.code}</p>
                                 </div>
                                 <div className="w-full sm:w-4/12">
                                     <h6 className="font-bold text-xs uppercase mb-2">Renewal Date</h6>
-                                    <p>22 Dec 2023</p>
+                                    <p>{license.expiration}</p>
                                 </div>
                                 <div className="w-full sm:w-4/12">
                                     <h6 className="font-bold text-xs uppercase mb-2">Site Activations</h6>
                                     <div className="flex gap-2 items-center">
-                                        <p>3/10</p>
+                                        <p>1/10</p>
                                         <span className="bg-blue-100 py-1 px-4 rounded-xl font-bold text-primary text-xs">View Sites</span>
                                     </div>
                                 </div>
@@ -127,7 +144,7 @@ const Plan: React.FC = () => {
                 </div>
                 <div className="w-full sm:w-6/12">
                     <Card>
-                        <h2 className="font-bold mb-4 text-xl">Octo Image Optimizer Premium</h2>
+                        <h2 className="font-bold mb-4 text-xl">{license.pluginName}</h2>
                         <ul className="mb-6">
                             <li className="flex items-center gap-2"><span className="text-primary"><Icon size={4} name="check-circle" /></span> Multiple keyphrases: Increase your SEO reach</li>
                             <li className="flex items-center gap-2"><span className="text-primary"><Icon size={4} name="check-circle" /></span> Superfast internal linking suggestions</li>
@@ -190,6 +207,7 @@ const Plan: React.FC = () => {
                 </Card>
             </div>
         </div>
+    </MainLayout>
     );
 }
 

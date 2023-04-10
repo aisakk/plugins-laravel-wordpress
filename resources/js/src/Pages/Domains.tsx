@@ -8,35 +8,33 @@ import Button from '../components/Form/Button';
 import Input from '../components/Form/Input';
 import Icon from '../components/Icon';
 
-interface Item {
-  name: string;
-  code: string;
-  date: string;
-  domains: string;
-  status: string;
+interface Domain{
+    id:number;
+    name:string;
+    active:boolean;
 }
 
-const items: Item[] = [
-  {
-    name: 'octonove.com',
-    code: 'SAXAS-XYAZ-UIZL',
-    date: '20 Nov 2023',
-    domains: 'octonove.com',
-    status: 'Active',
-  },
-];
+interface License {
+    id:number;
+    date: string;
+    code: string;
+    pluginName: string;
+    expiration: string;
+    domains: Domain[];
+    status: string;
+  }
 
-const Domains: React.FC = () => {
+  interface LicenseProps {
+      license: License;
+  }
 
-    const items = [
-        {
-            name: 'octonove.com',
-            code: 'SAXAS-XYAZ-UIZL',
-            date: '20 Nov 2023',
-            domains: 'octonove.com',
-            status: 'Active'
-        }
-    ]
+
+
+
+
+const Domains: React.FC<LicenseProps> = (props) => {
+    const { license } = props;
+
 
     let [isOpenCreate, setIsOpenCreate] = useState(false)
     let [isOpenEdit, setIsOpenEdit] = useState(false)
@@ -58,7 +56,7 @@ const Domains: React.FC = () => {
     }
 
     return (
-        <MainLayout>
+        <MainLayout licenseId={license.id}>
         <div className="py-10">
             <Card>
                 <div className="flex justify-between mb-6">
@@ -158,13 +156,13 @@ const Domains: React.FC = () => {
                     </div>
                 </div>
 
-                { items.map((item) => (
-                    <div key={item.name} className="flex border-t border-slate-200 py-4 items-center">
+                { license.domains.map((item) => (
+                    <div key={item.id} className="flex border-t border-slate-200 py-4 items-center">
                         <div className="w-5/12">
                             <p>{ item.name }</p>
                         </div>
                         <div className="w-5/12">
-                            <Badge background="bg-green-500">{ item.status }</Badge>
+                            <Badge background="bg-green-500">{ item.active?'active':'inactive' }</Badge>
                         </div>
                         <div className="w-2/12">
                             <div className="flex justify-center gap-4">

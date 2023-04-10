@@ -50,7 +50,7 @@ class AuthController extends Controller
               }
 
               // Autenticación exitosa
-              return redirect()->route('dashboard');
+              return redirect()->route('dashboard.licenses');
           }
 
           return back()->withErrors(['error' => 'No existe ningun correo y contraseña con las credenciales enviadas']);

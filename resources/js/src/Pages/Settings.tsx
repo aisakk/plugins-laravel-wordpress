@@ -14,6 +14,20 @@ import Badge from '../components/Badge';
 import Preview from '../components/Preview';
 import Card from '../components/Card';
 
+interface License {
+    id:number;
+    date: string;
+    code: string;
+    pluginName: string;
+    expiration: string;
+    domains: string;
+    status: string;
+  }
+
+  interface LicenseProps {
+      license: License;
+  }
+
 interface Option {
   name: string;
   value: string;
@@ -23,7 +37,8 @@ interface Label {
     value:string;
 
 }
-const Settings: React.FC = () => {
+const Settings: React.FC <LicenseProps> = (props) => {
+    const { license } = props;
     const order: Option[] = [
         { name: '1', value: '1' },
         { name: '2', value: '2' },
@@ -71,7 +86,7 @@ const Settings: React.FC = () => {
         { name: 'Move buttons selected to Right Bottom', value: '9' }
       ];
       return (
-        <MainLayout>
+       <MainLayout licenseId={license.id}>
           <div className="pt-10">
           <div>
                     <div className="flex flex-wrap xl:flex-nowrap gap-6">
