@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const IconWidget = ({ name, color,stylesEmotionCss }) => {
+const IconWidget = ({ name, color,stylesEmotionCss, size }) => {
     const icon = () => {
         switch (name) {
             case "arrow-down": return <path fill={color || "currentColor"} d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z"/>;
@@ -37,6 +37,6 @@ const IconWidget = ({ name, color,stylesEmotionCss }) => {
         }
     };
 
-    return <svg viewBox="0 0 24 24" className={stylesEmotionCss} fill={color}>{icon()}</svg>;
+    return <svg viewBox="0 0 24 24" width={size} height={size} className={stylesEmotionCss} fill={color}>{icon()}</svg>;
 };
 export default IconWidget;

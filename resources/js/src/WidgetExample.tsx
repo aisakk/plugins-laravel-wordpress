@@ -350,7 +350,7 @@ function WidgetExamples() {
         });
       }
 
-      function changeSelectionTemplateProperties(id:string,name:string,inputsJson:any){
+      function changeSelectionTemplateProperties(id,name,inputsJson){
         setJson((prevState) => {
           const newDataJson = { ...prevState };
           const objIndex = newDataJson.contentButtons.findIndex((obj) => obj.id === id);
@@ -415,31 +415,28 @@ function WidgetExamples() {
             return newDataJson
         })
       }
-
-    return (
-        <>
+        return (<>
 
             <FormButtons createButton={addButton} deleteButton={removeButton} dataButton={button}/>
-            {json.contentButtons.map((item,index)=>{
-                return <FormGeneralBasic dataJson={item} key={index} changeSelectionButtonPropertiesBasic={changeSelectionButtonPropertiesBasic} changeSelectionLabelPropertiesBasic={changeSelectionLabelPropertiesBasic} changeSelectionIconPropertiesBasic={changeSelectionIconPropertiesBasic}/>
-            })
-            /*
-                 <FormGeneralAdvanced
+            {json.contentButtons.map((item, index) => {
+            return <FormGeneralBasic
                 key={index}
                 dataJson={item}
-                changeSelectionButtonProperties={changeSelectionButtonProperties}
-                changeSelectionLabelProperties={changeSelectionLabelProperties}
-                 changeSelectionIconProperties={changeSelectionIconProperties}
-                 changeSelectionTemplateProperties={changeSelectionTemplateProperties}
-                 />
-            */
-            }
+                removeForm={removeButton}
+                changeSelectionTemplateProperties={changeSelectionTemplateProperties}
+                changeSelectionButtonPropertiesBasic={changeSelectionButtonPropertiesBasic}
+                changeSelectionLabelPropertiesBasic={changeSelectionLabelPropertiesBasic}
+                changeSelectionIconPropertiesBasic={changeSelectionIconPropertiesBasic}
+            />
+            /*<FormGeneralAdvanced key={index} dataJson={item} changeSelectionButtonProperties={changeSelectionButtonProperties} changeSelectionLabelProperties={changeSelectionLabelProperties} changeSelectionIconProperties={changeSelectionIconProperties} changeSelectionTemplateProperties={changeSelectionTemplateProperties}/>; */
+        })}
 
-            {json.contentButtons.map((item,index)=>{
-                return <WidgetPreviewButton key={index} labelText={item.labelText} link={`${generateLinktoIcon(item.id)}`} icon={item.icon} cssDesign={item.cssDesign}/>
+            {json.contentButtons.map((item, index) => {
+            return <WidgetPreviewButton key={index} labelText={item.labelText} link={`${generateLinktoIcon(item.id)}`} icon={item.icon} cssDesign={item.cssDesign}/>;
+        })}
 
-            })}
-
-        </>);
+    </>);;
 }
 export default WidgetExamples;
+
+
