@@ -14,10 +14,8 @@ class DomainsController extends Controller
 
     public function index(Request $request,$licenseId)
     {
-
         $license = License::findOrFail($licenseId);
         $licenseResource = (new LicenseResource($license))->toArray(request());
-        // return $licenseResource;
 
         if($request->limit_exceeded==1){
             return Inertia::render('Pages/Domains', ['license' => $licenseResource,'limit_exceeded' => true]);
