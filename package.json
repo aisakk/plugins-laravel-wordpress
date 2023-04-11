@@ -6,6 +6,7 @@
         "tail-watch": "tailwindcss -i ./resources/css/main.css -o ./resources/css/app.css --watch"
     },
     "devDependencies": {
+        "@heroicons/react": "^2.0.17",
         "axios": "^1.3.4",
         "laravel-vite-plugin": "^0.7.2",
         "prettier": "2.8.7",
@@ -16,7 +17,6 @@
     "dependencies": {
         "@emotion/css": "^11.10.6",
         "@headlessui/react": "^1.7.13",
-        "@heroicons/react": "^2.0.17",
         "@inertiajs/inertia-react": "^0.8.1",
         "@inertiajs/react": "^1.0.2",
         "@types/jest": "^29.5.0",
