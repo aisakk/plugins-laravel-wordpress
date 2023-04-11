@@ -182,6 +182,7 @@ interface Button {
 function WidgetExamples() {
     const [json, setJson] = useState<JsonData>(jsonData)
     const [button, setButton] = useState<Button[]>([])
+    const [showAdvancedForm, setShowAdvancedForm] = useState("basic");
 
     function addButton(e: React.FormEvent){
         e.preventDefault()
@@ -415,30 +416,42 @@ function WidgetExamples() {
             return newDataJson
         })
       }
-        return (<>
+      function toggleFormType(string){
+        string === "basic"? setShowAdvancedForm(string) : setShowAdvancedForm(string)
+    }
+      return (<>
+        <FormButtons createButton={addButton} deleteButton={removeButton} json={json} stateForm={showAdvancedForm} changeForm={toggleFormType}/>
+        {json.contentButtons.map((item, index) => {
 
-            <FormButtons createButton={addButton} deleteButton={removeButton} dataButton={button}/>
-            {json.contentButtons.map((item, index) => {
-            return <FormGeneralAdvanced key={index} dataJson={item} changeSelectionButtonProperties={changeSelectionButtonProperties} changeSelectionLabelProperties={changeSelectionLabelProperties} changeSelectionIconProperties={changeSelectionIconProperties} changeSelectionTemplateProperties={changeSelectionTemplateProperties}/>
+            return showAdvancedForm === "advanced" ? (
+                <FormGeneralAdvanced
+                  key={index}
+                  dataJson={item}
+                  deleteButton={removeButton}
+                  changeSelectionButtonProperties={changeSelectionButtonProperties}
+                  changeSelectionLabelProperties={changeSelectionLabelProperties}
+                  changeSelectionIconProperties={changeSelectionIconProperties}
+                  changeSelectionTemplateProperties={changeSelectionTemplateProperties}
+                />
+              ) : (
+                <FormGeneralBasic
+                  key={index}
+                  dataJson={item}
+                  deleteButton={removeButton}
+                  changeSelectionTemplateProperties={changeSelectionTemplateProperties}
+                  changeSelectionButtonPropertiesBasic={changeSelectionButtonPropertiesBasic}
+                  changeSelectionLabelPropertiesBasic={changeSelectionLabelPropertiesBasic}
+                  changeSelectionIconPropertiesBasic={changeSelectionIconPropertiesBasic}
+                />
+              );
 
+    })}
 
-            {/* <FormGeneralBasic
-                key={index}
-                dataJson={item}
-                removeForm={removeButton}
-                changeSelectionTemplateProperties={changeSelectionTemplateProperties}
-                changeSelectionButtonPropertiesBasic={changeSelectionButtonPropertiesBasic}
-                changeSelectionLabelPropertiesBasic={changeSelectionLabelPropertiesBasic}
-                changeSelectionIconPropertiesBasic={changeSelectionIconPropertiesBasic}
-            /> */}
-            /*<FormGeneralAdvanced key={index} dataJson={item} changeSelectionButtonProperties={changeSelectionButtonProperties} changeSelectionLabelProperties={changeSelectionLabelProperties} changeSelectionIconProperties={changeSelectionIconProperties} changeSelectionTemplateProperties={changeSelectionTemplateProperties}/>; */
-        })}
+    {json.contentButtons.map((item, index) => {
+        return <WidgetPreviewButton key={index} labelText={item.labelText} link={`${generateLinktoIcon(item.id)}`} icon={item.icon} cssDesign={item.cssDesign}/>;
+    })}
 
-            {json.contentButtons.map((item, index) => {
-            return <WidgetPreviewButton key={index} labelText={item.labelText} link={`${generateLinktoIcon(item.id)}`} icon={item.icon} cssDesign={item.cssDesign}/>;
-        })}
-
-    </>);;
+</>);
 }
 export default WidgetExamples;
 

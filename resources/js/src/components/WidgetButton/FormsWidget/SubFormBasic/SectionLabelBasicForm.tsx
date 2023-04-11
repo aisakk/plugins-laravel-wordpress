@@ -59,16 +59,13 @@ function SectionLabelBasicForm({ dataJson, handleProperties }) {
         });
         handleProperties(dataJson.id, name, inputsJson);
     }
-    return(
-        <div className='border-b border-solid border-slate-400 pt-4 pb-4'>
+    return (<div className='border-b border-solid border-slate-400 pt-4 pb-4'>
             <div>
-                <span
-                    className="
+                <span className="
                 border rounded-lg font-bold cursor-pointer uppercase py-1 px-2 text-white
                 bg-primary
                 text-[10px]
-            "
-                >
+            ">
                     Label
                 </span>
             </div>
@@ -114,7 +111,6 @@ function SectionLabelBasicForm({ dataJson, handleProperties }) {
                         </div>
                     </div>
             </div>
-        </div>
-    )
+        </div>);
 }
 export default SectionLabelBasicForm;

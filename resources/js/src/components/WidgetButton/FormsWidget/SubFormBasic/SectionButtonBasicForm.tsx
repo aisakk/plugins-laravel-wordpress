@@ -41,15 +41,13 @@ function SectionButtonBasicForm({ dataJson, handleProperties }) {
         });
         handleProperties(dataJson.id, name, inputsJson);
     }
-    return(<div className="border-b border-solid border-slate-400 pt-4 pb-4 flex flex-col">
+    return (<div className="border-b border-solid border-slate-400 pt-4 pb-4 flex flex-col">
          <div>
-                <span
-                    className="
+                <span className="
                 border rounded-lg font-bold cursor-pointer uppercase py-1 px-2 text-white
                 bg-primary
                 text-[10px]
-            "
-                >
+            ">
                     Button
                 </span>
             </div>
@@ -59,13 +57,7 @@ function SectionButtonBasicForm({ dataJson, handleProperties }) {
                                     <label className="font-bold text-sm pb-2">
                                         Background Color
                                     </label>
-                                    <input
-                                        onChange={(e) => handleDataInput(e)}
-                                        type="color"
-                                        value={inputsJson.backgroundColor}
-                                        name="backgroundColor"
-                                        id=""
-                                    />
+                                    <input onChange={(e) => handleDataInput(e)} type="color" value={inputsJson.backgroundColor} name="backgroundColor" id=""/>
                         </div>
                         <div className="flex flex-col">
                              <label className="font-bold text-sm pb-2">Margin </label>
@@ -82,7 +74,6 @@ function SectionButtonBasicForm({ dataJson, handleProperties }) {
                 </div>
 
             </div>
-    </div>
-    );
+    </div>);
 }
 export default SectionButtonBasicForm;
