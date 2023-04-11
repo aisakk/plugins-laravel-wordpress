@@ -25,13 +25,6 @@ class DashboardController extends Controller
         return Inertia::render('Pages/Plan', ['license' => $licenseResource]);
     }
 
-    public function domains($licenseId)
-    {
-        $license = License::findOrFail($licenseId);
-        $licenseResource = (new LicenseResource($license))->toArray(request());
-        // return $licenseResource;
-        return Inertia::render('Pages/Domains', ['license' => $licenseResource]);
-    }
 
     public function settings($licenseId)
     {
