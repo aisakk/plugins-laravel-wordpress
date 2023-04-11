@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
                 License::factory(3)->create([
                     'plugin_id' => $pluginCreated->id,
                 ])->each(function ($license) {
-                    Domain::factory(4)->create([
+                    Domain::factory($license->max_domains)->create([
                         'license_id' => $license->id,
                     ]);
                 });

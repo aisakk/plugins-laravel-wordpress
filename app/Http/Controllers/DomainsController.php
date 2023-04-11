@@ -12,18 +12,25 @@ use Illuminate\Support\Facades\Redirect; // Importa la clase Redirect
 class DomainsController extends Controller
 {
 
-    public function index($licenseId)
+    public function index(Request $request,$licenseId)
     {
+
         $license = License::findOrFail($licenseId);
         $licenseResource = (new LicenseResource($license))->toArray(request());
+        // return $licenseResource;
 
+        if($request->limit_exceeded==1){
+            return Inertia::render('Pages/Domains', ['license' => $licenseResource,'limit_exceeded' => true]);
+        }
         return Inertia::render('Pages/Domains', ['license' => $licenseResource]);
     }
 
     public function store(Request $request,$licenseId)
     {
         $license = License::findOrFail($licenseId);
-        $licenseId=$license->id;
+        if($license->domains->count()>=$license->max_domains){
+            return Redirect::route('dashboard.domains', ['licenseId' => $licenseId,'limit_exceeded' => true]);
+        }
         $data = $request->validate([
             'name' => 'required|string',
             'active' => 'boolean',

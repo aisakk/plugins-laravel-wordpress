@@ -60,9 +60,4 @@ Route::post('/password-reset/send', [PasswordResetController::class, 'sendResetE
 Route::get('/password-reset/{token}', [PasswordResetController::class, 'showUpdateForm'])->name('password-reset.update.show');
 Route::post('/password-reset/update', [PasswordResetController::class, 'updatePassword'])->name('password-reset.update');
 
-Route::get('dashboard', [PagesController::class, 'dashboard'])->name('dashboard');
-Route::get('domains', [PagesController::class, 'domains'])->name('domains');
-Route::get('settings', [PagesController::class, 'settings'])->name('settings');
-Route::get('details', [PagesController::class, 'details'])->name('details');
-
 Route::get("widget", [AuthController::class, 'widget']);

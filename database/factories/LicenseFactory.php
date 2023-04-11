@@ -27,6 +27,7 @@ class LicenseFactory extends Factory
             'licence_key' => strtoupper(fake()->bothify('?????-????-????')),
             'status' => $status,
             'expiration'=>fake()->dateTimeBetween('1 week', '+5 week'),
+            'max_domains'=>fake()->randomDigitNot(0),
             'user_id'=>1,
         ];
     }

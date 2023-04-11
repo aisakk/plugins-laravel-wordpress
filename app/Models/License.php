@@ -26,6 +26,10 @@ class License extends Model
         return $this->hasMany(Domain::class);
     }
 
+    public function domainsOrderedDesc()
+    {
+        return $this->domains()->orderBy('id', 'desc');
+    }
     public function plugin()
     {
         return $this->belongsTo(Plugin::class);
