@@ -64,3 +64,5 @@ Route::get('/password-reset/{token}', [PasswordResetController::class, 'showUpda
 Route::post('/password-reset/update', [PasswordResetController::class, 'updatePassword'])->name('password-reset.update');
 
 Route::get("widget", [AuthController::class, 'widget']);
+
+// Route::post('/wp-json/octorestapi/v1/update_widget',[SettingsController::class,'jwtDecode']);
