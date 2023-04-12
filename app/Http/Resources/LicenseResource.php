@@ -24,6 +24,7 @@ class LicenseResource extends JsonResource
             'pluginName' => $this->plugin->name,
             'expiration' => $expirationDate,
             'domains' => $this->domainsOrderedDesc,
+            'settings'=> $this->settings,
             'status' => $this->status ? 'Active' : 'Inactive',
         ];
     }

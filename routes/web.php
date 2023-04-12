@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DomainsController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
@@ -43,6 +44,8 @@ Route::middleware(['auth', 'verified-custom'])->group(function(){
     Route::delete('/domain/{domainId}/delete', [DomainsController::class, 'destroy'])->name('domains.destroy');
 
     Route::get('/license/{licenseId}/settings',[DashboardController::class,'settings'])->name('dashboard.settings');
+    Route::post('/license/{licenseId}/save-settings', [SettingsController::class, 'store'])->name('domains.save-settings');
+
     Route::get('/license/{licenseId}/details', [DashboardController::class, 'details'])->name('dashboard.details');
 });
 

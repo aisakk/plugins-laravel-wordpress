@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Services\EmailVerificationService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Str;
-
+use App\Http\Resources\SettingResource;
 
 class AuthController extends Controller
 {
@@ -105,13 +105,19 @@ class AuthController extends Controller
 
     }
 
-      public function logout()
-      {
-            Auth::logout();
-            return redirect('/');
-      }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
 
-      public function widget(){
-        return Inertia::render("WidgetExample");
-      }
+    public function widget(){
+        $user=User::first();
+
+        $license=$user->licenses()->orderBy('created_at','DESC')->first();
+        $settings=$license->settings;
+        $settings=SettingResource::collection($settings)->toArray(request());
+        // return $settings;
+        return Inertia::render("WidgetExample",['settings'=>$settings]);
+    }
 }

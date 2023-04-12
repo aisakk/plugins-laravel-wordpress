@@ -20,12 +20,14 @@ class License extends Model
     {
         return $this->belongsTo(User::class);
     }
-
     public function domains()
     {
         return $this->hasMany(Domain::class);
     }
-
+    public function settings()
+    {
+        return $this->hasMany(LicenseMeta::class);
+    }
     public function domainsOrderedDesc()
     {
         return $this->domains()->orderBy('id', 'desc');

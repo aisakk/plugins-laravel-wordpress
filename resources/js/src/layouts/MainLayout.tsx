@@ -6,9 +6,9 @@ import DrawerMenu from '../components/DrawerMenu';
 interface MainLayoutProps {
     licenseId: number;
     children: React.ReactNode;
-  }
+}
 
-  const MainLayout: React.FC<MainLayoutProps> = (props) => {
+const MainLayout: React.FC<MainLayoutProps> = (props) => {
     const { licenseId, children } = props;
     return (
         <div className="App">

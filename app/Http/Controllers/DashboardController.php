@@ -30,6 +30,7 @@ class DashboardController extends Controller
     {
         $license = License::findOrFail($licenseId);
         $licenseResource = (new LicenseResource($license))->toArray(request());
+
         return Inertia::render('Pages/Settings', ['license' => $licenseResource]);
     }
 
@@ -37,6 +38,7 @@ class DashboardController extends Controller
     {
         $license = License::findOrFail($licenseId);
         $licenseResource = (new LicenseResource($license))->toArray(request());
+
         return Inertia::render('Pages/Details', ['license' => $licenseResource]);
     }
 }
