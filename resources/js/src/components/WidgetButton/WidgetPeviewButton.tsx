@@ -1,6 +1,37 @@
 import { css } from '@emotion/css';
 import IconWidget from '../IconWidget';
-function WidgetPreviewButton({ labelText, link, icon, cssDesign }) {
+function WidgetPreviewButton({ labelText, link, icon, cssDesign, propertyJson }) {
+    function visibilityMediaQuery(jsonProperty){
+        const deviceBreakpoints = {
+            pc: "1024px",
+            tablet: "768px",
+            movil: "320px",
+        };
+        switch (jsonProperty.visiblityButtonPreview) {
+            case "movil":
+                return (`@media (min-width: ${deviceBreakpoints.movil}) { display:flex  }
+                @media (min-width: ${deviceBreakpoints.tablet}) { display:none }
+                @media (min-width: ${deviceBreakpoints.pc}) { display:none  }
+                `);
+            case "tablet":
+                return (`
+                    @media (min-width: ${deviceBreakpoints.tablet}) { display:flex }
+                    @media (min-width: ${deviceBreakpoints.movil}) { display:none }
+                     @media (min-width: ${deviceBreakpoints.pc}) { display:none  }
+                `);
+            case "pc":
+                return (`
+                @media (min-width: ${deviceBreakpoints.tablet}) { display:none }
+                @media (min-width: ${deviceBreakpoints.movil}) { display:none }
+                 @media (min-width: ${deviceBreakpoints.pc}) { display:flex  }
+            `);
+            case "all":
+                return "display:flex"
+            default:
+                return "";
+        }
+    }
+
     function getMediaQuery(jsonProperty, propertyCss) {
         const property = Object.entries(jsonProperty);
         const deviceBreakpoints = {
@@ -34,6 +65,7 @@ function WidgetPreviewButton({ labelText, link, icon, cssDesign }) {
         ${getMediaQuery(cssDesign.buttonDesign.borderRadius, "border-radius")}
   `;
     const labelStyle = css `
+        height: fit-content;
         background-color: ${cssDesign.labelDesign.backgroundColor};
         color: ${cssDesign.labelDesign.color};
         font-family: ${cssDesign.labelDesign.fontFamily};
@@ -52,23 +84,25 @@ function WidgetPreviewButton({ labelText, link, icon, cssDesign }) {
 
     `;
     const containerStyle = css `
-        display:flex;
-        position:${cssDesign.containerDesign.position};
+        position: absolute;
         top: ${cssDesign.containerDesign.top};
         right: ${cssDesign.containerDesign.right};
         left: ${cssDesign.containerDesign.left};
         bottom: ${cssDesign.containerDesign.bottom};
+        ${visibilityMediaQuery(propertyJson)}
     `;
     return (<>
-            <div className={containerStyle}>
-                {labelText && <label className={labelStyle}>{labelText}</label>}
-                <a href={link} target="blank">
-                    <button className={buttonStyle}>
-                        <IconWidget size="" name={icon} stylesEmotionCss={iconStyle} color={cssDesign.iconDesign.color}/>
+            {propertyJson.hiddenPreviewChecked == "true" &&(
+                <div className={containerStyle}>
+                    {labelText && <label className={labelStyle}>{labelText}</label>}
+                    <a href={link} target="blank">
+                        <button className={buttonStyle}>
+                            <IconWidget size="" name={icon} stylesEmotionCss={iconStyle} color={cssDesign.iconDesign.color}/>
+                        </button>
+                    </a>
+                </div>
+            )}
 
- </button>
-                </a>
-            </div>
         </>);
 }
 export default WidgetPreviewButton;

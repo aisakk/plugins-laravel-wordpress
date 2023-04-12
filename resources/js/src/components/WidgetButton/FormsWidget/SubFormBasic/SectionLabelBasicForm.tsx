@@ -79,7 +79,7 @@ function SectionLabelBasicForm({ dataJson, handleProperties }) {
                 <div className="flex flex-col">
                      <div><label className="font-bold text-sm pb-2">Color</label></div>
                      <div>
-                        <input onChange={(e) => handleDataInput(e)} type="color" value={inputsJson.backgroundColor} name="backgroundColor" id=""/>
+                        <input onChange={(e) => handleDataInput(e)} type="color" value={inputsJson.color} name="color" id=""/>
                      </div>
                 </div>
                 <div className="flex flex-col">
