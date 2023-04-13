@@ -50,16 +50,13 @@ function SectionIconBasicForm({ dataJson, handleProperties }) {
         });
         handleProperties(dataJson.id, name, inputsJson);
     }
-    return (
-        <div className="flex flex-col pt-3">
+    return (<div className="flex flex-col pt-3">
             <div>
-                <span
-                    className="
+                <span className="
                 border rounded-lg font-bold cursor-pointer uppercase py-1 px-2 text-white
                 bg-primary
                 text-[10px]
-            "
-                >
+            ">
                     Icon
                 </span>
             </div>
@@ -68,13 +65,7 @@ function SectionIconBasicForm({ dataJson, handleProperties }) {
                     <label className="font-bold text-sm pb-2">
                         Color
                     </label>
-                    <input
-                        onChange={(e) => handleDataInput(e)}
-                        type="color"
-                        value={inputsJson.color}
-                        name="color"
-                        id=""
-                    />
+                    <input onChange={(e) => handleDataInput(e)} type="color" value={inputsJson.color} name="color" id=""/>
                 </div>
                 <div className="flex flex-col">
                     <label className="font-bold text-sm pb-2">
@@ -107,7 +98,6 @@ function SectionIconBasicForm({ dataJson, handleProperties }) {
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        </div>);
 }
 export default SectionIconBasicForm;
