@@ -1,7 +1,7 @@
 {
     "private": true,
     "scripts": {
-        "dev": "tsc && vite",
+        "dev": "concurrently \"tsc -w\" \"vite\" \"tailwindcss -i ./resources/css/main.css -o ./resources/css/app.css --watch\" --kill-others",
         "build": "vite build",
         "tail-watch": "tailwindcss -i ./resources/css/main.css -o ./resources/css/app.css --watch"
     },
@@ -25,6 +25,7 @@
         "@types/react-dom": "^18.0.11",
         "@vitejs/plugin-react": "^3.1.0",
         "antd": "^5.3.0",
+        "concurrently": "^8.0.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-router": "^6.10.0",
