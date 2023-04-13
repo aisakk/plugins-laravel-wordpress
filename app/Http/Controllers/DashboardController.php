@@ -34,11 +34,18 @@ class DashboardController extends Controller
         return Inertia::render('Pages/Settings', ['license' => $licenseResource]);
     }
 
-    public function details($licenseId)
+    public function installation($licenseId)
     {
         $license = License::findOrFail($licenseId);
         $licenseResource = (new LicenseResource($license))->toArray(request());
 
-        return Inertia::render('Pages/Details', ['license' => $licenseResource]);
+        return Inertia::render('Pages/Installation', ['license' => $licenseResource]);
+    }
+    public function logs($licenseId)
+    {
+        $license = License::findOrFail($licenseId);
+        $licenseResource = (new LicenseResource($license))->toArray(request());
+
+        return Inertia::render('Pages/Logs', ['license' => $licenseResource]);
     }
 }

@@ -46,7 +46,8 @@ Route::middleware(['auth', 'verified-custom'])->group(function(){
     Route::get('/license/{licenseId}/settings',[DashboardController::class,'settings'])->name('dashboard.settings');
     Route::post('/license/{licenseId}/save-settings', [SettingsController::class, 'store'])->name('domains.save-settings');
 
-    Route::get('/license/{licenseId}/details', [DashboardController::class, 'details'])->name('dashboard.details');
+    Route::get('/license/{licenseId}/installation', [DashboardController::class, 'installation'])->name('dashboard.installation');
+    Route::get('/license/{licenseId}/logs', [DashboardController::class, 'logs'])->name('dashboard.logs');
 });
 
 

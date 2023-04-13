@@ -464,7 +464,7 @@ const Details: React.FC<LicenseProps> = (props) => {
   return (
     <MainLayout licenseId={license.id}>
         <div className="py-10">
-                <div className="py-10">
+            <div className="py-10">
                 <div className="w-full">
                     <div className="shadow-xl px-6 pt-6 pb-10 rounded-2xl bg-white relative">
                         <img className="w-full rounded-xl h-60 object-cover" src="https://ps.w.org/tutor/assets/banner-1544x500.jpg?rev=2694448" alt="" />
