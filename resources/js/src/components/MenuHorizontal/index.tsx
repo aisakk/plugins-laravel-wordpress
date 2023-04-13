@@ -25,7 +25,7 @@ const purchase: MenuItem[] = [
     {
       name: 'Optimized Chat button',
       description: 'Your visitors can Contact you through "WhatsApp"',
-      link: '/details',
+      link: '/installation',
       icon: 'https://ps.w.org/wordpress-seo/assets/icon-256x256.png?rev=2643727',
       active:true
     },
@@ -35,14 +35,14 @@ const purchase: MenuItem[] = [
     {
       name: 'Automations',
       description: 'Create your own targeted content',
-      link: '/details',
+      link: '/installation',
       icon: 'https://ps.w.org/shiny-updates/assets/icon-256x256.png?rev=1327674',
       active:true
     },
     {
       name: 'Reports',
       description: 'Keep track of your growth',
-      link: '/details',
+      link: '/installation',
       icon: 'https://ps.w.org/cookie-law-info/assets/icon-256x256.png?rev=2594824',
       active:true
     },

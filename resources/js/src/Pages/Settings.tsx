@@ -22,21 +22,23 @@ interface License {
     expiration: string;
     domains: string;
     status: string;
-  }
+}
 
-  interface LicenseProps {
-      license: License;
-  }
+interface LicenseProps {
+    license: License;
+}
 
 interface Option {
   name: string;
   value: string;
 }
+
 interface Label {
     name: string;
     value:string;
 
 }
+
 const Settings: React.FC <LicenseProps> = (props) => {
     const { license } = props;
     const order: Option[] = [
@@ -50,47 +52,44 @@ const Settings: React.FC <LicenseProps> = (props) => {
         { name: '8', value: '8' },
         { name: '9', value: '9' },
         { name: '10', value: '10' }
-      ];
+    ];
+    const font_size: Option[] = [
+    { name: '10', value: '10' },
+    { name: '11', value: '11' },
+    { name: '12', value: '12' },
+    { name: '13', value: '13' },
+    { name: '14', value: '14' },
+    ];
+    const font_family: Option[] = [
+    { name: 'Helvetica', value: 'helvetica' },
+    { name: 'Arial', value: 'arial' },
+    { name: 'Verdana', value: 'verdana' },
+    { name: 'Tahoma', value: 'tahoma' },
+    { name: 'Trebuchet', value: 'trebuchet' },
+    ];
+    const label:Label[]=[
+    {name:'label',value:'value'},
+    {name:'label',value:'value'},
+    {name:'label',value:'value'},
+    {name:'label',value:'value'}
+    ]
+    const speed_actions: Option[] = [
+    { name: 'Toggle buttons selected to Active', value: '1' },
+    { name: 'Toggle buttons selected to Inactive', value: '2' },
+    { name: 'Remove buttons selected', value: '3' },
+    { name: 'Move buttons selected to Left Top', value: '4' },
+    { name: 'Move buttons selected to Left Center', value: '5' },
+    { name: 'Move buttons selected to Left Bottom', value: '6' },
+    { name: 'Move buttons selected to Right Top', value: '7' },
+    { name: 'Move buttons selected to Right Center', value: '8' },
+    { name: 'Move buttons selected to Right Bottom', value: '9' }
+    ];
 
-      const font_size: Option[] = [
-        { name: '10', value: '10' },
-        { name: '11', value: '11' },
-        { name: '12', value: '12' },
-        { name: '13', value: '13' },
-        { name: '14', value: '14' },
-      ];
-
-      const font_family: Option[] = [
-        { name: 'Helvetica', value: 'helvetica' },
-        { name: 'Arial', value: 'arial' },
-        { name: 'Verdana', value: 'verdana' },
-        { name: 'Tahoma', value: 'tahoma' },
-        { name: 'Trebuchet', value: 'trebuchet' },
-      ];
-
-      const label:Label[]=[
-        {name:'label',value:'value'},
-        {name:'label',value:'value'},
-        {name:'label',value:'value'},
-        {name:'label',value:'value'}
-      ]
-      const speed_actions: Option[] = [
-        { name: 'Toggle buttons selected to Active', value: '1' },
-        { name: 'Toggle buttons selected to Inactive', value: '2' },
-        { name: 'Remove buttons selected', value: '3' },
-        { name: 'Move buttons selected to Left Top', value: '4' },
-        { name: 'Move buttons selected to Left Center', value: '5' },
-        { name: 'Move buttons selected to Left Bottom', value: '6' },
-        { name: 'Move buttons selected to Right Top', value: '7' },
-        { name: 'Move buttons selected to Right Center', value: '8' },
-        { name: 'Move buttons selected to Right Bottom', value: '9' }
-      ];
-      return (
-       <MainLayout licenseId={license.id}>
-          <div className="pt-10">
-          <div>
+    return (
+        <MainLayout licenseId={license.id}>
+            <div className="pt-10">
+                <div>
                     <div className="flex flex-wrap xl:flex-nowrap gap-6">
-
                         <div className="w-full xl:w-8/12">
                             <Card>
                                 <div className="pb-10">
@@ -387,12 +386,11 @@ const Settings: React.FC <LicenseProps> = (props) => {
                                 </Card>
                             </div>
                         </div>
-                        <Preview />
+                        <Preview licenseId={license.id} />
                     </div>
-
                 </div>
-          </div>
-    </MainLayout>
+            </div>
+        </MainLayout>
   );
 };
 

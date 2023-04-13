@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use App\Models\License;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -25,5 +25,8 @@ class User extends Authenticatable implements MustVerifyEmail
       public function hasVerifiedEmail()
       {
           return !is_null($this->email_last_verification);
+      }
+      public function licenses(){
+        return $this->hasMany(License::class);
       }
 }

@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        // '/wp-json/octorestapi/v1/update_widget' esta ruta se uso para probar en local la llamada que se hara a los dominios
     ];
 }

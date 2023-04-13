@@ -20,29 +20,35 @@ const DrawerMenu: React.FC<DrawerMenuProps> = (props) => {
   const currentPath = window.location.pathname;
   const items: MenuItem[] = [
     {
-      title: 'Plan',
-      icon: 'list-check',
-      link: `/license/${licenseId}/dashboard`,
-      active: false,
+        title: 'Plan',
+        icon: 'list-check',
+        link: `/license/${licenseId}/dashboard`,
+        active: false,
     },
     {
-      title: 'Domains',
-      icon: 'global',
-      link: `/license/${licenseId}/domains`,
-      active: false,
+        title: 'Domains',
+        icon: 'global',
+        link: `/license/${licenseId}/domains`,
+        active: false,
     },
     {
-      title: 'Installation',
-      icon: 'code',
-      link: `/license/${licenseId}/details`,
-      active: false,
+        title: 'Installation',
+        icon: 'code',
+        link: `/license/${licenseId}/installation`,
+        active: false,
     },
     {
-      title: 'Settings',
-      icon: 'settings',
-      link: `/license/${licenseId}/settings`,
-      active: false,
+        title: 'Settings',
+        icon: 'settings',
+        link: `/license/${licenseId}/settings`,
+        active: false,
     },
+    {
+        title: 'Logs',
+        icon: 'danger',
+        link: `/license/${licenseId}/logs`,
+        active: false,
+      },
   ];
 
   return (
