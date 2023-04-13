@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Icon from '../../Icon';
-function SectionTemplateForm({ dataJson, handleProperties }) {
+function SectionTemplateForm({ dataJson, handleProperties, handleOrder, lenghtJson, itemIndex }) {
     const [inputLayout, setInputLayout] = useState("facebook");
     const [labelProperties, setLabelProperties] = useState({
         labelText: dataJson.labelText,
@@ -12,6 +12,8 @@ function SectionTemplateForm({ dataJson, handleProperties }) {
         link: dataJson.link,
         icon: dataJson.icon,
     });
+    const [selectedIndex, setSelectedIndex] = useState(0);
+
     function handleIcon(property, nameIcon) {
         setInputLayout(nameIcon);
         const updateLabelProperties = {
@@ -30,6 +32,41 @@ function SectionTemplateForm({ dataJson, handleProperties }) {
         setLabelProperties(updateLabelProperties);
         handleProperties(dataJson.id, name, updateLabelProperties);
     }
+    function createSelectOptions() {
+        const options:JSX.Element[] = [];
+
+        for (let i: number = 0; i < lenghtJson; i++) {
+          options.push(
+            <option key={i} value={i}>
+              {i + 1}
+            </option>
+          );
+        }
+        return (
+          <select
+            value={selectedIndex}
+            onChange={(e) => {
+              handleSelectChange(e, selectedIndex);
+            }}
+          >
+            {options}
+          </select>
+        );
+      };
+
+
+    const handleSelectChange = (e, currentIndex) => {
+        // Obtiene el valor del select (índice al que moveremos el elemento)
+        const toIndex = parseInt(e.target.value);
+        setSelectedIndex(toIndex);
+        // Llama a la función handleOrder en el componente padre
+        handleOrder(currentIndex, toIndex);
+      };
+
+      useEffect(() => {
+        setSelectedIndex(0);
+      }, [dataJson]);
+
     return (<>
             <div className="containerLayout flex gap-10 flex-wrap">
                 <div className="container-icon cursor-pointer flex flex-col items-center justify-center" onClick={() => handleIcon("icon", "facebook")}>
@@ -112,8 +149,8 @@ function SectionTemplateForm({ dataJson, handleProperties }) {
                     <input className="rounded-xl border w-full border-slate-200 py-2 px-4 text-xs" onChange={(e) => handleDataInput(e)} type="text" name="labelText" id="" value={labelProperties.labelText} placeholder='Contact Us'/>
                 </div>
                 <div className="flex flex-col">
-
-
+                <label className="font-bold text-sm pb-2">Order</label>
+                    {createSelectOptions()}
                 </div>
                 </>
             </div>

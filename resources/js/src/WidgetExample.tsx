@@ -490,7 +490,14 @@ function WidgetExamples() {
        setShowFormArea(dataValue)
        setSelectedPosition(dataValue)
     }
+    const handleSorting = (fromIndex, toIndex) => {
+        if (fromIndex === toIndex) return; // No hacer nada si los índices son iguales
+        const newContentButtons = [...json.contentButtons];
+        const itemToMove = newContentButtons.splice(fromIndex, 1)[0];
+        newContentButtons.splice(toIndex, 0, itemToMove);
+        setJson({ ...json, contentButtons: newContentButtons });
 
+    };
     function sendDataJson(e) {
         e.preventDefault();
     }
@@ -502,10 +509,10 @@ function WidgetExamples() {
         <div className='flex gap-3'>
             <div className="flex flex-col">
                 {json.contentButtons.filter((item) => selectedPosition == null || item.position === selectedPosition).map((item, index) => {
-                    return showAdvancedForm === "advanced" ?
-                    (<><FormGeneralAdvanced key={index} dataJson={item} deleteButton={removeButton} changeSelectionButtonProperties={changeSelectionButtonProperties} changeSelectionLabelProperties={changeSelectionLabelProperties} changeSelectionIconProperties={changeSelectionIconProperties} changeSelectionTemplateProperties={changeSelectionTemplateProperties}/><br/> </>)
-                    : (<><FormGeneralBasic  key={index} dataJson={item} deleteButton={removeButton} changeSelectionTemplateProperties={changeSelectionTemplateProperties} changeSelectionButtonPropertiesBasic={changeSelectionButtonPropertiesBasic} changeSelectionLabelPropertiesBasic={changeSelectionLabelPropertiesBasic} changeSelectionIconPropertiesBasic={changeSelectionIconPropertiesBasic}/> <br /></>);
-                })}
+                return showAdvancedForm === "advanced" ?
+                    (<><FormGeneralAdvanced key={index} dataJson={item} itemIndex={index}  lenghtJson={json.contentButtons.length}  handleOrder={handleSorting} deleteButton={removeButton} changeSelectionButtonProperties={changeSelectionButtonProperties} changeSelectionLabelProperties={changeSelectionLabelProperties} changeSelectionIconProperties={changeSelectionIconProperties} changeSelectionTemplateProperties={changeSelectionTemplateProperties}/><br /> </>)
+                    : (<><FormGeneralBasic key={index} dataJson={item} itemIndex={index} lenghtJson={json.contentButtons.length} handleOrder={handleSorting} deleteButton={removeButton} changeSelectionTemplateProperties={changeSelectionTemplateProperties} changeSelectionButtonPropertiesBasic={changeSelectionButtonPropertiesBasic} changeSelectionLabelPropertiesBasic={changeSelectionLabelPropertiesBasic} changeSelectionIconPropertiesBasic={changeSelectionIconPropertiesBasic}/> <br /></>);
+            })}
             </div>
             <div className='flex flex-col bg-white shadow-xl p-6 rounded-xl relative h-auto'>
                 <div style={{position:'relative', width: '500px', height: '500px'}} className='bg-slate-100 w-full rounded-xl p-4'>
