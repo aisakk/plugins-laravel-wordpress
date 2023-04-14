@@ -82,8 +82,8 @@ const InputMultiple: React.FC<InputMultipleProps> = ({
 
       {!basic && (
         <div className="flex gap-3">
-          {values?.map((item) => (
-            <div className="w-4/12 relative">
+          {values?.map((item, index) => (
+            <div className="w-4/12 relative" key={index}>
               {device === "desktop" && (
                 <div>
                   <small className="block text-[10px] uppercase pt-1">

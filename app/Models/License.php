@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Log;
 
 class License extends Model
 {
@@ -35,5 +36,9 @@ class License extends Model
     public function plugin()
     {
         return $this->belongsTo(Plugin::class);
+    }
+    public function logs()
+    {
+        return $this->hasMany(Log::class);
     }
 }
