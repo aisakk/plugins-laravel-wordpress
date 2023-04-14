@@ -36,8 +36,10 @@ class AuthController extends Controller
           $remember = $request->input('remember');
 
           $user = User::where('email', $emailOrUsername)->orWhere('username', $emailOrUsername)->first();
-
-          if ($user && Auth::attempt(['email' => $user->email, 'password' => $password], $remember)) {
+          if($user == null){
+            return back()->withErrors(['error' => 'No existe el correo o el usuario proporcionado']);
+          }
+           if ($user && Auth::attempt(['email' => $user->email, 'password' => $password], $remember)) {
                 if (!$user->email_last_verification) {
                   // Desconectar al usuario si el correo electrónico no está verificado
                   Auth::logout();
@@ -45,7 +47,6 @@ class AuthController extends Controller
                   $user->verification_code = $verificationCode;
                   $user->save();
                   $user->notify(new EmailVerificationLinkNotification($verificationCode));
-
                   return back()->withErrors(['error' => 'Debe verificar su correo electrónico, le enviamos el enlace nuevamente a su correo.']);
               }
               // Autenticación exitosa
@@ -53,7 +54,7 @@ class AuthController extends Controller
           }
 
 
-          return back()->withErrors(['error' => 'No existe ningun correo y contraseña con las credenciales enviadas']);
+         return back()->withErrors(['error' => 'La contraseña es Incorrecta']);
       }
 
 
@@ -64,18 +65,26 @@ class AuthController extends Controller
             'password_register' => 'required|min:8'
         ];
         $request->validate($rules);
+        $userEmail= User::where('email', $request->email_register)->first();
+        $userName = User::where('username', $request->username)->first();
+        $userEmail ? back()->withErrors(['email_register' => 'Correo ya existente']) : null;
+        $userName ? back()->withErrors(['username' => 'Usuario ya existente']) : null;
 
-        $user = new User([
-            'email' => $request->input('email_register'),
-            'username' => $request->input('username'),
-            'password' => Hash::make($request->input('password_register')),
-        ]);
-        $verificationCode = Str::random(32);
+         if($userEmail == null && $userName == null){
+            $user = new User([
+                'email' => $request->input('email_register'),
+                'username' => $request->input('username'),
+                'password' => Hash::make($request->input('password_register')),
+            ]);
+            $verificationCode = Str::random(32);
+            $user->verification_code = $verificationCode;
+            $user->save();
+            $user->notify(new EmailVerificationLinkNotification($verificationCode));
+            return redirect()->route('verifyMessage');
+        }
 
-        $user->verification_code = $verificationCode;
-        $user->save();
-        $user->notify(new EmailVerificationLinkNotification($verificationCode));
-        return redirect()->route('verifyMessage');
+
+
 
       }
 
