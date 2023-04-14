@@ -122,8 +122,11 @@ class AuthController extends Controller
 
         $license=$user->licenses()->orderBy('created_at','DESC')->first();
         $settings=$license->settings;
-        $settings=SettingResource::collection($settings)->toArray(request());
-        return response()->json($settings);
-        return Inertia::render("WidgetExample",['settings'=>$settings]);
+        $settings=SettingResource::collection($settings);
+        $settings=$settings->map(function($set){
+            return json_decode($set->meta_value);
+        });
+
+        return Inertia::render("WidgetExample", ['settings' => $settings->toArray(request())]);
     }
 }

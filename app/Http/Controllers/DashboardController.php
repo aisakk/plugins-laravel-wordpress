@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Inertia\Inertia;
-use App\Models\License;
 use App\Http\Resources\LicenseResource;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Models\License;
+use Inertia\Inertia;
+use App\Models\Log;
+
 class DashboardController extends Controller
 {
     public function licenses()
@@ -45,8 +46,9 @@ class DashboardController extends Controller
     public function logs($licenseId)
     {
         $license = License::findOrFail($licenseId);
+        $logs = Log::where('license_id', $licenseId)->get();
         $licenseResource = (new LicenseResource($license))->toArray(request());
 
-        return Inertia::render('Pages/Logs', ['license' => $licenseResource]);
+        return Inertia::render('Pages/Logs', ['logs' => $logs, 'license' => $licenseResource]);
     }
 }

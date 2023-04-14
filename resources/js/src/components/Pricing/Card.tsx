@@ -65,13 +65,13 @@ const PricingCard: React.FC<PricingCardProps> = ({ item }) => {
                     </div>
                     <p className="text-slate-600 pt-4 text-center text-xs">${ item.renew_price }/month when you renew</p>
                 </div>
-                { item.features.map((feature) => (
-                    <div className="pt-6">
+                { item.features.map((feature,index) => (
+                    <div className="pt-6" key={index}>
                         <h6 className="font-bold pb-6 text-sm">{ feature.name }</h6>
 
                         <ul className="flex flex-col gap-3 text-sm">
-                            { feature.items.map((feature_item) => (
-                                <List item={ feature_item } />
+                            { feature.items.map((feature_item,index) => (
+                                <List item={ feature_item } key={index}/>
                             ))}
                         </ul>
 

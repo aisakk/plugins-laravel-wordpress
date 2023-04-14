@@ -93,8 +93,8 @@ const DrawerMenu: React.FC<DrawerMenuProps> = (props) => {
           <DropdownMenu />
         </div>
         <div className="flex flex-col gap-y-2 px-6 sm:px-2 py-10">
-          {items.map((item) => (
-            <DrawerMenuItem key={item.title} item={{ ...item, active: currentPath === item.link }}  />
+          {items.map((item, index) => (
+            <DrawerMenuItem key={index} item={{ ...item, active: currentPath === item.link }}  />
           ))}
         </div>
       </nav>

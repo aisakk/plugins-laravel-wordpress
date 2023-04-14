@@ -1,7 +1,6 @@
 import MainLayout from '../layouts/MainLayout';
 import React, { useState, Fragment, useEffect } from 'react';
 import { Inertia } from '@inertiajs/inertia';
-import { useForm } from '@inertiajs/react';
 import { Dialog, Transition } from '@headlessui/react';
 
 import Badge from '../components/Badge';
@@ -46,7 +45,6 @@ const Domains: React.FC<LicenseProps> = (props) => {
     let [isOpenDelete, setIsOpenDelete] = useState(false);
     const [isLimitExceededModalOpen, setIsLimitExceededModalOpen] = useState(false);
     const [domainData, setDomainData] = useState<DomainData>({id:0, name: '', active: true });
-    // const [validationErrors, setValidationErrors] = useState({});
 
     useEffect(() => {
         if (props.limit_exceeded) {
@@ -112,8 +110,6 @@ const Domains: React.FC<LicenseProps> = (props) => {
     function closeLimitExceededModal() {
         setIsLimitExceededModalOpen(false);
     }
-
-
 
     function openModalCreate() {
         setIsOpenCreate(true)
@@ -265,7 +261,7 @@ const Domains: React.FC<LicenseProps> = (props) => {
                                 <p>{ item.name }</p>
                             </div>
                             <div className="w-5/12">
-                                <Badge background="bg-green-500">{ item.active?'active':'inactive' }</Badge>
+                                { item.active?<Badge background="bg-green-500">active</Badge>:<Badge background="bg-red-500">inactive</Badge> }
                             </div>
                             <div className="w-2/12">
                                 <div className="flex justify-center gap-4">

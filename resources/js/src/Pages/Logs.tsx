@@ -3,26 +3,16 @@ import LogsTable from '../components/LogsTable';
 import Card from '../components/Card';
 import {  useState } from 'react';
 
-
-const logsData = [
-    {
-      timestamp: '13-04-2023 12:45',
-      actionName: 'Hook de Actualización',
-      actionDetails: 'Ejecucion de hook de actualizacion en el dominio "www.dominio.com"',
-      actionData: '{url: Json codificado}, endpoint: www.dominio.com/wp-json/octorestapi/v1/update_widget',
-      actionResult: 'Error (500) "MENSAJE"',
-    },
-    {
-      timestamp: '13-04-2023 13:00',
-      actionName: 'Hook de Actualización',
-      actionDetails: 'Ejecucion de hook de actualizacion en el dominio "www.dominio.com"',
-      actionData: '{url: Json codificado}, endpoint: www.dominio.com/wp-json/octorestapi/v1/update_widget',
-      actionResult: '200 Completado correctamente.',
-    },
-  ];
+interface Log {
+    created_at: string;
+    action_name: string;
+    action_details: string;
+    action_data: string;
+    action_result: string;
+}
 
 interface Item {
-    id:number;
+    id: number;
     date: string;
     code: string;
     pluginName: string;
@@ -31,36 +21,84 @@ interface Item {
     status: string;
 }
 
-interface LicenseProps {
+interface LogsProps {
+    logs: Log[];
     license: Item;
 }
 
-const Logs: React.FC<LicenseProps> = (props) =>{
-    const { license } = props;
-    let [isOpen, setIsOpen] = useState(false);
+const formatDate = (dateString: string) => {
+    if (!dateString) {
+        return 'Fecha desconocida';
+    }
 
-function closeModal() {
-    setIsOpen(false);
-}
+    const isoDate = dateString.replace(/\.\d+/, ''); // Elimina los microsegundos
+    const date = new Date(isoDate);
+    const options: Intl.DateTimeFormatOptions = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    };
 
-function openModal() {
-    setIsOpen(true);
-}
+    return date.toLocaleDateString(undefined, options);
+};
 
-  return (
-    <MainLayout licenseId={license.id}>
-        <div className="py-10">
-            <div className="flex flex-wrap sm:flex-nowrap gap-y-6 sm:gap-6 items-center">
+const separateLogsByDay = (logs: any[]) => {
+    const logsByDay: { [date: string]: any[] } = {};
 
-                <div className="w-full">
-                    <Card>
-                         <LogsTable logs={logsData} />
-                    </Card>
+    logs.forEach((log) => {
+      const logDate = log.created_at.split(' ')[0];
+      if (logsByDay[logDate]) {
+        logsByDay[logDate].push(log);
+      } else {
+        logsByDay[logDate] = [log];
+      }
+    });
+
+    return logsByDay;
+};
+
+const Logs: React.FC<LogsProps> = ({ logs, license }) => {
+    const logsData = logs ? Object.values(logs) : [];
+
+    // Crear un conjunto de fechas únicas
+    const uniqueDates = new Set(
+        logsData.map((log) => formatDate(log.created_at.split(' ')[0]))
+    );
+
+    // Crear un estado para la fecha seleccionada
+    const [selectedDate, setSelectedDate] = useState<string | null>(null);
+
+    // Filtrar registros por fecha seleccionada
+    const filteredLogs = selectedDate
+        ? logsData.filter(
+            (log) => formatDate(log.created_at.split(' ')[0]) === selectedDate
+        )
+        : logsData;
+
+    const logsByDay = separateLogsByDay(filteredLogs);
+
+    return (
+        <MainLayout licenseId={license.id}>
+            <div className="py-10">
+                <div className="w-full items-center">
+                    <select
+                        value={selectedDate || ''}
+                        onChange={(e) => setSelectedDate(e.target.value)}
+                        className="w-full mb-4 sm:mb-0 sm:w-auto bg-white border border-gray-300 py-2 px-4 rounded-lg"
+                    >
+                        <option value="">Todos los días</option>
+                        {Array.from(uniqueDates).map((date) => (
+                        <option key={date} value={date}>
+                            {date}
+                        </option>
+                        ))}
+                    </select>
                 </div>
+                <Card>
+                    <LogsTable logs={logsByDay} />
+                </Card>
             </div>
-
-        </div>
-    </MainLayout>
+        </MainLayout>
     );
 }
 
