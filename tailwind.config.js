@@ -11,6 +11,9 @@ module.exports = {
             'primary': '#4054b2',
             'secondary': '#fa6000'
         },
+        animation:{
+            'bounce-slow': 'bounce 3s infinite'
+        }
     },
   },
   plugins: [],

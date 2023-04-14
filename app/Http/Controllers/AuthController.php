@@ -38,7 +38,7 @@ class AuthController extends Controller
           $user = User::where('email', $emailOrUsername)->orWhere('username', $emailOrUsername)->first();
 
           if ($user && Auth::attempt(['email' => $user->email, 'password' => $password], $remember)) {
-              if (!$user->email_last_verification) {
+                if (!$user->email_last_verification) {
                   // Desconectar al usuario si el correo electrónico no está verificado
                   Auth::logout();
                   $verificationCode = Str::random(32);
@@ -48,13 +48,14 @@ class AuthController extends Controller
 
                   return back()->withErrors(['error' => 'Debe verificar su correo electrónico, le enviamos el enlace nuevamente a su correo.']);
               }
-
               // Autenticación exitosa
               return redirect()->route('dashboard.licenses');
           }
 
+
           return back()->withErrors(['error' => 'No existe ningun correo y contraseña con las credenciales enviadas']);
       }
+
 
       public function register(Request $request){
         $rules = [
@@ -105,10 +106,15 @@ class AuthController extends Controller
 
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
+        $user = User::find(Auth::id());
+        $user->remember_token = null;
+        $user->save();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         Auth::logout();
-        return redirect('/');
+        return redirect('/login');
     }
 
     public function widget(){
@@ -117,7 +123,7 @@ class AuthController extends Controller
         $license=$user->licenses()->orderBy('created_at','DESC')->first();
         $settings=$license->settings;
         $settings=SettingResource::collection($settings)->toArray(request());
-        // return $settings;
+        return response()->json($settings);
         return Inertia::render("WidgetExample",['settings'=>$settings]);
     }
 }

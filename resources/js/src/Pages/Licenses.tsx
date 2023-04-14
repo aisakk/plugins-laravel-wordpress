@@ -4,7 +4,7 @@ import Badge from '../components/Badge';
 import Card from '../components/Card';
 import Button from '../components/Form/Button';
 import Icon from '../components/Icon';
-
+import { usePage } from '@inertiajs/inertia-react';
 
 interface Domain{
     id:number;
@@ -28,9 +28,8 @@ interface LicensesProps {
 
 
 const Licenses: React.FC<LicensesProps> = (props) => {
+    const { auth } = usePage().props;
     const { licenses } = props;
-    console.log(licenses)
-
   return (
         <NosideBarLayout>
             <div className="py-10 text-center">

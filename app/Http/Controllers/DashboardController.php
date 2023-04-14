@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\License;
 use App\Http\Resources\LicenseResource;
-
+use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function licenses()
     {
+
         $licenses = License::all();
         $licensesArray = LicenseResource::collection($licenses)->toArray(request());
 

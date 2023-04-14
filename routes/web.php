@@ -23,17 +23,26 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+/* Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); */
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::get('/verify-email', [AuthController::class, 'verifyEmailThenRegister'])->name('verifyMessage');
 
 Route::get('/email-verification/{code}',  [AuthController::class, 'verify'])->name('verify-link');
 
 //Route::get('/email-verification', [EmailVerificationController::class, 'showEmailForm'])->name('email-verification.show');
+Route::middleware(["guest"])->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware(['auth', 'verified-custom'])->group(function(){
+    // Si tienes una ruta POST para el inicio de sesión, también puedes agregarla aquí
+    // Route::post('/login', 'Auth\LoginController@login');
+});
+Route::middleware(['auth', 'verified-custom', 'remember-custom'])->group(function(){
     // Route::get('dashboard', [UserController::class, 'show'])->name('dashboard');
     Route::get('/licenses', [DashboardController::class, 'licenses'])->name('dashboard.licenses');
     Route::get('/license/{licenseId}/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

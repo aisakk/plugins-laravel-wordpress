@@ -9,9 +9,10 @@ interface DrawerMenuItemProps {
     active: boolean;
     icon: string;
   };
+  route: ()=>any
 }
 
-const DropdownAccountItem: React.FC<DrawerMenuItemProps> = ({ item }) => {
+const DropdownAccountItem: React.FC<DrawerMenuItemProps> = ({ item, route }) => {
 
   return (
     <Menu.Item>
@@ -20,6 +21,7 @@ const DropdownAccountItem: React.FC<DrawerMenuItemProps> = ({ item }) => {
           className={`${
             active ? 'bg-slate-100' : 'text-gray-900'
           } group flex gap-2 w-full items-center rounded-md px-2 py-2 text-sm`}
+          onClick={route}
         >
           <Icon name={item.icon} size={25} />
           {item.name}

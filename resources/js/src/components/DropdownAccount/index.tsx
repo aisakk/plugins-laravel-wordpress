@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useMemo, Fragment } from 'react';
 import Icon from '../Icon';
 import DropdownAccountItem from './Item';
+import { Inertia } from '@inertiajs/inertia';
+
 
 interface Item {
   name: string;
   active: boolean;
   icon: string;
+  method: ()=>void;
 }
 
 const items: Item[] = [
@@ -13,17 +16,23 @@ const items: Item[] = [
     name: 'Profile',
     active:true,
     icon: 'user',
+    method: ()=>{},
   },
   {
     name: 'Logout',
     active:true,
     icon: 'logout-box',
+    method: ()=>{}
   },
 ];
 
 const DropdownAccount: React.FC = () => {
   const [Menu, setMenu] = useState<any>(null);
   const [Transition, setTransition] = useState<any>(null);
+
+  function handleLogout() {
+        return Inertia.post('/logout');
+  }
 
   useEffect(() => {
     (async () => {
@@ -75,7 +84,9 @@ const DropdownAccount: React.FC = () => {
           <Menu.Items className="absolute right-0 mt-3 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="px-1 py-1">
               {items.map((item) => (
-                <DropdownAccountItem key={item.name} item={item} />
+                item.name === 'Logout'
+                ? <DropdownAccountItem key={item.name} item={item} route={handleLogout}/>
+                : <DropdownAccountItem key={item.name} item={item} route={()=>{}}/>
               ))}
             </div>
           </Menu.Items>

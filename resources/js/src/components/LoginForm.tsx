@@ -28,9 +28,9 @@ const LoginForm = (props:LoginInterface) => {
                         Iniciar sesión
                     </h2>
                 </div>
-                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+                <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
                     <input type="hidden" name="remember" value="true" />
-                    <div className="rounded-md shadow-sm -space-y-px">
+                    <div className="flex flex-col gap-2 shadow-sm -space-y-px">
                         <div>
                             <label
                                 htmlFor="emailOrUsername"
@@ -44,7 +44,7 @@ const LoginForm = (props:LoginInterface) => {
                                 type="text"
                                 autoComplete="email"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Correo electrónico o nombre de usuario"
                                 value={emailOrUsername}
                                 onChange={(e) =>
@@ -63,7 +63,7 @@ const LoginForm = (props:LoginInterface) => {
                                 type="password"
                                 autoComplete="current-password"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Contraseña"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -92,7 +92,7 @@ const LoginForm = (props:LoginInterface) => {
                         </div>
                     </div>
 
-                    <div className="">
+                    <div className="flex flex-col gap-3">
                         {errors.error && <p className="text-red-400">{errors.error}</p>}
                         <button
                             type="submit"
