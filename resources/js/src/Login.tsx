@@ -5,7 +5,7 @@ import RegisterForm from "./components/RegisterForm";
 import ResetPasswordForm from "./components/ResetPasswordForm";
 import IconWordpress from "./assets/IconWordpress";
 
-const Login = () => {
+const Login = ({ success }) => {
     const [formulario, setFormulario] = useState("login");
     const mostrarFormulario = (formulario:string) => {
         setFormulario(formulario);
@@ -32,7 +32,10 @@ const Login = () => {
                         <RegisterForm handleForm={mostrarFormulario}/>
                     )}
                     {formulario === "reset" && (
-                        <ResetPasswordForm handleForm={mostrarFormulario}/>
+                        <>
+                            <ResetPasswordForm handleForm={mostrarFormulario} success={success}/>
+
+                        </>
                     )}
                 </div>
             </div>

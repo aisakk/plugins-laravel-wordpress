@@ -13,6 +13,7 @@ use App\Services\EmailVerificationService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Str;
 use App\Http\Resources\SettingResource;
+use App\Notifications\ResetPasswordVerificationCodeNotification;
 
 class AuthController extends Controller
 {
@@ -83,9 +84,6 @@ class AuthController extends Controller
             return redirect()->route('verifyMessage');
         }
 
-
-
-
       }
 
       public function verifyEmailThenRegister(){
@@ -122,13 +120,55 @@ class AuthController extends Controller
         $user->save();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        Auth::logout();
+
         return redirect('/login');
+
+    }
+    public function showResetPassword($code){
+        return Inertia::render('PasswordUpdateForm');
+    }
+
+    public function resetPassword(Request $request){
+        $email = User::where('email', $request->emailOrUsername)->first();
+        $username = User::where('username', $request->emailOrUsername)->first();
+        if($email == null && $username == null){
+            return back()->withErrors(['error_reset' => 'Correo o Usuario no encontrado']);
+        }
+        if($email){
+            $verificationCode = Str::random(32);
+            $email->verification_code = $verificationCode;
+            $email->save();
+            $email->notify(new ResetPasswordVerificationCodeNotification($verificationCode));
+            return Inertia::render('Login', [
+                'success' => 'Se ha enviado el correo para resetear el password'
+               ]);
+        }
+        if($username){
+            $verificationCode = Str::random(32);
+            $username->verification_code = $verificationCode;
+            $username->save();
+            $username->notify(new ResetPasswordVerificationCodeNotification($verificationCode));
+            return Inertia::render('Login', [
+                'success' => 'Se ha enviado el correo para resetear el password'
+               ]);
+        }
+    }
+    public function resetPasswordWithCode(Request $request){
+        $rules = [
+            'password' => 'required|min:8',
+            'passwordConfirmation' => 'required|min:8|same:password'
+        ];
+        $request->validate($rules);
+
+        $user = User::where('verification_code', $request->code)->first();
+        $user->password = Hash::make($request->password);
+        $user->verification_code = null;
+        $user->save();
+        return redirect()->route('login');
     }
 
     public function widget(){
         $user=User::first();
-
         $license=$user->licenses()->orderBy('created_at','DESC')->first();
         $settings=$license->settings;
         $settings=SettingResource::collection($settings);
