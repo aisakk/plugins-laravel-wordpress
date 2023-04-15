@@ -5,6 +5,7 @@ use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DomainsController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\LicenseController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
@@ -57,6 +58,10 @@ Route::middleware(['auth', 'verified-custom', 'remember-custom'])->group(functio
 
     Route::get('/license/{licenseId}/installation', [DashboardController::class, 'installation'])->name('dashboard.installation');
     Route::get('/license/{licenseId}/logs', [DashboardController::class, 'logs'])->name('dashboard.logs');
+
+
+    Route::post('/license/store', [LicenseController::class, 'store'])->name('license.store');
+    Route::post('/license/create', [LicenseController::class, 'create'])->name('license.create');
 });
 
 
@@ -76,3 +81,6 @@ Route::post('/password-reset/update', [PasswordResetController::class, 'updatePa
 Route::get("widget", [AuthController::class, 'widget']);
 
 // Route::post('/wp-json/octorestapi/v1/update_widget',[SettingsController::class,'jwtDecode']);
+Route::get('/',function(){
+    return csrf_token();
+});

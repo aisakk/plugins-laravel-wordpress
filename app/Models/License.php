@@ -15,6 +15,8 @@ class License extends Model
         'status',
         'user_id',
         'plugin_id',
+        'expiration',
+        'max_domains'
     ];
 
     public function user()
