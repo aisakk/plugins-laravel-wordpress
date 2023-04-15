@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class EmailVerificationLinkNotification extends Notification
+class ResetPasswordVerificationCodeNotification extends Notification
 {
     use Queueable;
     public $verificationCode;
@@ -35,16 +35,14 @@ class EmailVerificationLinkNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $url = route('verify-link', ['code' => $this->verificationCode]);
-
-      /*   return (new MailMessage)
+        $url = route('showResetPassword', ['code' => $this->verificationCode]);
+       /*  return (new MailMessage)
         ->line('Haga clic en el enlace de abajo para verificar su correo electrónico:')
         ->action('Verificar correo electrónico', $url)
         ->line('Si no solicitó la verificación de correo electrónico, no se requiere ninguna acción adicional.'); */
         return (new MailMessage)
-            ->subject('Verificación de correo electrónico Octonove') // Opcional: personalizar el asunto del correo electrónico
-            ->view('notification.email-verify', ['url' => $url]);
-
+            ->subject('Resetear Contraseña Octonove') // Opcional: personalizar el asunto del correo electrónico
+            ->view('notification.reset-password', ['url' => $url]);
     }
 
     /**
