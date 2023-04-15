@@ -36,10 +36,13 @@ class ResetPasswordVerificationCodeNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $url = route('showResetPassword', ['code' => $this->verificationCode]);
-        return (new MailMessage)
+       /*  return (new MailMessage)
         ->line('Haga clic en el enlace de abajo para verificar su correo electrónico:')
         ->action('Verificar correo electrónico', $url)
-        ->line('Si no solicitó la verificación de correo electrónico, no se requiere ninguna acción adicional.');
+        ->line('Si no solicitó la verificación de correo electrónico, no se requiere ninguna acción adicional.'); */
+        return (new MailMessage)
+            ->subject('Resetear Contraseña Octonove') // Opcional: personalizar el asunto del correo electrónico
+            ->view('notification.reset-password', ['url' => $url]);
     }
 
     /**

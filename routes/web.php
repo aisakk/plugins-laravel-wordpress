@@ -59,7 +59,9 @@ Route::middleware(['auth', 'verified-custom', 'remember-custom'])->group(functio
     Route::get('/license/{licenseId}/logs', [DashboardController::class, 'logs'])->name('dashboard.logs');
 });
 
-
+/* Route::get('/', function(){
+    return view('notification.email-verify', ['url' =>'hola']);
+}); */
 /* Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegistrationController::class, 'register']); */
 
