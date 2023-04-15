@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Inertia } from '@inertiajs/inertia';
 import { useForm } from "@inertiajs/inertia-react";
-
+import Alert from "./Alert/Alert";
 interface RegisterInterface{
     handleForm: (form:string) => void;
 }
@@ -11,11 +11,20 @@ const RegisterForm = (props:RegisterInterface) => {
         username: '',
         password_register: ''
    })
-
+   const [showAlert, setShowAlert] = useState(false);
   const handleSubmit = (e:any) => {
     e.preventDefault();
     post('/register');
+    setShowAlert(false)
   };
+
+  const handleAlert = ()=>{
+    setShowAlert(!showAlert)
+        errors.email_register = ''
+        errors.username = ''
+        errors.password_register = ''
+
+}
 
   return (
       <div className="lg:max-w-lg max-w-md w-full space-y-8">
@@ -37,7 +46,8 @@ const RegisterForm = (props:RegisterInterface) => {
                 type="email"
                 autoComplete="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className={errors.email_register ? "border border-red-500 appearance-none rounded relative block w-full px-3 py-2 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" : "appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"}
+
                 placeholder="Correo electrónico"
                 value={data.email_register}
                 onChange={(e) => setData('email_register', e.target.value)}
@@ -54,7 +64,7 @@ const RegisterForm = (props:RegisterInterface) => {
                 type="text"
                 autoComplete="username"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className={errors.username ? "border border-red-500 appearance-none rounded relative block w-full px-3 py-2 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" : "appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"}
                 placeholder="Nombre de usuario"
                 value={data.username}
                 onChange={(e) => setData('username',e.target.value)}
@@ -71,7 +81,7 @@ const RegisterForm = (props:RegisterInterface) => {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className={errors.password_register ? "border border-red-500 appearance-none rounded relative block w-full px-3 py-2 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" : "appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"}
                 placeholder="Contraseña"
                 value={data.password_register}
                 onChange={(e) => setData('password_register',e.target.value)}
@@ -95,6 +105,16 @@ const RegisterForm = (props:RegisterInterface) => {
               <button onClick={()=> props.handleForm("login")}> Iniciar Sesion </button>
               </div>
             </form>
+            {errors.email_register &&(
+                        <Alert show={!showAlert} error={errors.email_register} onClose={handleAlert}/>
+
+                )}
+                {errors.password_register &&(
+                         <Alert show={!showAlert} error={errors.password_register} onClose={handleAlert}/>
+                )}
+                {errors.username &&(
+                         <Alert show={!showAlert} error={errors.username} onClose={handleAlert}/>
+                )}
         </div>
     );
 };

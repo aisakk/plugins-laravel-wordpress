@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import { Inertia } from '@inertiajs/inertia';
 import { useForm } from "@inertiajs/inertia-react";
-
+import Alert from "./Alert/Alert";
 interface ResetInterface{
     handleForm: (form:string) => void;
     success: string;
@@ -12,11 +12,19 @@ const ResetPasswordForm = (props:ResetInterface) => {
         emailOrUsername: '',
         error_reset: false,
    })
+   const [showAlert, setShowAlert] = useState(false);
     const handleSubmit:React.FormEventHandler<HTMLFormElement> = (e) => {
       e.preventDefault();
       post('/password-reset')
-
+      setShowAlert(false)
     };
+
+    const handleAlert = ()=>{
+        setShowAlert(!showAlert)
+            errors.emailOrUsername = ''
+            errors.error_reset = ''
+
+    }
 
     return (
         <div className="lg:max-w-lg max-w-md w-full space-y-8">
@@ -37,7 +45,7 @@ const ResetPasswordForm = (props:ResetInterface) => {
                   type="text"
                   autoComplete="email"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className={errors.emailOrUsername ? "border border-red-500 appearance-none rounded relative block w-full px-3 py-2 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" : "appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"}
                   placeholder="Correo electrónico o nombre de usuario"
                   value={data.emailOrUsername}
                   onChange={(e) => setData('emailOrUsername', e.target.value)}
@@ -60,6 +68,14 @@ const ResetPasswordForm = (props:ResetInterface) => {
             </div>
 
           </form>
+          {errors.emailOrUsername &&(
+                        <Alert show={!showAlert} error={errors.emailOrUsername} onClose={handleAlert}/>
+
+                )}
+                {errors.error_reset &&(
+                         <Alert show={!showAlert} error={errors.error_reset} onClose={handleAlert}/>
+                )}
+
         </div>
     );
 }
