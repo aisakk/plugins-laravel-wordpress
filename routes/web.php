@@ -5,7 +5,6 @@ use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DomainsController;
 use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\LicenseController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
@@ -57,9 +56,6 @@ Route::middleware(['auth', 'verified-custom', 'remember-custom', "web"])->group(
     Route::get('/plugins/{licenseId}/installation', [DashboardController::class, 'installation'])->name('dashboard.installation');
     Route::get('/plugins/{licenseId}/logs', [DashboardController::class, 'logs'])->name('dashboard.logs');
 
-
-    Route::post('/plugins/store', [LicenseController::class, 'store'])->name('license.store');
-    Route::post('/plugins/create', [LicenseController::class, 'create'])->name('license.create');
 });
 
 /* Route::get('/', function(){
