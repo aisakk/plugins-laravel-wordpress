@@ -17,61 +17,62 @@ use App\Notifications\ResetPasswordVerificationCodeNotification;
 
 class AuthController extends Controller
 {
-      public function showLoginForm()
-      {
-            return Inertia::render('Login');
-      }
+    public function showLoginForm()
+    {
+        return Inertia::render('Login');
+    }
 
-      public function login(Request $request)
-      {
-          $rules = [
-              'emailOrUsername' => 'required',
-              'password' => 'required|min:8',
-              'remember' => 'required|boolean'
-          ];
+    public function login(Request $request)
+    {
+        $rules = [
+            'emailOrUsername' => 'required',
+            'password' => 'required|min:8',
+            'remember' => 'required|boolean'
+        ];
 
-          $request->validate($rules);
+        $request->validate($rules);
 
-          $emailOrUsername = $request->input('emailOrUsername');
-          $password = $request->input('password');
-          $remember = $request->input('remember');
+        $emailOrUsername = $request->input('emailOrUsername');
+        $password = $request->input('password');
+        $remember = $request->input('remember');
 
-          $user = User::where('email', $emailOrUsername)->orWhere('username', $emailOrUsername)->first();
-          if($user == null){
+        $user = User::where('email', $emailOrUsername)->orWhere('username', $emailOrUsername)->first();
+        if ($user == null) {
             return back()->withErrors(['error' => 'No existe el correo o el usuario proporcionado']);
-          }
-           if ($user && Auth::attempt(['email' => $user->email, 'password' => $password], $remember)) {
-                if (!$user->email_last_verification) {
-                  // Desconectar al usuario si el correo electrónico no está verificado
-                  Auth::logout();
-                  $verificationCode = Str::random(32);
-                  $user->verification_code = $verificationCode;
-                  $user->save();
-                  $user->notify(new EmailVerificationLinkNotification($verificationCode));
-                  return back()->withErrors(['error' => 'Debe verificar su correo electrónico, le enviamos el enlace nuevamente a su correo.']);
-              }
-              // Autenticación exitosa
-              return redirect()->route('dashboard.licenses');
-          }
+        }
+        if ($user && Auth::attempt(['email' => $user->email, 'password' => $password], $remember)) {
+            if (!$user->email_last_verification) {
+                // Desconectar al usuario si el correo electrónico no está verificado
+                Auth::logout();
+                $verificationCode = Str::random(32);
+                $user->verification_code = $verificationCode;
+                $user->save();
+                $user->notify(new EmailVerificationLinkNotification($verificationCode));
+                return back()->withErrors(['error' => 'Debe verificar su correo electrónico, le enviamos el enlace nuevamente a su correo.']);
+            }
+            // Autenticación exitosa
+            return redirect()->route('dashboard.licenses');
+        }
 
 
-         return back()->withErrors(['error' => 'La contraseña es Incorrecta']);
-      }
+        return back()->withErrors(['error' => 'La contraseña es Incorrecta']);
+    }
 
 
-      public function register(Request $request){
+    public function register(Request $request)
+    {
         $rules = [
             'email_register' => 'required|email',
             'username' => 'required|string',
             'password_register' => 'required|min:8'
         ];
         $request->validate($rules);
-        $userEmail= User::where('email', $request->email_register)->first();
+        $userEmail = User::where('email', $request->email_register)->first();
         $userName = User::where('username', $request->username)->first();
         $userEmail ? back()->withErrors(['email_register' => 'Correo ya existente']) : null;
         $userName ? back()->withErrors(['username' => 'Usuario ya existente']) : null;
 
-         if($userEmail == null && $userName == null){
+        if ($userEmail == null && $userName == null) {
             $user = new User([
                 'email' => $request->input('email_register'),
                 'username' => $request->input('username'),
@@ -83,17 +84,18 @@ class AuthController extends Controller
             $user->notify(new EmailVerificationLinkNotification($verificationCode));
             return redirect()->route('verifyMessage');
         }
+    }
 
-      }
-
-      public function verifyEmailThenRegister(){
-        return Inertia::render('VerificationEmail',[
+    public function verifyEmailThenRegister()
+    {
+        return Inertia::render('VerificationEmail', [
             'success' => '',
             'errors' => ''
         ]);
-      }
+    }
 
-      public function verify(Request $request, $code){
+    public function verify(Request $request, $code)
+    {
         $user = User::where('verification_code', $code)->first();
         if ($user && !$user->email_last_verification) {
             // Marcar el correo electrónico como verificado y eliminar el código de verificación
@@ -105,12 +107,10 @@ class AuthController extends Controller
                 'errors' => ''
             ]);
         }
-         return Inertia::render('VerificationEmail', [
-                'errors' => 'Error el usuario ha sido verificado anteriormente.',
-                'success' => ''
+        return Inertia::render('VerificationEmail', [
+            'errors' => 'Error el usuario ha sido verificado anteriormente.',
+            'success' => ''
         ]);
-
-
     }
 
     public function logout(Request $request)
@@ -122,38 +122,40 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login');
-
     }
-    public function showResetPassword($code){
+    public function showResetPassword($code)
+    {
         return Inertia::render('PasswordUpdateForm');
     }
 
-    public function resetPassword(Request $request){
+    public function resetPassword(Request $request)
+    {
         $email = User::where('email', $request->emailOrUsername)->first();
         $username = User::where('username', $request->emailOrUsername)->first();
-        if($email == null && $username == null){
+        if ($email == null && $username == null) {
             return back()->withErrors(['error_reset' => 'Correo o Usuario no encontrado']);
         }
-        if($email){
+        if ($email) {
             $verificationCode = Str::random(32);
             $email->verification_code = $verificationCode;
             $email->save();
             $email->notify(new ResetPasswordVerificationCodeNotification($verificationCode));
             return Inertia::render('Login', [
                 'success' => 'Se ha enviado el correo para resetear el password'
-               ]);
+            ]);
         }
-        if($username){
+        if ($username) {
             $verificationCode = Str::random(32);
             $username->verification_code = $verificationCode;
             $username->save();
             $username->notify(new ResetPasswordVerificationCodeNotification($verificationCode));
             return Inertia::render('Login', [
                 'success' => 'Se ha enviado el correo para resetear el password'
-               ]);
+            ]);
         }
     }
-    public function resetPasswordWithCode(Request $request){
+    public function resetPasswordWithCode(Request $request)
+    {
         $rules = [
             'password' => 'required|min:8',
             'passwordConfirmation' => 'required|min:8|same:password'
@@ -167,12 +169,13 @@ class AuthController extends Controller
         return redirect()->route('login');
     }
 
-    public function widget(){
-        $user=User::first();
-        $license=$user->licenses()->orderBy('created_at','DESC')->first();
-        $settings=$license->settings;
-        $settings=SettingResource::collection($settings);
-        $settings=$settings->map(function($set){
+    public function widget()
+    {
+        $user = User::first();
+        $license = $user->licenses()->orderBy('created_at', 'DESC')->first();
+        $settings = $license->settings;
+        $settings = SettingResource::collection($settings);
+        $settings = $settings->map(function ($set) {
             return json_decode($set->meta_value);
         });
 

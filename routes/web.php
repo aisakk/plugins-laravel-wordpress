@@ -40,28 +40,26 @@ Route::middleware(["guest"])->group(function () {
     Route::post('/password-reset/update',  [AuthController::class, 'resetPasswordWithCode'])->name('resetPasswordWithCode');
     Route::get('/verify-email', [AuthController::class, 'verifyEmailThenRegister'])->name('verifyMessage');
     Route::get('/email-verification/{code}',  [AuthController::class, 'verify'])->name('verify-link');
-    // Si tienes una ruta POST para el inicio de sesión, también puedes agregarla aquí
-    // Route::post('/login', 'Auth\LoginController@login');
 });
-Route::middleware(['auth', 'verified-custom', 'remember-custom'])->group(function(){
+Route::middleware(['auth', 'verified-custom', 'remember-custom', "web"])->group(function(){
     // Route::get('dashboard', [UserController::class, 'show'])->name('dashboard');
-    Route::get('/licenses', [DashboardController::class, 'licenses'])->name('dashboard.licenses');
-    Route::get('/license/{licenseId}/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/plugins', [DashboardController::class, 'licenses'])->name('dashboard.licenses');
+    Route::get('/plugins/{licenseId}/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-    Route::get('/license/{licenseId}/domains', [DomainsController::class, 'index'])->name('dashboard.domains');
+    Route::get('/plugins/{licenseId}/domains', [DomainsController::class, 'index'])->name('dashboard.domains');
     Route::post('/domain/{licenseId}/store', [DomainsController::class, 'store'])->name('domains.store');
     Route::put('/domain/{domainId}/update', [DomainsController::class, 'update'])->name('domains.update');
     Route::delete('/domain/{domainId}/delete', [DomainsController::class, 'destroy'])->name('domains.destroy');
 
-    Route::get('/license/{licenseId}/settings',[DashboardController::class,'settings'])->name('dashboard.settings');
-    Route::post('/license/{licenseId}/save-settings', [SettingsController::class, 'store'])->name('domains.save-settings');
+    Route::get('/plugins/{licenseId}/settings',[DashboardController::class,'settings'])->name('dashboard.settings');
+    Route::post('/plugins/{licenseId}/save-settings', [SettingsController::class, 'store'])->name('domains.save-settings');
 
-    Route::get('/license/{licenseId}/installation', [DashboardController::class, 'installation'])->name('dashboard.installation');
-    Route::get('/license/{licenseId}/logs', [DashboardController::class, 'logs'])->name('dashboard.logs');
+    Route::get('/plugins/{licenseId}/installation', [DashboardController::class, 'installation'])->name('dashboard.installation');
+    Route::get('/plugins/{licenseId}/logs', [DashboardController::class, 'logs'])->name('dashboard.logs');
 
 
-    Route::post('/license/store', [LicenseController::class, 'store'])->name('license.store');
-    Route::post('/license/create', [LicenseController::class, 'create'])->name('license.create');
+    Route::post('/plugins/store', [LicenseController::class, 'store'])->name('license.store');
+    Route::post('/plugins/create', [LicenseController::class, 'create'])->name('license.create');
 });
 
 /* Route::get('/', function(){

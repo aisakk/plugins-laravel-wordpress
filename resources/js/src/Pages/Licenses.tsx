@@ -38,9 +38,6 @@ const Licenses: React.FC<LicensesProps> = (props) => {
                         <div className="w-3/12">
                             <h6>Date</h6>
                         </div>
-                        <div className="w-2/12">
-                            <h6>License</h6>
-                        </div>
                         <div className="w-3/12">
                             <h6>Plugin</h6>
                         </div>
@@ -64,9 +61,6 @@ const Licenses: React.FC<LicensesProps> = (props) => {
                             <div className="w-3/12">
                                 <p>{ item.date }</p>
                             </div>
-                            <div className="w-2/12">
-                                <p className="bg-slate-100 text-slate-600 rounded-xl py-1 px-4 font-bold inline-block">{ item.code }</p>
-                            </div>
                             <div className="w-3/12">
                                 <p>{ item.pluginName }</p>
                             </div>
@@ -84,7 +78,7 @@ const Licenses: React.FC<LicensesProps> = (props) => {
                                 <Badge background="bg-green-500">{ item.status }</Badge>
                             </div>
                             <div className="w-1/12">
-                                <Link href={'license/'+item.id+'/dashboard'} className="flex justify-center">
+                                <Link href={'plugins/'+item.id+'/dashboard'} className="flex justify-center">
                                     <Button background="bg-white" padding="p-2"><Icon size={25} name="eye" /></Button>
                                 </Link>
                             </div>

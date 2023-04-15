@@ -19,9 +19,7 @@ class RememberSessionLifetime
         if($request->user()->remember_token !== null){
             config(['session.lifetime' => env('SESSION_LIFETIME_REMEMBER', 43200)]);
         }else{
-            session()->invalidate();
-            session()->regenerateToken();
-            config(['session.lifetime' => env('SESSION_LIFETIME', 1)]);
+            config(['session.lifetime' => env('SESSION_LIFETIME', 0)]);
         }
         return $next($request);
     }

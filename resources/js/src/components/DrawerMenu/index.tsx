@@ -22,31 +22,31 @@ const DrawerMenu: React.FC<DrawerMenuProps> = (props) => {
     {
         title: 'Plan',
         icon: 'list-check',
-        link: `/license/${licenseId}/dashboard`,
+        link: `/plugins/${licenseId}/dashboard`,
         active: false,
     },
     {
         title: 'Domains',
         icon: 'global',
-        link: `/license/${licenseId}/domains`,
+        link: `/plugins/${licenseId}/domains`,
         active: false,
     },
     {
         title: 'Installation',
         icon: 'code',
-        link: `/license/${licenseId}/installation`,
+        link: `/plugins/${licenseId}/installation`,
         active: false,
     },
     {
         title: 'Settings',
         icon: 'settings',
-        link: `/license/${licenseId}/settings`,
+        link: `/plugins/${licenseId}/settings`,
         active: false,
     },
     {
         title: 'Logs',
         icon: 'danger',
-        link: `/license/${licenseId}/logs`,
+        link: `/plugins/${licenseId}/logs`,
         active: false,
       },
   ];

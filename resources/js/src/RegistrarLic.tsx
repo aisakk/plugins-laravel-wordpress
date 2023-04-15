@@ -4,7 +4,7 @@ import CryptoJS from 'crypto-js';
 const RegistrarLic = () => {
     const sendLicenseData = async (encryptedData:string) => {
         try {
-          Inertia.post('/license/store', { license_data: encryptedData });
+          Inertia.post('/plugins/store', { license_data: encryptedData });
           console.log('Licencia creada exitosamente');
         } catch (error) {
           console.error('Error al crear la licencia', error);

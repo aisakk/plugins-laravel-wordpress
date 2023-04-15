@@ -78,7 +78,7 @@ const Example: React.FC = () => {
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
 
 
-          <a href="/license/1/dashboard" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="/plugins/1/dashboard" className="text-sm font-semibold leading-6 text-gray-900">
             Dashboard
           </a>
           <Popover className="relative">
