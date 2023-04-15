@@ -56,6 +56,8 @@ Route::middleware(['auth', 'verified-custom', 'remember-custom', "web"])->group(
     Route::get('/plugins/{licenseId}/installation', [DashboardController::class, 'installation'])->name('dashboard.installation');
     Route::get('/plugins/{licenseId}/logs', [DashboardController::class, 'logs'])->name('dashboard.logs');
 
+    Route::get('/plugins/{licenseId}/logs', [DashboardController::class, 'logs'])->name('dashboard.logs');
+
 });
 
 /* Route::get('/', function(){
