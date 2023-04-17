@@ -1,57 +1,71 @@
 import { useState, useEffect } from "react";
+import Icon from "../../components/Icon";
 import { RadioGroup } from "@headlessui/react";
 
-const positions = [
+interface ButtonOption {
+    name: string;
+    value: string;
+}
+
+const buttons: ButtonOption[] = [
     {
-        name: "Left Top",
-        value: "start-start",
+        name: "Facebook",
+        value: "facebook",
     },
     {
-        name: "Left Center",
-        value: "start-center",
+        name: "WhatsApp",
+        value: "whatsapp",
     },
     {
-        name: "Left Bottom",
-        value: "start-end",
+        name: "Instagram",
+        value: "instagram",
     },
     {
-        name: "Right Top",
-        value: "end-start",
+        name: "Phone",
+        value: "phone",
     },
     {
-        name: "Right Center",
-        value: "end-center",
+        name: "Email",
+        value: "email",
     },
     {
-        name: "Right Bottom",
-        value: "end-end",
+        name: "Link",
+        value: "link",
     },
 ];
 
-interface RadioGroupAreaProps {
-    item: {
-        name: string;
-        value: string;
-    };
+interface ChatBtnIconSelect {
+    icon: string;
+    onChange: (newIcon: string) => void;
 }
 
-const RadioGroupArea: React.FC<RadioGroupAreaProps> = ({ item }) => {
-    const [selected, setSelected] = useState(positions[0]);
-
+const ChatBtnIconSelect = ({ icon, onChange }) => {
     return (
         <div>
-            <RadioGroup value={selected} onChange={setSelected}>
-                <div className="flex flex-wrap xl:flex-nowrap xl:space-x-3 space-y-3">
-                    {positions.map((item, index) => (
+            <RadioGroup value={icon} onChange={onChange}>
+                <div className="flex flex-wrap xl:flex-nowrap xl:space-x-3 space-y-3 sm:space-y-0">
+                    {buttons.map((item, index) => (
                         <RadioGroup.Option
-                            key={item.name}
+                            key={item.value}
                             value={item.value}
-                            className={({ active, checked }) =>
+                            className={({
+                                active,
+                                checked,
+                            }: {
+                                active: boolean;
+                                checked: boolean;
+                            }) =>
                                 `${index % 2 ? "pl-2" : "pr-2"}
                   w-6/12 xl:w-2/12 relative cursor-pointer focus:outline-none`
                             }
                         >
-                            {({ active, checked }) => (
+                            {({
+                                active,
+                                checked,
+                            }: {
+                                active: boolean;
+                                checked: boolean;
+                            }) => (
                                 <>
                                     <div
                                         className={`
@@ -62,13 +76,9 @@ const RadioGroupArea: React.FC<RadioGroupAreaProps> = ({ item }) => {
                         } relative p-2 w-full h-20  border-2 rounded-lg p-2 shadow-md`}
                                     >
                                         <div
-                                            className={`flex h-full w-full justify-${
-                                                item.value.split("-")[0]
-                                            } items-${
-                                                item.value.split("-")[1]
-                                            }`}
+                                            className={`flex h-full w-full justify-center items-center`}
                                         >
-                                            <span className="w-4 h-4 bg-black block rounded-md"></span>
+                                            <Icon name={item.value} size={25} />
                                         </div>
                                         {checked && (
                                             <div className="absolute right-0 top-0 text-green-500">
@@ -105,4 +115,4 @@ function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
     );
 }
 
-export default RadioGroupArea;
+export default ChatBtnIconSelect;

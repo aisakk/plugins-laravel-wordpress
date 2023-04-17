@@ -37,7 +37,7 @@ class DashboardController extends Controller
         $license = License::findOrFail($licenseId);
         $licenseResource = (new LicenseResource($license))->toArray(request());
 
-        return Inertia::render('Pages/Settings', ['license' => $licenseResource]);
+        return Inertia::render('Pages/ChatBtnSettings', ['license' => $licenseResource]);
     }
 
     public function installation($licenseId)
