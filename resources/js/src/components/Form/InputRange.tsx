@@ -1,29 +1,42 @@
-// InputRange.tsx
-import React, { useState } from "react";
+import React from "react";
 import { Slider } from "antd";
 
 interface InputRangeProps {
-  description?: string;
+    maxValue?: number;
+    minValue?: number;
+    value?: number;
+    defaultValue?: number;
+    description?: string;
+    onChange: (value: number) => void;
 }
 
-const InputRange: React.FC<InputRangeProps> = ({ description }) => {
-  const [value, setValue] = useState(0);
-
-  return (
-    <div className="">
-      {description && (
-        <small className="block text-[10px] uppercase pt-2">
-          {description}
-        </small>
-      )}
-
-      <div className="flex items-center justify-between gap-3 pt-6">
-        <div className="text-sm">0</div>
-        <Slider className="w-8/12" defaultValue={30} tooltip={{ open: true }} />
-        <div className="text-sm">100px</div>
-      </div>
-    </div>
-  );
+const InputRange: React.FC<InputRangeProps> = ({
+    maxValue,
+    minValue,
+    defaultValue,
+    value,
+    description,
+    onChange,
+}) => {
+    return (
+        <div className="">
+            {description && (
+                <small className="block text-[10px] uppercase pt-2">
+                    {description}
+                </small>
+            )}
+            <div className="flex items-center justify-between gap-3">
+                <div className="text-sm">{minValue || 0}</div>
+                <Slider
+                    className="w-8/12"
+                    value={value}
+                    defaultValue={defaultValue || (maxValue || 100) / 2}
+                    onChange={onChange}
+                />
+                <div className="text-sm">{maxValue || 100}px</div>
+            </div>
+        </div>
+    );
 };
 
 export default InputRange;

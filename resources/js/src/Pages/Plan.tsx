@@ -13,6 +13,14 @@ interface Plugin{
     icon: string;
     link: string;
 }
+
+interface Plugin{
+    name: string;
+    description: string;
+    active: boolean;
+    icon: string;
+    link: string;
+}
 interface Item {
     id:number;
     date: string;
@@ -25,11 +33,11 @@ interface Item {
 
   interface LicenseProps {
       license: Item;
-      plugins:Plugin[];
+      plugins: Plugin[]
   }
 
 const Plan: React.FC<LicenseProps> = (props) =>{
-    const { license,plugins } = props;
+    const { license, plugins } = props;
     let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
