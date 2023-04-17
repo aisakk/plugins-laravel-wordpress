@@ -108,7 +108,7 @@ const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( props ) 
                     <span className="text-xs uppercase text-slate-400">
                       Purchase
                     </span>
-                    {plugins.map((item) => (
+                    {plugins && plugins.map((item) => (
 
                      <DropdownMenuItem key={item.name} item={item} />
                      ))}
