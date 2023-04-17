@@ -54,12 +54,11 @@ function classNames(...classes: (string | undefined | boolean)[]) {
 }
 
 interface DropDownHorizontalMenuProps{
-    plugins:Plugin[]
+    plugins:Plugin[];
 }
 
 const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( props ) => {
     const {plugins}=props;
-    console.log(plugins);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     // console.log(plugins);
   return (
@@ -109,8 +108,7 @@ const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( props ) 
                       Purchase
                     </span>
                     {plugins.map((item) => (
-
-                     <DropdownMenuItem key={item.name} item={item} />
+                        <DropdownMenuItem key={item.name} item={item} />
                      ))}
                      <span className="text-xs uppercase text-slate-400">
                        Available

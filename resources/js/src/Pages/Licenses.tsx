@@ -22,8 +22,11 @@ interface License {
   status: string;
 }
 interface Plugin{
-    name:string;
-    readme_path:string;
+    name: string;
+    description: string;
+    active: boolean;
+    icon: string;
+    link: string;
 }
 
 interface LicensesProps {
@@ -32,7 +35,6 @@ interface LicensesProps {
 }
 
 const Licenses: React.FC<LicensesProps> = (props) => {
-    const { auth } = usePage().props;
     const { licenses,plugins } = props;
   return (
         <NosideBarLayout plugins={plugins}>
@@ -60,8 +62,8 @@ const Licenses: React.FC<LicensesProps> = (props) => {
                         </div>
                     </div>
 
-                    { licenses.map((item) => (
-                        <div className="flex border-t border-slate-200 py-4 items-center">
+                    { licenses.map((item,index) => (
+                        <div className="flex border-t border-slate-200 py-4 items-center" key={index}>
                             <div className="w-3/12">
                                 <p>{ item.date }</p>
                             </div>
@@ -73,8 +75,8 @@ const Licenses: React.FC<LicensesProps> = (props) => {
                             </div>
                             <div className="w-3/12">
                                 {
-                                    item.domains.map((item)=>(
-                                        <p>{ item.name }</p>
+                                    item.domains.map((item,index)=>(
+                                        <p key={index}>{ item.name }</p>
                                     ))
                                 }
                             </div>

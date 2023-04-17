@@ -4,8 +4,11 @@ import MenuHorizontal from '../MenuHorizontal';
 import Icon from '../Icon';
 
 interface Plugin{
-    name:string;
-    readme_path:string;
+    name: string;
+    description: string;
+    active: boolean;
+    icon: string;
+    link: string;
 }
 
 interface TopNavNotSideBarProps{

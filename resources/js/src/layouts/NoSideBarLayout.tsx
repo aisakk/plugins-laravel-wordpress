@@ -3,8 +3,11 @@ import { Outlet } from 'react-router-dom';
 import TopNavNotSideBar from '../components/TopNav/TopNavNotSideBar';
 
 interface Plugin{
-    name:string;
-    readme_path:string;
+    name: string;
+    description: string;
+    active: boolean;
+    icon: string;
+    link: string;
 }
 
 interface NoSideBarLayoutProps {
@@ -13,7 +16,7 @@ interface NoSideBarLayoutProps {
 }
 
 
-const NosideBarLayout: React.FC<NoSideBarLayoutProps> = (props ) => {
+const NosideBarLayout: React.FC<NoSideBarLayoutProps> = (props) => {
     const {children,plugins}=props;
     return (
         <div className="App">

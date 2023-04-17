@@ -26,33 +26,41 @@ class DashboardController extends Controller
     public function index($licenseId)
     {
         $license = License::findOrFail($licenseId);
+        $plugins = Plugin::all();
+        $pluginsArray = PluginResource::collection($plugins)->toArray(request());
         $licenseResource = (new LicenseResource($license))->toArray(request());
 
-        return Inertia::render('Pages/Plan', ['license' => $licenseResource]);
+        return Inertia::render('Pages/Plan', ['license' => $licenseResource, 'plugins'=>$pluginsArray]);
     }
 
 
     public function settings($licenseId)
     {
         $license = License::findOrFail($licenseId);
+        $plugins = Plugin::all();
+        $pluginsArray = PluginResource::collection($plugins)->toArray(request());
         $licenseResource = (new LicenseResource($license))->toArray(request());
 
-        return Inertia::render('Pages/Settings', ['license' => $licenseResource]);
+        return Inertia::render('Pages/Settings', ['license' => $licenseResource, 'plugins'=>$pluginsArray]);
     }
 
     public function installation($licenseId)
     {
         $license = License::findOrFail($licenseId);
+        $plugins = Plugin::all();
+        $pluginsArray = PluginResource::collection($plugins)->toArray(request());
         $licenseResource = (new LicenseResource($license))->toArray(request());
 
-        return Inertia::render('Pages/Installation', ['license' => $licenseResource]);
+        return Inertia::render('Pages/Installation', ['license' => $licenseResource, 'plugins'=>$pluginsArray]);
     }
     public function logs($licenseId)
     {
         $license = License::findOrFail($licenseId);
+        $plugins = Plugin::all();
+        $pluginsArray = PluginResource::collection($plugins)->toArray(request());
         $logs = Log::where('license_id', $licenseId)->get();
         $licenseResource = (new LicenseResource($license))->toArray(request());
 
-        return Inertia::render('Pages/Logs', ['logs' => $logs, 'license' => $licenseResource]);
+        return Inertia::render('Pages/Logs', ['logs' => $logs, 'license' => $licenseResource, 'plugins'=>$pluginsArray]);
     }
 }

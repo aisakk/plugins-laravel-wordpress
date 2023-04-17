@@ -4,23 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Models\Domain; // Asegúrate de importar el modelo Domain
+use App\Models\Domain;
 use App\Models\License;
+use App\Models\Plugin;
 use App\Http\Resources\LicenseResource;
-use Illuminate\Support\Facades\Redirect; // Importa la clase Redirect
+use App\Http\Resources\PluginResource;
+use Illuminate\Support\Facades\Redirect;
 
 class DomainsController extends Controller
 {
-
     public function index(Request $request,$licenseId)
     {
         $license = License::findOrFail($licenseId);
         $licenseResource = (new LicenseResource($license))->toArray(request());
+        $plugins = Plugin::all();
+        $pluginsArray = PluginResource::collection($plugins)->toArray(request());
 
         if($request->limit_exceeded==1){
-            return Inertia::render('Pages/Domains', ['license' => $licenseResource,'limit_exceeded' => true]);
+            return Inertia::render('Pages/Domains', ['license' => $licenseResource,'limit_exceeded' => true,'plugins'=>$pluginsArray]);
         }
-        return Inertia::render('Pages/Domains', ['license' => $licenseResource]);
+        return Inertia::render('Pages/Domains', ['license' => $licenseResource,'plugins'=>$pluginsArray]);
     }
 
     public function store(Request $request,$licenseId)

@@ -10,6 +10,13 @@ import InputDomain from '../components/Form/InputDomain';
 import Icon from '../components/Icon';
 import Checkbox from '../components/Form/Checkbox';
 
+interface Plugin{
+    name: string;
+    description: string;
+    active: boolean;
+    icon: string;
+    link: string;
+}
 interface Domain{
     id:number;
     name:string;
@@ -29,6 +36,7 @@ interface License {
 interface LicenseProps {
     license: License;
     limit_exceeded?: boolean;
+    plugins:Plugin[];
 }
 
 interface DomainData {
@@ -39,7 +47,7 @@ interface DomainData {
 
 
 const Domains: React.FC<LicenseProps> = (props) => {
-    const { license } = props;
+    const { license,plugins } = props;
     let [isOpenCreate, setIsOpenCreate] = useState(false);
     let [isOpenEdit, setIsOpenEdit] = useState(false);
     let [isOpenDelete, setIsOpenDelete] = useState(false);
@@ -50,7 +58,7 @@ const Domains: React.FC<LicenseProps> = (props) => {
         if (props.limit_exceeded) {
             openLimitExceededModal();
         }
-      }, [props.limit_exceeded]);
+    }, [props.limit_exceeded]);
 
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -135,7 +143,7 @@ const Domains: React.FC<LicenseProps> = (props) => {
 
 
     return (
-        <MainLayout licenseId={license.id}>
+        <MainLayout licenseId={license.id} plugins={plugins}>
 
             <div className="py-10">
                 <Card>

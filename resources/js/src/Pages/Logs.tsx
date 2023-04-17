@@ -3,6 +3,13 @@ import LogsTable from '../components/LogsTable';
 import Card from '../components/Card';
 import {  useState } from 'react';
 
+interface Plugin{
+    name: string;
+    description: string;
+    active: boolean;
+    icon: string;
+    link: string;
+}
 interface Log {
     created_at: string;
     action_name: string;
@@ -24,6 +31,7 @@ interface Item {
 interface LogsProps {
     logs: Log[];
     license: Item;
+    plugins:Plugin[];
 }
 
 const formatDate = (dateString: string) => {
@@ -57,7 +65,7 @@ const separateLogsByDay = (logs: any[]) => {
     return logsByDay;
 };
 
-const Logs: React.FC<LogsProps> = ({ logs, license }) => {
+const Logs: React.FC<LogsProps> = ({ logs, license,plugins }) => {
     const logsData = logs ? Object.values(logs) : [];
 
     // Crear un conjunto de fechas únicas
@@ -78,7 +86,7 @@ const Logs: React.FC<LogsProps> = ({ logs, license }) => {
     const logsByDay = separateLogsByDay(filteredLogs);
 
     return (
-        <MainLayout licenseId={license.id}>
+        <MainLayout licenseId={license.id} plugins={plugins}>
             <div className="py-10">
                 <div className="w-full items-center">
                     <select

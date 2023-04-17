@@ -14,6 +14,13 @@ import Badge from '../components/Badge';
 import Preview from '../components/Preview';
 import Card from '../components/Card';
 
+interface Plugin{
+    name: string;
+    description: string;
+    active: boolean;
+    icon: string;
+    link: string;
+}
 interface License {
     id:number;
     date: string;
@@ -26,6 +33,7 @@ interface License {
 
 interface LicenseProps {
     license: License;
+    plugins:Plugin[];
 }
 
 interface Option {
@@ -40,7 +48,7 @@ interface Label {
 }
 
 const Settings: React.FC <LicenseProps> = (props) => {
-    const { license } = props;
+    const { license,plugins } = props;
     const order: Option[] = [
         { name: '1', value: '1' },
         { name: '2', value: '2' },
@@ -86,7 +94,7 @@ const Settings: React.FC <LicenseProps> = (props) => {
     ];
 
     return (
-        <MainLayout licenseId={license.id}>
+        <MainLayout licenseId={license.id} plugins={plugins}>
             <div className="pt-10">
                 <div>
                     <div className="flex flex-wrap xl:flex-nowrap gap-6">

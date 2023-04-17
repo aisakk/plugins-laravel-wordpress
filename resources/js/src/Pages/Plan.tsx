@@ -6,7 +6,13 @@ import Button from '../components/Form/Button';
 import Card from '../components/Card';
 import Icon from '../components/Icon';
 import Badge from '../components/Badge';
-
+interface Plugin{
+    name: string;
+    description: string;
+    active: boolean;
+    icon: string;
+    link: string;
+}
 interface Item {
     id:number;
     date: string;
@@ -19,10 +25,11 @@ interface Item {
 
   interface LicenseProps {
       license: Item;
+      plugins:Plugin[];
   }
 
 const Plan: React.FC<LicenseProps> = (props) =>{
-    const { license } = props;
+    const { license,plugins } = props;
     let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -34,7 +41,7 @@ const Plan: React.FC<LicenseProps> = (props) =>{
   }
 
   return (
-    <MainLayout licenseId={license.id}>
+    <MainLayout licenseId={license.id} plugins={plugins}>
         <div className="py-10">
             <div className="flex flex-wrap sm:flex-nowrap gap-y-6 sm:gap-6 items-center">
                 <div className="w-full sm:w-6/12">
