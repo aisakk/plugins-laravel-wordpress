@@ -3,16 +3,10 @@ import DropdownAccount from '../DropdownAccount/index';
 import DrawerMenu from '../DrawerMenu';
 import MenuHorizontal from '../MenuHorizontal';
 import Icon from '../Icon';
+import {Plugin} from "../../types/DashboardTypes";
 
-interface Plugin{
-    name: string;
-    description: string;
-    active: boolean;
-    icon: string;
-    link: string;
-}
 interface TopNavProps{
-    licenseId: number,
+    licenseId: number;
     plugins: Plugin[];
 }
 
@@ -24,12 +18,12 @@ const TopNav: React.FC<TopNavProps> = (props) => {
                 <div className="flex gap-6 sm:pl-32">
                     <div className="">
                         {/* <DropdownMenu /> */}
-                        <DrawerMenu  licenseId={licenseId}/>
+                        <DrawerMenu licenseId={licenseId} plugins={plugins}/>
                     </div>
                 </div>
 
                 <div className="flex gap-3">
-            {/*     <MenuHorizontal plugins={plugins}/> */}
+                <MenuHorizontal plugins={plugins}/>
                     <button>
                         <Icon name="notification" size={25}/>
                     </button>

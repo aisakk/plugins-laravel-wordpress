@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DrawerMenuItem from './Item';
 import DropdownMenu from '../DropdownMenu/index';
 import Icon from '../Icon';
+import {Plugin} from "../../types/DashboardTypes";
 
 interface MenuItem {
   title: string;
@@ -12,10 +13,11 @@ interface MenuItem {
 
 interface DrawerMenuProps {
   licenseId: number;
+  plugins:Plugin[];
 }
 
 const DrawerMenu: React.FC<DrawerMenuProps> = (props) => {
-  const { licenseId } = props;
+  const { licenseId,plugins } = props;
   const [isShowing, setIsShowing] = useState(false);
   const currentPath = window.location.pathname;
   const items: MenuItem[] = [
@@ -90,7 +92,7 @@ const DrawerMenu: React.FC<DrawerMenuProps> = (props) => {
           />
         </div>
         <div className="px-6 sm:hidden">
-          <DropdownMenu />
+          <DropdownMenu plugins={plugins}/>
         </div>
         <div className="flex flex-col gap-y-2 px-6 sm:px-2 py-10">
           {items.map((item, index) => (

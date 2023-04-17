@@ -1,17 +1,10 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react';
 import { Bars3Icon } from '@heroicons/react/24/outline';
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/24/solid';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { Link } from "@inertiajs/react";
 import DropdownMenuItem from '../DropdownMenu/Item';
-
-interface Plugin{
-    name: string;
-    description: string;
-    active: boolean;
-    icon: string;
-    link: string;
-}
+import {Plugin} from "../../types/DashboardTypes";
 
 type MenuItem = {
     name: string;
@@ -107,9 +100,9 @@ const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( props ) 
                     <span className="text-xs uppercase text-slate-400">
                       Purchase
                     </span>
-                    {plugins && plugins.map((item) => (
+                    {plugins && plugins.map((item,index) => (
 
-                     <DropdownMenuItem key={item.name} item={item} />
+                     <DropdownMenuItem key={index} item={item} />
                      ))}
                      <span className="text-xs uppercase text-slate-400">
                        Available
@@ -138,7 +131,7 @@ const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( props ) 
               </Popover.Panel>
             </Transition>
           </Popover>
-          <a href="/licenses" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="/plugins" className="text-sm font-semibold leading-6 text-gray-900">
             Tus plugins
           </a>
           {/* <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
@@ -182,7 +175,7 @@ const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( props ) 
                           <Disclosure.Button
                             key={item.name}
                             as="a"
-                            href={item.link}
+                            href={item.image}
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                           >
                             {item.name}

@@ -6,23 +6,7 @@ import RatingPercentage from '../components/Rating/Percentage';
 import Gallery from '../components/Gallery';
 import Tag from '../components/Tag';
 import Card from '../components/Card';
-
-interface Plugin{
-    name: string;
-    description: string;
-    active: boolean;
-    icon: string;
-    link: string;
-}
-interface License {
-    id:number;
-    date: string;
-    code: string;
-    pluginName: string;
-    expiration: string;
-    domains: string;
-    status: string;
-  }
+import {Plugin,License} from '../types/DashboardTypes';
 
 interface LicenseProps {
     license: License;

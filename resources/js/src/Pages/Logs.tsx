@@ -2,14 +2,9 @@ import MainLayout from '../layouts/MainLayout';
 import LogsTable from '../components/LogsTable';
 import Card from '../components/Card';
 import {  useState } from 'react';
+import {Plugin} from "../types/DashboardTypes";
 
-interface Plugin{
-    name: string;
-    description: string;
-    active: boolean;
-    icon: string;
-    link: string;
-}
+
 interface Log {
     created_at: string;
     action_name: string;

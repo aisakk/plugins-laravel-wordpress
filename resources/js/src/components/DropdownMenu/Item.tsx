@@ -1,14 +1,9 @@
 // DropdownMenuItem.tsx
 import React, { Suspense } from 'react';
 import { Link } from "@inertiajs/react";
-
+import {Plugin} from "../../types/DashboardTypes";
 interface DropdownMenuItemProps {
-  item: {
-    name: string;
-    link: string;
-    icon: string;
-    description: string;
-  };
+  item: Plugin;
 }
 
 const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({ item }) => {
@@ -16,7 +11,7 @@ const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({ item }) => {
     <Suspense fallback={<div>Loading...</div>}>
       <Link
         key={item.name}
-        href={item.link}
+        href={item.image}
         className="flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-slate-100"
       >
         <div className="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12">

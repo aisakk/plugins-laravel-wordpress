@@ -41,7 +41,7 @@ class DashboardController extends Controller
         $pluginsArray = PluginResource::collection($plugins)->toArray(request());
         $licenseResource = (new LicenseResource($license))->toArray(request());
 
-        return Inertia::render('Pages/ChatBtnSettings', ['license' => $licenseResource]);
+        return Inertia::render('Pages/ChatBtnSettings', ['license' => $licenseResource,'plugins'=>$pluginsArray]);
     }
 
     public function installation($licenseId)
