@@ -12,7 +12,6 @@ class PluginController extends Controller
     {
         $readmeFilePath = resource_path('plugins');
         $plugins = PluginHelper::extractPluginNames($readmeFilePath);
-        // return $plugins;
         if ($plugins) {
             foreach ($plugins as $plugin) {
                 Plugin::updateOrCreate(

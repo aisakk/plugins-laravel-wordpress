@@ -5,18 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Resources\LicenseResource;
 use Illuminate\Http\Request;
 use App\Models\License;
+use App\Models\Plugin;
 use Inertia\Inertia;
 use App\Models\Log;
+use App\Http\Resources\PluginResource;
 
 class DashboardController extends Controller
 {
     public function licenses()
     {
-
+        $plugins = Plugin::all();
         $licenses = License::all();
-        $licensesArray = LicenseResource::collection($licenses)->toArray(request());
 
-        return Inertia::render('Pages/Licenses', ['licenses' => $licensesArray]);
+        $pluginsArray = PluginResource::collection($plugins)->toArray(request());
+        $licensesArray = LicenseResource::collection($licenses)->toArray(request());
+        // return $pluginsArray;
+        return Inertia::render('Pages/Licenses', ['licenses' => $licensesArray, 'plugins'=>$pluginsArray]);
     }
 
     public function index($licenseId)

@@ -21,19 +21,23 @@ interface License {
   domains: Domain[];
   status: string;
 }
+interface Plugin{
+    name:string;
+    readme_path:string;
+}
 
 interface LicensesProps {
     licenses: License[];
+    plugins: Plugin[];
 }
-
 
 const Licenses: React.FC<LicensesProps> = (props) => {
     const { auth } = usePage().props;
-    const { licenses } = props;
+    const { licenses,plugins } = props;
   return (
-        <NosideBarLayout>
+        <NosideBarLayout plugins={plugins}>
             <div className="py-10 text-center">
-            <Card>
+                <Card>
                     <div className="flex text-xs font-bold py-4 uppercase items-start">
                         <div className="w-3/12">
                             <h6>Date</h6>

@@ -2,15 +2,23 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import TopNavNotSideBar from '../components/TopNav/TopNavNotSideBar';
 
-interface NoSideBarayoutProps {
-    children: React.ReactNode;
+interface Plugin{
+    name:string;
+    readme_path:string;
 }
 
-const NosideBarLayout: React.FC<NoSideBarayoutProps> = ({ children }) => {
+interface NoSideBarLayoutProps {
+    children: React.ReactNode;
+    plugins: Plugin[];
+}
+
+
+const NosideBarLayout: React.FC<NoSideBarLayoutProps> = (props ) => {
+    const {children,plugins}=props;
     return (
         <div className="App">
             <main className="min-h-screen bg-slate-100">
-                <TopNavNotSideBar />
+                <TopNavNotSideBar plugins={plugins} />
                     <section className="py-14 sm:py-20">
                         <Outlet />
                         {children}

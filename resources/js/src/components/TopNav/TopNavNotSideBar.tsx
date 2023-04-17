@@ -3,7 +3,17 @@ import DropdownAccount from '../DropdownAccount/index';
 import MenuHorizontal from '../MenuHorizontal';
 import Icon from '../Icon';
 
-const TopNavNotSideBar: React.FC = () => {
+interface Plugin{
+    name:string;
+    readme_path:string;
+}
+
+interface TopNavNotSideBarProps{
+    plugins:Plugin[];
+}
+
+const TopNavNotSideBar: React.FC<TopNavNotSideBarProps> = (props) => {
+    const {plugins}=props;
     return (
         <nav className="fixed top-0 z-30 w-full bg-white shadow-lg items-center">
             <div className="flex justify-between items-center py-2 px-4">
@@ -15,7 +25,7 @@ const TopNavNotSideBar: React.FC = () => {
                 </div>
 
                 <div className="flex gap-3">
-                <MenuHorizontal/>
+                    <MenuHorizontal plugins={plugins}/>
                     <button>
                         <Icon name="notification" size={25}/>
                     </button>

@@ -79,6 +79,4 @@ Route::post('/email-verification/verify', [EmailVerificationController::class, '
 Route::get("widget", [AuthController::class, 'widget']);
 
 // Route::post('/wp-json/octorestapi/v1/update_widget',[SettingsController::class,'jwtDecode']);
-Route::get('/',function(){
-    return csrf_token();
-});
+

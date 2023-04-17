@@ -1,17 +1,17 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react';
-import {
-  ArrowPathIcon,
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
+import { Bars3Icon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/24/solid';
 import { Link } from "@inertiajs/react";
 import DropdownMenuItem from '../DropdownMenu/Item';
+
+interface Plugin{
+    name: string;
+    description: string;
+    active: boolean;
+    icon: string;
+    link: string;
+}
 
 type MenuItem = {
     name: string;
@@ -23,7 +23,7 @@ type MenuItem = {
 
 const purchase: MenuItem[] = [
     {
-      name: 'Optimized Chat button',
+      name: 'Optimized Chat button 1',
       description: 'Your visitors can Contact you through "WhatsApp"',
       link: '/installation',
       icon: 'https://ps.w.org/wordpress-seo/assets/icon-256x256.png?rev=2643727',
@@ -31,7 +31,7 @@ const purchase: MenuItem[] = [
     },
 ];
 
-  const available: MenuItem[] = [
+const available: MenuItem[] = [
     {
       name: 'Automations',
       description: 'Create your own targeted content',
@@ -53,9 +53,15 @@ function classNames(...classes: (string | undefined | boolean)[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-const Example: React.FC = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+interface DropDownHorizontalMenuProps{
+    plugins:Plugin[]
+}
 
+const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( props ) => {
+    const {plugins}=props;
+    console.log(plugins);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    // console.log(plugins);
   return (
     <header className="bg-white">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -102,16 +108,16 @@ const Example: React.FC = () => {
                     <span className="text-xs uppercase text-slate-400">
                       Purchase
                     </span>
-                    {purchase.map((item) => (
+                    {plugins.map((item) => (
 
                      <DropdownMenuItem key={item.name} item={item} />
                      ))}
                      <span className="text-xs uppercase text-slate-400">
                        Available
                      </span>
-                     {available.map((item) => (
+                     {/* {available.map((item) => (
                        <DropdownMenuItem key={item.name} item={item} />
-                     ))}
+                     ))} */}
                    </div>
 
                    <div className="bg-slate-100 p-2">
@@ -173,7 +179,7 @@ const Example: React.FC = () => {
                         />
                       </Disclosure.Button>
                       <Disclosure.Panel className="mt-2 space-y-2">
-                        {purchase.map((item) => (
+                        {plugins.map((item) => (
                           <Disclosure.Button
                             key={item.name}
                             as="a"
@@ -222,4 +228,4 @@ const Example: React.FC = () => {
   );
 };
 
-export default Example;
+export default DropDownHorizontalMenu;
