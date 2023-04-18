@@ -10,6 +10,7 @@ class PluginController extends Controller
 {
     public function updatePluginInfo()
     {
+
         $readmeFilePath = resource_path('plugins');
         $plugins = PluginHelper::extractPluginNames($readmeFilePath);
         if ($plugins) {

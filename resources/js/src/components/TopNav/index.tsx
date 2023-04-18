@@ -6,24 +6,20 @@ import Icon from '../Icon';
 import {Plugin} from "../../types/DashboardTypes";
 
 interface TopNavProps{
-    licenseId: number;
     plugins: Plugin[];
 }
 
 const TopNav: React.FC<TopNavProps> = (props) => {
-    const {licenseId, plugins} = props
+    const {plugins} = props
     return (
         <nav className="fixed top-0 z-30 w-full bg-white shadow-lg items-center">
             <div className="flex justify-between items-center py-2 px-4">
-                <div className="flex gap-6 sm:pl-32">
-                    <div className="">
-                        {/* <DropdownMenu /> */}
-                        <DrawerMenu licenseId={licenseId} plugins={plugins}/>
-                    </div>
+                <div className="py-2 px-6 sm:px-0">
+                        <img className="w-16 sm:mx-auto" src="https://cdn-bjgin.nitrocdn.com/LxoCvaeHElFzlCBGqsfvssGnySbvIRYM/assets/images/optimized/rev-2f83237/wp-content/uploads/2022/01/cropped-octo-300x300.png" alt="" />
                 </div>
 
                 <div className="flex gap-3">
-                <MenuHorizontal plugins={plugins}/>
+                    <MenuHorizontal plugins={plugins}/>
                     <button>
                         <Icon name="notification" size={25}/>
                     </button>

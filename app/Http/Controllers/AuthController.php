@@ -21,23 +21,6 @@ class AuthController extends Controller
     {
         return Inertia::render('Login');
     }
-    public function loginApi(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['error' => 'The provided credentials are incorrect.'], 401);
-        }
-
-        $token = $user->createToken('my-app-token')->plainTextToken;
-
-        return response()->json(['token' => $token]);
-    }
 
     public function login(Request $request)
     {

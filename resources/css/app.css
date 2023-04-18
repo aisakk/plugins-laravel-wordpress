@@ -3201,6 +3201,10 @@ input[type="color"]::-webkit-color-swatch {
     padding-right: 0px;
   }
 
+  .sm\:pl-10 {
+    padding-left: 2.5rem;
+  }
+
   .sm\:text-left {
     text-align: left;
   }

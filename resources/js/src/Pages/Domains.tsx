@@ -8,9 +8,9 @@ import Icon from '../components/Icon';
 import Checkbox from '../components/Form/Checkbox';
 import { Inertia } from '@inertiajs/inertia';
 import { Dialog, Transition } from '@headlessui/react';
-import {Plugin,Domain,License} from "../types/DashboardTypes";
+import {Plugin,Domain,License, LicenseIdProps} from "../types/DashboardTypes";
 
-interface DomainsProps {
+interface DomainsProps extends LicenseIdProps {
     license: License;
     limit_exceeded?: boolean;
     plugins:Plugin[];
@@ -23,7 +23,7 @@ interface DomainData {
 
 
 const Domains: React.FC<DomainsProps> = (props) => {
-    const { license,plugins } = props;
+    const { license,plugins,licenseId } = props;
     let [isOpenCreate, setIsOpenCreate] = useState(false);
     let [isOpenEdit, setIsOpenEdit] = useState(false);
     let [isOpenDelete, setIsOpenDelete] = useState(false);
@@ -119,7 +119,7 @@ const Domains: React.FC<DomainsProps> = (props) => {
 
 
     return (
-        <MainLayout licenseId={license.id} plugins={plugins}>
+        <MainLayout licenseId={licenseId} plugins={plugins}>
 
             <div className="py-10">
                 <Card>

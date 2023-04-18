@@ -2,7 +2,7 @@ import MainLayout from '../layouts/MainLayout';
 import LogsTable from '../components/LogsTable';
 import Card from '../components/Card';
 import {  useState } from 'react';
-import {Plugin} from "../types/DashboardTypes";
+import {Plugin,LicenseIdProps} from "../types/DashboardTypes";
 
 
 interface Log {
@@ -23,7 +23,7 @@ interface Item {
     status: string;
 }
 
-interface LogsProps {
+interface LogsProps extends LicenseIdProps {
     logs: Log[];
     license: Item;
     plugins:Plugin[];
@@ -60,7 +60,7 @@ const separateLogsByDay = (logs: any[]) => {
     return logsByDay;
 };
 
-const Logs: React.FC<LogsProps> = ({ logs, license,plugins }) => {
+const Logs: React.FC<LogsProps> = ({ logs, licenseId,plugins }) => {
     const logsData = logs ? Object.values(logs) : [];
 
     // Crear un conjunto de fechas únicas
@@ -81,7 +81,7 @@ const Logs: React.FC<LogsProps> = ({ logs, license,plugins }) => {
     const logsByDay = separateLogsByDay(filteredLogs);
 
     return (
-        <MainLayout licenseId={license.id} plugins={plugins}>
+        <MainLayout licenseId={licenseId} plugins={plugins}>
             <div className="py-10">
                 <div className="w-full items-center">
                     <select

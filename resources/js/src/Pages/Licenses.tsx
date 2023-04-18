@@ -1,10 +1,11 @@
-import NosideBarLayout from '../layouts/NoSideBarLayout';
+import MainLayout from '../layouts/MainLayout';
 import { Link } from '@inertiajs/inertia-react';
 import Badge from '../components/Badge';
 import Card from '../components/Card';
 import Button from '../components/Form/Button';
 import Icon from '../components/Icon';
 import { usePage } from '@inertiajs/inertia-react';
+import {Plugin,LicenseIdProps} from "../types/DashboardTypes";
 
 interface Domain{
     id:number;
@@ -21,13 +22,6 @@ interface License {
   domains: Domain[];
   status: string;
 }
-interface Plugin{
-    name: string;
-    description: string;
-    active: boolean;
-    icon: string;
-    link: string;
-}
 
 interface LicensesProps {
     licenses: License[];
@@ -37,7 +31,7 @@ interface LicensesProps {
 const Licenses: React.FC<LicensesProps> = (props) => {
     const { licenses,plugins } = props;
   return (
-        <NosideBarLayout plugins={plugins}>
+        <MainLayout plugins={plugins}>
             <div className="py-10 text-center">
                 <Card>
                     <div className="flex text-xs font-bold py-4 uppercase items-start">
@@ -92,7 +86,7 @@ const Licenses: React.FC<LicensesProps> = (props) => {
                     ))}
                 </Card>
             </div>
-        </NosideBarLayout>
+        </MainLayout>
     );
 }
 

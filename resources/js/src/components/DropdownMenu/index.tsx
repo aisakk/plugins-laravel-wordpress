@@ -46,7 +46,6 @@ interface DropdownMenuProps{
 
 const DropdownMenu: React.FC<DropdownMenuProps> = (props) => {
     const {plugins}=props;
-    console.log(plugins);
     const [Popover, setPopover] = useState<any>();
     const [Transition, setTransition] = useState<any>();
 
