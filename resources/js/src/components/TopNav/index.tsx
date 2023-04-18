@@ -6,6 +6,8 @@ import Icon from "../Icon";
 import DropDownGeneral from "../DropDownGeneral/DropDownGeneral";
 import axios from "axios";
 import { Menu } from "@headlessui/react";
+import { usePage } from "@inertiajs/inertia-react";
+
 interface Plugin {
     name: string;
     description: string;
@@ -27,6 +29,7 @@ interface Notification {
     user_id: number;
 }
 const TopNav: React.FC<TopNavProps> = (props) => {
+    const { notifications} = usePage().props
     const { licenseId, plugins } = props;
     const [notification, setNotification] = useState<Notification[]>([]);
     async function getNotification() {
@@ -45,6 +48,12 @@ const TopNav: React.FC<TopNavProps> = (props) => {
             )
             .then((res) => setNotification(res.data));
     }
+    function selectNotificationSource() {
+        return notifications && Array.isArray(notifications) && notifications.length > 0
+            ? notifications
+            : notification;
+    }
+
     useEffect(() => {
         getNotification();
     }, []);
@@ -65,8 +74,7 @@ const TopNav: React.FC<TopNavProps> = (props) => {
                         <DropDownGeneral
                             icons={<Icon name="notification" size={22} />}
                         >
-                            {notification &&
-                                notification.map((item, index) => {
+                            {selectNotificationSource().map((item, index) => {
                                     return (
                                         <Menu.Item key={index}>
                                             {({ active }) => (
