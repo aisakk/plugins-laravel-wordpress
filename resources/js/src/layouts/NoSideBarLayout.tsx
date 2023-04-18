@@ -12,15 +12,13 @@ interface NoSideBarLayoutProps {
 const NosideBarLayout: React.FC<NoSideBarLayoutProps> = (props) => {
     const {children,plugins}=props;
     return (
-        <div className="App">
-            <main className="min-h-screen bg-slate-100">
-                <TopNavNoSideBar plugins={plugins} />
-                    <section className="py-14 sm:py-20">
-                        <Outlet />
-                        {children}
-                    </section>
-            </main>
-        </div>
+        <main className="min-h-screen bg-slate-100">
+            <TopNavNoSideBar plugins={plugins} />
+                <section className="container mx-auto py-14 sm:py-20">
+                    <Outlet />
+                    {children}
+                </section>
+        </main>
     );
 };
 

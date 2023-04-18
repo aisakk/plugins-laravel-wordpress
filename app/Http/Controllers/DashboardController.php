@@ -63,4 +63,17 @@ class DashboardController extends Controller
 
         return Inertia::render('Pages/Logs', ['logs' => $logs, 'license' => $licenseResource, 'plugins'=>$pluginsArray]);
     }
+    public function allPlugins(){
+        $plugins = Plugin::all();
+        $pluginsArray = PluginResource::collection($plugins)->toArray(request());
+
+        return Inertia::render('Pages/AllPlugins', ['plugins'=>$pluginsArray]);
+    }
+    public function pluginDetails($pluginId){
+        $plugin = Plugin::findOrFail($pluginId);
+        $plugins = Plugin::all();
+        $pluginsArray = PluginResource::collection($plugins)->toArray(request());
+
+        return Inertia::render('Pages/PluginDetails', ['plugins'=>$pluginsArray,'plugin'=>$plugin]);
+    }
 }

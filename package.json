@@ -1,7 +1,7 @@
 {
     "private": true,
     "scripts": {
-        "dev": "concurrently \"tsc -w\" \"vite\" \"tailwindcss -i ./resources/css/main.css -o ./resources/css/app.css --watch\" --kill-others",
+        "dev": "concurrently \"tsc -w\" \"vite \" \"tailwindcss -i ./resources/css/main.css -o ./resources/css/app.css --watch\" --kill-others",
         "build": "vite build",
         "tail-watch": "tailwindcss -i ./resources/css/main.css -o ./resources/css/app.css --watch"
     },
