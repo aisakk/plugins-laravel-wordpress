@@ -2,12 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LicenseNotificationEvent;
+use App\Listeners\SendLicenseNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\License;
-
+use App\Models\Notifications;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 class LicenseController extends Controller
 {
+    public function notification(Request $request){
+        $searchAllLicence = License::where('user_id', '=', Auth::id())->get();
+        $today = Carbon::now()->startOfDay();
+        foreach ($searchAllLicence as $license) {
+            // Convierte la fecha de expiración a un objeto Carbon y establece la hora, minutos y segundos en 0
+            $expiration = Carbon::parse($license->expiration)->startOfDay();
+            if($today > $expiration){
+                event(new LicenseNotificationEvent($license, Auth::user(), 'expired'));
+            }
+            // Compara la fecha de expiración con la fecha actual
+        }
+
+        $searchNotification = Notifications::where('user_id', '=', Auth::id())->get();
+        return response()->json($searchNotification);
+    }
     public function store(Request $request)
     {
         try {
@@ -22,6 +41,7 @@ class LicenseController extends Controller
         // Convert encoded json to asociative array
         $license_data = json_decode($decryptedData, true);
         $license = new License($license_data);
+        event(new LicenseNotificationEvent($license, Auth::user(), 'new'));
         $license->save();
         return response()->json(['success' => true, 'data'=>$license]);
     }
