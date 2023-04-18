@@ -8,17 +8,8 @@ import { Menu } from "@headlessui/react";
 import axios from "axios";
 import { usePage } from "@inertiajs/inertia-react";
 
-interface Plugin {
-    name: string;
-    description: string;
-    active: boolean;
-    icon: string;
-    link: string;
-}
-interface TopNavProps {
-    licenseId: number;
-    plugins: Plugin[];
-}
+
+
 interface Notification {
     created_at: string;
     description_notify: string;
@@ -28,35 +19,40 @@ interface Notification {
     updated_at: string;
     user_id: number;
 }
-const TopNav: React.FC<TopNavProps> = (props) => {
-    const { notifications} = usePage().props
-    const { licenseId, plugins } = props;
-    const [notification, setNotification] = useState<Notification[]>([]);
-    async function getNotification() {
-        await axios
-            .post(
-                "/api/license/notification",
-                {
-                    data: "hellow",
-                },
-                {
-                    headers: {
-                        Authorization:
-                            "Bearer " + localStorage.getItem("api_token"),
-                    },
-                }
-            )
-            .then((res) => setNotification(res.data));
-    }
-    function selectNotificationSource() {
-        return notifications && Array.isArray(notifications) && notifications.length > 0
-            ? notifications
-            : notification;
-    }
+const TopNav: React.FC = () => {
+    const { notifications } = usePage().props;
+    const [localNotifications, setLocalNotifications] = useState(notifications);
 
-    useEffect(() => {
-        getNotification();
-    }, []);
+    async function deleteNotification(id:number) {
+        try {
+            const response = await axios.delete(`/api/notifications/${id}`,{
+                headers: {
+                    Authorization:
+                        "Bearer " + localStorage.getItem("api_token"),
+                },
+            });
+            setLocalNotifications((prevState) =>
+                prevState.filter((notification) => notification.id !== id)
+            );
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    const deleteAllNotifications = () => {
+        axios.delete("/api/notifications/deleteAll",{
+            headers: {
+                Authorization:
+                    "Bearer " + localStorage.getItem("api_token"),
+            },
+        })
+          .then(res => {
+            // Actualiza la lista de notificaciones en el estado local
+            setLocalNotifications([]);
+          })
+          .catch(err => {
+            console.error(err);
+          });
+      };
     return (
         <nav className="fixed top-0 z-30 w-full bg-white shadow-lg items-center">
             <div className="flex justify-between items-center py-2 px-4">
@@ -68,60 +64,64 @@ const TopNav: React.FC<TopNavProps> = (props) => {
                 </div>
 
                 <div className="flex gap-3">
-                    {/*     <MenuHorizontal plugins={plugins}/> */}
-
-                    <button>
-                        <DropDownGeneral
-                            icons={<Icon name="notification" size={22} />}
+                        <MenuHorizontal />
+                        <button>
+                    <DropDownGeneral icons={<Icon name="notification" size={22} />}>
+                    <Menu.Item>
+                        <div
+                            className="py-2 px-4 flex items-center hover:shadow-md"
+                            onClick={deleteAllNotifications}
                         >
-                            {selectNotificationSource().map((item, index) => {
-                                    return (
-                                        <Menu.Item key={index}>
-                                            {({ active }) => (
-                                                <a
-                                                    className={`${
-                                                        active && "bg-blue-500 rounded-lg text-white text-sm"
-                                                    } flex`}
-                                                    href={item.link}
-                                                >
-                                                    {item.type_action == "expired" && (<div className="text-sm flex py-2 px-4">
-                                                        <p>{item.description_notify}</p>
-                                                        <div className="text-red-500">
-                                                            <Icon name="close" size={15} />
-                                                        </div>
-                                                    </div>
-                                                    )}
-                                                     {item.type_action == "new" && (
-                                                       <div className="text-sm flex py-2 px-4">
-                                                       <p>{item.description_notify}</p>
-                                                       <div className="text-green-500">
-                                                           <Icon name="close" size={15} />
-                                                       </div>
-                                                   </div>
-                                                    )}
-                                                     {item.type_action == "renewed" && (
-                                                        <div className="text-sm flex py-2 px-4">
-                                                        <p>{item.description_notify}</p>
-                                                        <div className="text-yellow-500">
-                                                            <Icon name="close" size={15} />
-                                                        </div>
-                                                    </div>
-                                                    )}
-                                                     {item.type_action == "about_expired" && (
-                                                        <div className="text-sm flex py-2 px-4">
-                                                        <p>{item.description_notify}</p>
-                                                        <div className="text-orange-500">
-                                                            <Icon name="close" size={15} />
-                                                        </div>
-                                                    </div>
-                                                    )}
-                                                </a>
-                                            )}
-                                        </Menu.Item>
-                                    );
-                                })}
-                        </DropDownGeneral>
+                            <p className="text-gray-700 flex-grow">Eliminar todo</p>
+                            <div className="text-sm">
+                                <Icon name="close" size={20} />
+                            </div>
+                        </div>
+                    </Menu.Item>
+    {Array.isArray(localNotifications) && localNotifications.length > 0 ? (
+        localNotifications.map((item, index) => {
+            return (
+                <Menu.Item key={index}>
+                    {({ active }) => (
+                        <div className="flex items-center p-4">
+                            <div className="flex-grow">
+                                <p
+                                    className={`text-sm font-medium ${
+                                        active ? "bg-blue-500 text-white rounded-lg p-2" : ""
+                                    } ${
+                                        item.type_action === "expired"
+                                            ? "text-red-500"
+                                            : item.type_action === "new"
+                                            ? "text-green-500"
+                                            : item.type_action === "renewed"
+                                            ? "text-yellow-500"
+                                            : "text-orange-500"
+                                    }`}
+                                >
+                                    {item.description_notify}
+                                </p>
+                            </div>
+                            <div
+                                className="text-sm cursor-pointer"
+                                onClick={() => deleteNotification(item.id)}
+                            >
+                                <Icon name="close" size={20} />
+                            </div>
+                        </div>
+                    )}
+                </Menu.Item>
+            );
+        })
+    ) : (
+        <div className="text-sm flex py-2 px-4">
+            <p className="text-gray-400">No hay notificaciones</p>
+        </div>
+    )}
+</DropDownGeneral>
+
+
                     </button>
+
                     <DropdownAccount />
                 </div>
             </div>

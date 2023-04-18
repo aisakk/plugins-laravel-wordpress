@@ -23,7 +23,7 @@ class DomainsController extends Controller
         if($request->limit_exceeded==1){
             return Inertia::render('Pages/Domains', ['license' => $licenseResource,'limit_exceeded' => true,'plugins'=>$pluginsArray]);
         }
-        return Inertia::render('Pages/Domains', ['license' => $licenseResource,'plugins'=>$pluginsArray]);
+        return Inertia::render('Pages/Domains', ['licenseId'=>$licenseId,'license' => $licenseResource,'plugins'=>$pluginsArray]);
     }
 
     public function store(Request $request,$licenseId)

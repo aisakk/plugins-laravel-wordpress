@@ -2352,10 +2352,6 @@ video {
   padding-right: 0.75rem;
 }
 
-.pr-3\.5 {
-  padding-right: 0.875rem;
-}
-
 .pr-4 {
   padding-right: 1rem;
 }
@@ -2825,10 +2821,6 @@ video {
 .ring-gray-900 {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(17 24 39 / var(--tw-ring-opacity));
-}
-
-.ring-gray-900\/5 {
-  --tw-ring-color: rgb(17 24 39 / 0.05);
 }
 
 .ring-white {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DrawerMenuItem from './Item';
 import DropdownMenu from '../DropdownMenu/index';
 import Icon from '../Icon';
-import {Plugin} from "../../types/DashboardTypes";
+import {Plugin, LicenseIdProps} from "../../types/DashboardTypes";
 
 interface MenuItem {
   title: string;
@@ -11,13 +11,12 @@ interface MenuItem {
   active: boolean;
 }
 
-interface DrawerMenuProps {
-  licenseId: number;
+interface DrawerMenuProps extends LicenseIdProps{
   plugins:Plugin[];
 }
 
 const DrawerMenu: React.FC<DrawerMenuProps> = (props) => {
-  const { licenseId,plugins } = props;
+  const { licenseId, plugins } = props;
   const [isShowing, setIsShowing] = useState(false);
   const currentPath = window.location.pathname;
   const items: MenuItem[] = [

@@ -1,10 +1,11 @@
-import NosideBarLayout from '../layouts/NoSideBarLayout';
+import MainLayout from '../layouts/MainLayout';
 import { Link } from '@inertiajs/inertia-react';
 import Badge from '../components/Badge';
 import Card from '../components/Card';
 import Button from '../components/Form/Button';
 import Icon from '../components/Icon';
 import { usePage } from '@inertiajs/inertia-react';
+import {Plugin,LicenseIdProps} from "../types/DashboardTypes";
 import { URLSearchParams } from 'url';
 
 interface Domain{
@@ -21,13 +22,6 @@ interface License {
   expiration: string;
   domains: Domain[];
   status: string;
-}
-interface Plugin{
-    name: string;
-    description: string;
-    active: boolean;
-    icon: string;
-    link: string;
 }
 
 interface LicensesProps {
@@ -61,7 +55,7 @@ function getQueryParam(param) {
   }
 
   return (
-        <NosideBarLayout plugins={plugins}>
+        <MainLayout plugins={plugins}>
             <div className="py-10 text-center">
                 <Card>
                     <div className="flex text-xs font-bold py-4 uppercase items-start">
@@ -116,7 +110,7 @@ function getQueryParam(param) {
                     ))}
                 </Card>
             </div>
-        </NosideBarLayout>
+        </MainLayout>
     );
 }
 

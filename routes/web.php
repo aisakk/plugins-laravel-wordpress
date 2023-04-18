@@ -1,16 +1,13 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DomainsController;
 use App\Http\Controllers\SettingsController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegistrationController;
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +37,8 @@ Route::middleware(["guest"])->group(function () {
     Route::get('/verify-email', [AuthController::class, 'verifyEmailThenRegister'])->name('verifyMessage');
     Route::get('/email-verification/{code}',  [AuthController::class, 'verify'])->name('verify-link');
 });
+
 Route::middleware(['auth', 'verified-custom', 'remember-custom', "web", "notificaciones"])->group(function(){
-    // Route::get('dashboard', [UserController::class, 'show'])->name('dashboard');
     Route::get('/plugins', [DashboardController::class, 'licenses'])->name('dashboard.licenses');
     Route::get('/plugins/{licenseId}/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 

@@ -1,7 +1,7 @@
-import NosideBarLayout from '../layouts/NoSideBarLayout';
 import Card from '../components/Card';
 import PluginCard from '../components/Plugin/Card';
 import {Plugin} from "../types/DashboardTypes";
+import MainLayout from '../layouts/MainLayout';
 
 interface AllPluginsProps{
     plugins:Plugin[]
@@ -11,7 +11,7 @@ interface AllPluginsProps{
 const AllPlugins: React.FC<AllPluginsProps> = ({plugins}) => {
 
     return (
-        <NosideBarLayout plugins={plugins}>
+        <MainLayout plugins={plugins}>
             <div className="pt-10">
                 <div className="mb-10 max-w-3xl text-center mx-auto px-8">
                     <h1 className="text-2xl font-bold mb-4">Plugins</h1>
@@ -28,7 +28,7 @@ const AllPlugins: React.FC<AllPluginsProps> = ({plugins}) => {
                     ))}
                 </div>
             </div>
-        </NosideBarLayout>
+        </MainLayout>
     );
 }
 

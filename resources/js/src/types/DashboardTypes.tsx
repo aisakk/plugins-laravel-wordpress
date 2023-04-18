@@ -25,3 +25,6 @@ export interface License {
     domains: Domain[];
     status: string;
 }
+export interface LicenseIdProps {
+    licenseId?: number;
+}
