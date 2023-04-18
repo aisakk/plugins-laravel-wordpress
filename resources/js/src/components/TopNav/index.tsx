@@ -4,8 +4,8 @@ import DrawerMenu from "../DrawerMenu";
 import MenuHorizontal from "../MenuHorizontal";
 import Icon from "../Icon";
 import DropDownGeneral from "../DropDownGeneral/DropDownGeneral";
-import axios from "axios";
 import { Menu } from "@headlessui/react";
+import axios from "axios";
 import { usePage } from "@inertiajs/inertia-react";
 
 interface Plugin {
