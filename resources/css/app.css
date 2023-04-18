@@ -3057,14 +3057,14 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 @media (prefers-color-scheme: dark) {
-  .dark\:bg-gray-400 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-  }
-
   .dark\:bg-gray-700 {
     --tw-bg-opacity: 1;
     background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+  }
+
+  .dark\:text-gray-400 {
+    --tw-text-opacity: 1;
+    color: rgb(156 163 175 / var(--tw-text-opacity));
   }
 
   .dark\:text-gray-500 {
@@ -3075,11 +3075,6 @@ input[type="color"]::-webkit-color-swatch {
   .dark\:text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
-  }
-
-  .dark\:text-gray-400 {
-    --tw-text-opacity: 1;
-    color: rgb(156 163 175 / var(--tw-text-opacity));
   }
 }
 
