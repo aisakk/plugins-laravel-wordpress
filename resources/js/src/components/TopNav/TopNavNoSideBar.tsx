@@ -1,29 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import DropdownAccount from "../DropdownAccount/index";
-import DrawerMenu from "../DrawerMenu";
 import MenuHorizontal from "../MenuHorizontal";
 import Icon from "../Icon";
+import { Plugin } from "../../types/DashboardTypes";
+import { usePage } from "@inertiajs/inertia-react";
 import DropDownGeneral from "../DropDownGeneral/DropDownGeneral";
 import { Menu } from "@headlessui/react";
 import axios from "axios";
-import { usePage } from "@inertiajs/inertia-react";
-
-
-
-interface Notification {
-    created_at: string;
-    description_notify: string;
-    id: number;
-    link: string;
-    type_action: string;
-    updated_at: string;
-    user_id: number;
+interface TopNavNotSideBarProps {
+    plugins: Plugin[];
 }
-const TopNav: React.FC = () => {
+
+const TopNavNotSideBar: React.FC<TopNavNotSideBarProps> = (props) => {
+    const { plugins } = props;
     const { notifications } = usePage().props;
     const [localNotifications, setLocalNotifications] = useState(notifications);
 
-    async function deleteNotification(id:number) {
+    async function deleteNotification(id) {
         try {
             const response = await axios.delete(`/api/notifications/${id}`,{
                 headers: {
@@ -59,13 +52,17 @@ const TopNav: React.FC = () => {
                 <div className="flex gap-6 sm:pl-32">
                     <div className="">
                         {/* <DropdownMenu /> */}
-                    {/*     <DrawerMenu licenseId={licenseId}  /> */}
+                        <img
+                            className="h-14 w-14"
+                            src="https://cdn-bjgin.nitrocdn.com/LxoCvaeHElFzlCBGqsfvssGnySbvIRYM/assets/images/optimized/rev-2f83237/wp-content/uploads/2022/01/cropped-octo-300x300.png"
+                            alt=""
+                        />
                     </div>
                 </div>
 
                 <div className="flex gap-3">
-                        <MenuHorizontal />
-                        <button>
+                    <MenuHorizontal plugins={plugins} />
+                    <button>
                     <DropDownGeneral icons={<Icon name="notification" size={22} />}>
                     <Menu.Item>
                         <div
@@ -129,4 +126,4 @@ const TopNav: React.FC = () => {
     );
 };
 
-export default TopNav;
+export default TopNavNotSideBar;
