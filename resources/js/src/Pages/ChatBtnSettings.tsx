@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from "react";
+import MainLayout from "../layouts/MainLayout";
+import {Plugin,License} from '../types/DashboardTypes';
 import {
     ChatBtnProps,
     defaultChatBtnProps,
@@ -8,19 +10,22 @@ import {
 import { Inertia } from "@inertiajs/inertia";
 import { notification } from "antd";
 import { renderToString } from "react-dom/server";
-// import type { NotificationPlacement } from "antd/es/notification/interface";
-// import { router } from "@inertiajs/react";
+import type { NotificationPlacement } from "antd/es/notification/interface";
+import { router } from "@inertiajs/react";
 
-import MainLayout from "../layouts/MainLayout";
 
 import ChatBtnPreview from "../components/ChatBtn/ChatBtnPreview";
 import Button from "../components/Form/Button";
 import ChatBtnForm from "../components/ChatBtn/ChatBtnForm";
 import ChatBtnWidgetBuilder from "../components/ChatBtn/WidgetBuilder/ChatBtnWidgetBuilder";
 
-const ChatBtnSettings: React.FC<LicenseProps> = (props) => {
+interface LicenseProps {
+    license: License;
+    plugins:Plugin[];
+}
+
+const ChatBtnSettings: React.FC<LicenseProps> = ({ license,plugins }) => {
     const [widgetData, setWidgetData] = useState(defaultChatBtnWidgetProps);
-    const { license } = props;
     const [api, contextHolder] = notification.useNotification();
 
     const Context = React.createContext({ name: "Default" });
@@ -39,20 +44,20 @@ const ChatBtnSettings: React.FC<LicenseProps> = (props) => {
         });
     };
 
-    //     function doStuff() {
-    //         api.success({
-    //             message: `Widget Saved Successfully!`,
-    //             description: (
-    //                 <Context.Consumer>
-    //                     {({ name }) =>
-    //                         `Your settings were saved and sent to your website. Your widget will be updated in some minutes.`
-    //                     }
-    //                 </Context.Consumer>
-    //             ),
-    //             placement: "bottomRight",
-    //             duration: 5,
-    //         });
-    //     }
+        function doStuff() {
+            api.success({
+                message: `Widget Saved Successfully!`,
+                description: (
+                    <Context.Consumer>
+                        {({ name }) =>
+                            `Your settings were saved and sent to your website. Your widget will be updated in some minutes.`
+                        }
+                    </Context.Consumer>
+                ),
+                placement: "bottomRight",
+                duration: 5,
+            });
+        }
 
     function requestWidgetSave() {
         console.log(
@@ -80,7 +85,7 @@ const ChatBtnSettings: React.FC<LicenseProps> = (props) => {
     }
 
     return (
-        <MainLayout licenseId={license.id}>
+        <MainLayout licenseId={license.id} plugins={plugins}>
             <div className="pt-10">
                 <div>
                     <div className="flex flex-wrap xl:flex-nowrap gap-6">
@@ -108,16 +113,5 @@ const ChatBtnSettings: React.FC<LicenseProps> = (props) => {
 
 export default ChatBtnSettings;
 
-interface License {
-    id: number;
-    date: string;
-    code: string;
-    pluginName: string;
-    expiration: string;
-    domains: string;
-    status: string;
-}
 
-interface LicenseProps {
-    license: License;
-}
+

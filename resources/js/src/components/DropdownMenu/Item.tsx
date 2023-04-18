@@ -1,14 +1,9 @@
 // DropdownMenuItem.tsx
 import React, { Suspense } from 'react';
 import { Link } from "@inertiajs/react";
-
+import {Plugin} from "../../types/DashboardTypes";
 interface DropdownMenuItemProps {
-  item: {
-    name: string;
-    link: string;
-    icon: string;
-    description: string;
-  };
+  item: Plugin;
 }
 
 const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({ item }) => {
@@ -21,7 +16,7 @@ const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({ item }) => {
       >
         <div className="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12">
           {/* <img src={item.icon} className="rounded-xl" /> */}
-          <img src="https://ps.w.org/wordpress-seo/assets/icon-256x256.png?rev=2643727" className="rounded-xl" alt="" />
+          <img src={item.icon ? item.icon :"https://ps.w.org/wordpress-seo/assets/icon-256x256.png?rev=2643727"} className="rounded-xl" alt="" />
         </div>
         <div className="ml-4">
           <p className="text-sm font-medium text-gray-900">{item.name}</p>

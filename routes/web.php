@@ -58,6 +58,8 @@ Route::middleware(['auth', 'verified-custom', 'remember-custom', "web"])->group(
 
     Route::get('/plugins/{licenseId}/logs', [DashboardController::class, 'logs'])->name('dashboard.logs');
 
+    Route::get('/all-plugins', [DashboardController::class, 'allPlugins'])->name('dashboard.all-plugins');
+    Route::get('/plugin/{pluginId}/details', [DashboardController::class, 'pluginDetails'])->name('dashboard.plugin-details');
 });
 
 /* Route::get('/', function(){

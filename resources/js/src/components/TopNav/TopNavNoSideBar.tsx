@@ -2,14 +2,7 @@ import React from 'react';
 import DropdownAccount from '../DropdownAccount/index';
 import MenuHorizontal from '../MenuHorizontal';
 import Icon from '../Icon';
-
-interface Plugin{
-    name: string;
-    description: string;
-    active: boolean;
-    icon: string;
-    link: string;
-}
+import {Plugin} from "../../types/DashboardTypes";
 
 interface TopNavNotSideBarProps{
     plugins:Plugin[];
@@ -29,9 +22,9 @@ const TopNavNotSideBar: React.FC<TopNavNotSideBarProps> = (props) => {
 
                 <div className="flex gap-3">
                     <MenuHorizontal plugins={plugins}/>
-                    <button>
-                        <Icon name="notification" size={25}/>
-                    </button>
+                        <button>
+                            <Icon name="notification" size={25}/>
+                        </button>
                     <DropdownAccount />
                 </div>
             </div>

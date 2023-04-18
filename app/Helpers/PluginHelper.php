@@ -22,8 +22,8 @@ class PluginHelper
             // Buscar el archivo readme.txt en cada carpeta
             $readmeFilePath = $directory . DIRECTORY_SEPARATOR . 'readme.txt';
 
-            // Extraer el nombre del plugin y agregar el objeto a la colección de plugins
-            $plugin = self::extractPluginName($readmeFilePath);
+            // Extraer el nombre y la descripción del plugin y agregar el objeto a la colección de plugins
+            $plugin = self::extractPluginData($readmeFilePath);
             if ($plugin) {
                 $plugins[] = $plugin;
             }
@@ -33,7 +33,7 @@ class PluginHelper
         return $plugins;
     }
 
-    private static function extractPluginName(string $readmeFilePath): ?object
+    private static function extractPluginData(string $readmeFilePath): ?object
     {
         if (!File::exists($readmeFilePath)) {
             return null;
@@ -41,15 +41,24 @@ class PluginHelper
 
         $readmeContent = File::get($readmeFilePath);
         $matches = [];
-        preg_match('/===\s+(.*?)\s+===/', $readmeContent, $matches);
 
+        // Extraer el nombre del plugin
+        preg_match('/===\s+(.*?)\s+===/', $readmeContent, $matches);
         if (count($matches) < 2) {
             return null;
         }
-
         $pluginName = trim($matches[1]);
+
+        // Extraer la descripción del plugin
+        preg_match('/== Description ==\s*(.*?)\s*==/s', $readmeContent, $matches);
+        if (count($matches) < 2) {
+            return null;
+        }
+        $pluginDescription = trim($matches[1]);
+
         $plugin = new \stdClass();
         $plugin->name = $pluginName;
+        $plugin->description = $pluginDescription;
 
         return $plugin;
     }

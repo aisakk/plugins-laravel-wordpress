@@ -1,17 +1,10 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react';
 import { Bars3Icon } from '@heroicons/react/24/outline';
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/24/solid';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { Link } from "@inertiajs/react";
 import DropdownMenuItem from '../DropdownMenu/Item';
-
-interface Plugin{
-    name: string;
-    description: string;
-    active: boolean;
-    icon: string;
-    link: string;
-}
+import {Plugin} from "../../types/DashboardTypes";
 
 type MenuItem = {
     name: string;
@@ -21,17 +14,8 @@ type MenuItem = {
     active:boolean;
 };
 
-const purchase: MenuItem[] = [
-    {
-      name: 'Optimized Chat button 1',
-      description: 'Your visitors can Contact you through "WhatsApp"',
-      link: '/installation',
-      icon: 'https://ps.w.org/wordpress-seo/assets/icon-256x256.png?rev=2643727',
-      active:true
-    },
-];
 
-const available: MenuItem[] = [
+const purchase: MenuItem[] = [
     {
       name: 'Automations',
       description: 'Create your own targeted content',
@@ -54,23 +38,15 @@ function classNames(...classes: (string | undefined | boolean)[]) {
 }
 
 interface DropDownHorizontalMenuProps{
-    plugins:Plugin[]
+    plugins:Plugin[];
 }
 
 const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( props ) => {
     const {plugins}=props;
-    console.log(plugins);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    // console.log(plugins);
   return (
     <header className="bg-white">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-        {/* <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
-            <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
-          </a>
-        </div> */}
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -108,21 +84,21 @@ const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( props ) 
                     <span className="text-xs uppercase text-slate-400">
                       Purchase
                     </span>
-                    {plugins && plugins.map((item) => (
+                    {purchase && purchase.map((item,index) => (
 
-                     <DropdownMenuItem key={item.name} item={item} />
+                     <DropdownMenuItem key={index} item={item} />
                      ))}
                      <span className="text-xs uppercase text-slate-400">
                        Available
                      </span>
-                     {/* {available.map((item) => (
+                     {plugins.map((item) => (
                        <DropdownMenuItem key={item.name} item={item} />
-                     ))} */}
+                     ))}
                    </div>
 
                    <div className="bg-slate-100 p-2">
                      <Link
-                       href="/dashboard"
+                       href="/all-plugins"
                        className="flow-root rounded-md px-4 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                      >
                        <span className="flex items-center">
@@ -139,32 +115,16 @@ const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( props ) 
               </Popover.Panel>
             </Transition>
           </Popover>
-          <a href="/licenses" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="/plugins" className="text-sm font-semibold leading-6 text-gray-900">
             Tus plugins
           </a>
-          {/* <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Company
-          </a> */}
         </Popover.Group>
-        {/* <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div> */}
+
       </nav>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-10 pt-20" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 mt-20 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-          <div className="flex items-center justify-between">
-            {/* <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
-            </a> */}
-          </div>
+
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
@@ -183,7 +143,7 @@ const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( props ) 
                           <Disclosure.Button
                             key={item.name}
                             as="a"
-                            href={item.link}
+                            href={item.icon}
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                           >
                             {item.name}

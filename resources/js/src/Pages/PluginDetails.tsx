@@ -5,19 +5,14 @@ import Button from '../components/Form/Button';
 import RatingPercentage from '../components/Rating/Percentage';
 import Gallery from '../components/Gallery';
 import Tag from '../components/Tag';
-interface License {
-    id:number;
-    date: string;
-    code: string;
-    pluginName: string;
-    expiration: string;
-    domains: string;
-    status: string;
-  }
+import {License,Plugin} from '../types/DashboardTypes'
 
-  interface LicenseProps {
-      license: License;
-  }
+
+interface LicenseProps {
+    license: License;
+    plugins:Plugin[];
+    plugin:Plugin;
+}
 
 type Rating = {
   name: string;
@@ -55,7 +50,7 @@ type PluginTag = {
   name: string;
 };
 
-type Plugin = {
+type SinglePlugin = {
   name: string;
   description: string;
   rating: Rating[];
@@ -64,9 +59,9 @@ type Plugin = {
   tags: PluginTag[];
 };
 
-const Details: React.FC<LicenseProps> = (props) => {
-    const { license } = props;
-  const plugin: Plugin = {
+const PluginDetails: React.FC<LicenseProps> = (props) => {
+    const { license,plugins,plugin } = props;
+  const pluginExample: SinglePlugin = {
     name: 'Optimized Chat button, phone, social link by Octonove',
     description: '',
     rating: [
@@ -462,7 +457,7 @@ const Details: React.FC<LicenseProps> = (props) => {
   };
 
   return (
-    <MainLayout licenseId={license.id}>
+    <MainLayout licenseId={2} plugins={plugins}>
         <div className="py-10">
             <div className="py-10">
                 <div className="w-full">
@@ -493,7 +488,7 @@ const Details: React.FC<LicenseProps> = (props) => {
                             </div>
                             <div className="w-full flex gap-4 justify-center sm:justify-end">
                                 <div className="text-right pb-2">
-                                    <h5 className="text-2xl font-bold"><span className="text-sm">From</span> 12$</h5>
+                                    <h5 className="text-2xl font-bold"><span className="text-sm">From</span> {plugin.price}$</h5>
                                 </div>
                                 <div className="">
                                     <Button background="bg-primary" color="text-white">Pricing</Button>
@@ -501,7 +496,9 @@ const Details: React.FC<LicenseProps> = (props) => {
                             </div>
                         </div>
 
-                        <span className="absolute top-8 left-8 bg-green-500 text-white p-2 font-bold text-xs rounded-xl">New</span>
+                        <span className="absolute top-8 left-8 bg-green-500 text-white p-2 font-bold text-xs rounded-xl">
+                            New
+                        </span>
 
 
 
@@ -706,7 +703,7 @@ const Details: React.FC<LicenseProps> = (props) => {
                                     <div className="flex justify-between">
                                         <div className='w-24'>Tags:</div>
                                         <div className="flex gap-1 justify-end flex-wrap">
-                                            { plugin.tags.map((tag) => (
+                                            { pluginExample.tags.map((tag) => (
                                                 <Tag item={ tag } />
                                             ))}
 
@@ -727,7 +724,7 @@ const Details: React.FC<LicenseProps> = (props) => {
                                             <p className="ml-2 text-sm font-medium text-gray-900 dark:text-white">4.95 out of 5</p>
                                         </div>
 
-                                        { plugin.rating.map((rating) => (
+                                        { pluginExample.rating.map((rating) => (
                                             <RatingPercentage rating={ rating } />
                                         ))}
 
@@ -754,7 +751,7 @@ const Details: React.FC<LicenseProps> = (props) => {
                             <h6 className="text-3xl font-bold text-center">Screenshots</h6>
                         </div>
 
-                        <Gallery images={ plugin.screenshots } />
+                        <Gallery images={ pluginExample.screenshots } />
                     </div>
                 </div>
                 <div>
@@ -762,7 +759,7 @@ const Details: React.FC<LicenseProps> = (props) => {
                         <h6 className="text-3xl font-bold text-center">Pricing</h6>
                     </div>
                     <div className="flex flex-wrap sm:flex-nowrap justify-center items-center gap-4 pt-10">
-                        { plugin.plans.map((item) => (
+                        { pluginExample.plans.map((item) => (
                             <div className="w-full sm:w-4/12 p-2">
                                 <PricingCard item={ item } />
                             </div>
@@ -776,4 +773,4 @@ const Details: React.FC<LicenseProps> = (props) => {
   );
 };
 
-export default Details;
+export default PluginDetails;

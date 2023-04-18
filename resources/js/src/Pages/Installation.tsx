@@ -6,19 +6,12 @@ import RatingPercentage from '../components/Rating/Percentage';
 import Gallery from '../components/Gallery';
 import Tag from '../components/Tag';
 import Card from '../components/Card';
-interface License {
-    id:number;
-    date: string;
-    code: string;
-    pluginName: string;
-    expiration: string;
-    domains: string;
-    status: string;
-  }
+import {Plugin,License} from '../types/DashboardTypes';
 
-  interface LicenseProps {
-      license: License;
-  }
+interface LicenseProps {
+    license: License;
+    plugins:Plugin[];
+}
 
 type Rating = {
   name: string;
@@ -56,7 +49,7 @@ type PluginTag = {
   name: string;
 };
 
-type Plugin = {
+type SinglePlugin = {
   name: string;
   description: string;
   rating: Rating[];
@@ -66,8 +59,8 @@ type Plugin = {
 };
 
 const Installation: React.FC<LicenseProps> = (props) => {
-    const { license } = props;
-  const plugin: Plugin = {
+    const { license,plugins } = props;
+  const plugin: SinglePlugin = {
     name: 'Optimized Chat button, phone, social link by Octonove',
     description: '',
     rating: [
@@ -463,7 +456,7 @@ const Installation: React.FC<LicenseProps> = (props) => {
   };
 
   return (
-    <MainLayout licenseId={license.id}>
+    <MainLayout licenseId={license.id} plugins={plugins}>
 
         <div className="py-10">
             <div className="w-full">

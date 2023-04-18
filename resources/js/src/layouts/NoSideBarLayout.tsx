@@ -1,14 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import TopNavNotSideBar from '../components/TopNav/TopNavNotSideBar';
-
-interface Plugin{
-    name: string;
-    description: string;
-    active: boolean;
-    icon: string;
-    link: string;
-}
+import TopNavNoSideBar from '../components/TopNav/TopNavNoSideBar';
+import {Plugin} from "../types/DashboardTypes";
 
 interface NoSideBarLayoutProps {
     children: React.ReactNode;
@@ -16,18 +9,16 @@ interface NoSideBarLayoutProps {
 }
 
 
-const NosideBarLayout: React.FC<NoSideBarLayoutProps> = (props ) => {
+const NosideBarLayout: React.FC<NoSideBarLayoutProps> = (props) => {
     const {children,plugins}=props;
     return (
-        <div className="App">
-            <main className="min-h-screen bg-slate-100">
-                <TopNavNotSideBar plugins={plugins} />
-                    <section className="py-14 sm:py-20">
-                        <Outlet />
-                        {children}
-                    </section>
-            </main>
-        </div>
+        <main className="min-h-screen bg-slate-100">
+            <TopNavNoSideBar plugins={plugins} />
+                <section className="container mx-auto py-14 sm:py-20">
+                    <Outlet />
+                    {children}
+                </section>
+        </main>
     );
 };
 

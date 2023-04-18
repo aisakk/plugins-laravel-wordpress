@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             foreach($plugins as $plugin){
                 $pluginCreated=Plugin::factory()->create([
                     'name' => $plugin->name,
+                    'description'=>$plugin->description,
                     'readme_path' => $readmeFilePath,
                 ]);
                 License::factory(3)->create([

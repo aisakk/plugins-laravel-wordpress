@@ -36,7 +36,6 @@ interface LicensesProps {
 }
 
 const Licenses: React.FC<LicensesProps> = (props) => {
-    const { auth } = usePage().props;
     const { licenses,plugins } = props;
     console.log(auth)
    // Función para extraer el valor del token de la cadena de consulta
@@ -88,8 +87,8 @@ function getQueryParam(param) {
                         </div>
                     </div>
 
-                    { licenses.map((item) => (
-                        <div className="flex border-t border-slate-200 py-4 items-center">
+                    { licenses.map((item,index) => (
+                        <div className="flex border-t border-slate-200 py-4 items-center" key={index}>
                             <div className="w-3/12">
                                 <p>{ item.date }</p>
                             </div>
@@ -101,8 +100,8 @@ function getQueryParam(param) {
                             </div>
                             <div className="w-3/12">
                                 {
-                                    item.domains.map((item)=>(
-                                        <p>{ item.name }</p>
+                                    item.domains.map((item,index)=>(
+                                        <p key={index}>{ item.name }</p>
                                     ))
                                 }
                             </div>

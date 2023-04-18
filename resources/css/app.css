@@ -687,6 +687,10 @@ video {
   grid-column: span 2 / span 2;
 }
 
+.-m-1 {
+  margin: -0.25rem;
+}
+
 .-m-2 {
   margin: -0.5rem;
 }
@@ -2132,6 +2136,10 @@ video {
      object-position: center;
 }
 
+.p-1 {
+  padding: 0.25rem;
+}
+
 .p-10 {
   padding: 2.5rem;
 }
@@ -3067,6 +3075,11 @@ input[type="color"]::-webkit-color-swatch {
   .dark\:text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
+  }
+
+  .dark\:text-gray-400 {
+    --tw-text-opacity: 1;
+    color: rgb(156 163 175 / var(--tw-text-opacity));
   }
 }
 

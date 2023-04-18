@@ -1,36 +1,20 @@
 import MainLayout from '../layouts/MainLayout';
 import React, { useState, Fragment, useEffect } from 'react';
-import { Inertia } from '@inertiajs/inertia';
-import { Dialog, Transition } from '@headlessui/react';
-
 import Badge from '../components/Badge';
 import Card from '../components/Card';
 import Button from '../components/Form/Button';
 import InputDomain from '../components/Form/InputDomain';
 import Icon from '../components/Icon';
 import Checkbox from '../components/Form/Checkbox';
+import { Inertia } from '@inertiajs/inertia';
+import { Dialog, Transition } from '@headlessui/react';
+import {Plugin,Domain,License} from "../types/DashboardTypes";
 
-interface Domain{
-    id:number;
-    name:string;
-    active:boolean;
-}
-
-interface License {
-    id:number;
-    date: string;
-    code: string;
-    pluginName: string;
-    expiration: string;
-    domains: Domain[];
-    status: string;
-}
-
-interface LicenseProps {
+interface DomainsProps {
     license: License;
     limit_exceeded?: boolean;
+    plugins:Plugin[];
 }
-
 interface DomainData {
     id:number;
     name: string;
@@ -38,8 +22,8 @@ interface DomainData {
 }
 
 
-const Domains: React.FC<LicenseProps> = (props) => {
-    const { license } = props;
+const Domains: React.FC<DomainsProps> = (props) => {
+    const { license,plugins } = props;
     let [isOpenCreate, setIsOpenCreate] = useState(false);
     let [isOpenEdit, setIsOpenEdit] = useState(false);
     let [isOpenDelete, setIsOpenDelete] = useState(false);
@@ -50,7 +34,7 @@ const Domains: React.FC<LicenseProps> = (props) => {
         if (props.limit_exceeded) {
             openLimitExceededModal();
         }
-      }, [props.limit_exceeded]);
+    }, [props.limit_exceeded]);
 
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -135,7 +119,7 @@ const Domains: React.FC<LicenseProps> = (props) => {
 
 
     return (
-        <MainLayout licenseId={license.id}>
+        <MainLayout licenseId={license.id} plugins={plugins}>
 
             <div className="py-10">
                 <Card>
