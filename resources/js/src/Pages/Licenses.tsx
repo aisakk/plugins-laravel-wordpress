@@ -37,7 +37,6 @@ interface LicensesProps {
 
 const Licenses: React.FC<LicensesProps> = (props) => {
     const { licenses,plugins } = props;
-    console.log(auth)
    // Función para extraer el valor del token de la cadena de consulta
 function getQueryParam(param) {
     const queryString = window.location.search.substring(1);

@@ -54,7 +54,7 @@ const TopNav: React.FC<TopNavProps> = (props) => {
                 <div className="flex gap-6 sm:pl-32">
                     <div className="">
                         {/* <DropdownMenu /> */}
-                        <DrawerMenu licenseId={licenseId} />
+                    {/*     <DrawerMenu licenseId={licenseId}  /> */}
                     </div>
                 </div>
 
