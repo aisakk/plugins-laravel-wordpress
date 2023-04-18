@@ -68,8 +68,7 @@ class AuthController extends Controller
                 return back()->withErrors(['error' => 'Debe verificar su correo electrónico, le enviamos el enlace nuevamente a su correo.']);
             }
             // Autenticación exitosa
-            $token = $user->createToken('my-app-token')->plainTextToken;
-            return redirect()->route('dashboard.licenses', ['token' => $token]);
+            return redirect()->route('dashboard.licenses');
         }
 
 

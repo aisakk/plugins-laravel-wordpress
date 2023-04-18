@@ -20,6 +20,7 @@ class NotificacionMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
+        $token = Auth::user()->createToken('my-app-token')->plainTextToken;
         $now = Carbon::now();
         $notificaciones_pendientes = Notifications::where('user_id', $user->id)
             ->where('start_at', '<=', $now)
@@ -30,7 +31,7 @@ class NotificacionMiddleware
         } else {
             Inertia::share('notifications', []);
         }
-
+        Inertia::share('api_token', $token);
         return $next($request);
     }
 }
