@@ -14,7 +14,7 @@ const MainLayout: React.FC<MainLayoutProps> = (props) => {
     return (
         <div className="App">
             <main className="min-h-screen bg-slate-100">
-                <TopNav plugins={plugins}/>
+                <TopNav/>
                 <section className="px-2 sm:px-6 sm:pl-32 py-14 sm:py-20">
                     {licenseId !== undefined && (
                         <div className="hidden sm:block">

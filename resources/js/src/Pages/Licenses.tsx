@@ -6,6 +6,7 @@ import Button from '../components/Form/Button';
 import Icon from '../components/Icon';
 import { usePage } from '@inertiajs/inertia-react';
 import {Plugin,LicenseIdProps} from "../types/DashboardTypes";
+import { URLSearchParams } from 'url';
 
 interface Domain{
     id:number;
@@ -30,6 +31,29 @@ interface LicensesProps {
 
 const Licenses: React.FC<LicensesProps> = (props) => {
     const { licenses,plugins } = props;
+   // Función para extraer el valor del token de la cadena de consulta
+function getQueryParam(param) {
+    const queryString = window.location.search.substring(1);
+    const queryParams = queryString.split("&");
+
+    for (let i = 0; i < queryParams.length; i++) {
+      const [key, value] = queryParams[i].split("=");
+      if (key === param) {
+        return decodeURIComponent(value);
+      }
+    }
+
+    return null;
+  }
+
+  // Llamar a la función para obtener el valor del token
+  const token = getQueryParam("token");
+
+  // Guardar el token en el localStorage si está presente
+  if (token) {
+    localStorage.setItem("api_token", token);
+  }
+
   return (
         <MainLayout plugins={plugins}>
             <div className="py-10 text-center">

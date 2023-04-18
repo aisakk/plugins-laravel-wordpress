@@ -6,47 +6,18 @@ import { Link } from "@inertiajs/react";
 import DropdownMenuItem from '../DropdownMenu/Item';
 import {Plugin} from "../../types/DashboardTypes";
 
-type MenuItem = {
-    name: string;
-    description: string;
-    link: string;
-    icon: string;
-    active:boolean;
-};
-
-
-const purchase: MenuItem[] = [
-    {
-      name: 'Automations',
-      description: 'Create your own targeted content',
-      link: '/installation',
-      icon: 'https://ps.w.org/shiny-updates/assets/icon-256x256.png?rev=1327674',
-      active:true
-    },
-    {
-      name: 'Reports',
-      description: 'Keep track of your growth',
-      link: '/installation',
-      icon: 'https://ps.w.org/cookie-law-info/assets/icon-256x256.png?rev=2594824',
-      active:true
-    },
-];
-
-
-function classNames(...classes: (string | undefined | boolean)[]) {
-  return classes.filter(Boolean).join(' ');
-}
 
 interface DropDownHorizontalMenuProps{
-    plugins:Plugin[];
+
 }
 
-const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( props ) => {
-    const {plugins}=props;
+const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( ) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <header className="bg-white">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -63,16 +34,46 @@ const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( props ) 
           <a href="/plugins/1/dashboard" className="text-sm font-semibold leading-6 text-gray-900">
             Dashboard
           </a>
-          <a href="/all-plugins" className="text-sm font-semibold leading-6 text-gray-900">
+
+        <a href="/plugins" className="text-sm font-semibold leading-6 text-gray-900">
             Listado de plugins
-          </a>
+        </a>
+
           <a href="/plugins" className="text-sm font-semibold leading-6 text-gray-900">
             Tus plugins
           </a>
         </Popover.Group>
 
       </nav>
+      <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+        <div className="fixed inset-0 z-10 pt-20" />
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 mt-20 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
 
+          <div className="mt-6 flow-root">
+            <div className="-my-6 divide-y divide-gray-500/10">
+              <div className="space-y-2 py-6">
+                <a
+                  href="/plugins/1/dashboard"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Dashboard
+                </a>
+                <a href="/all-plugins" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                    Listado de plugins
+                </a>
+
+                <a
+                  href="/plugins"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Tus plugins
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </Dialog.Panel>
+      </Dialog>
     </header>
   );
 };

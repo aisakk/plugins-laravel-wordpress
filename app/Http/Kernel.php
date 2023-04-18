@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'remember-custom' => \App\Http\Middleware\RememberSessionLifetime::class,
         'verified-custom' => \App\Http\Middleware\VerificateEmaill::class,
+        'notificaciones' => \App\Http\Middleware\NotificacionMiddleware::class,
     ];
 }

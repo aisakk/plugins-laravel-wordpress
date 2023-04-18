@@ -1906,6 +1906,11 @@ video {
   background-color: rgb(239 246 255 / var(--tw-bg-opacity));
 }
 
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
 .bg-blue-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
@@ -2343,10 +2348,6 @@ video {
   padding-right: 0.75rem;
 }
 
-.pr-3\.5 {
-  padding-right: 0.875rem;
-}
-
 .pr-4 {
   padding-right: 1rem;
 }
@@ -2619,6 +2620,11 @@ video {
   color: rgb(251 146 60 / var(--tw-text-opacity));
 }
 
+.text-orange-500 {
+  --tw-text-opacity: 1;
+  color: rgb(249 115 22 / var(--tw-text-opacity));
+}
+
 .text-primary {
   --tw-text-opacity: 1;
   color: rgb(64 84 178 / var(--tw-text-opacity));
@@ -2694,6 +2700,11 @@ video {
   color: rgb(250 204 21 / var(--tw-text-opacity));
 }
 
+.text-yellow-500 {
+  --tw-text-opacity: 1;
+  color: rgb(234 179 8 / var(--tw-text-opacity));
+}
+
 .text-opacity-90 {
   --tw-text-opacity: 0.9;
 }
@@ -2738,6 +2749,10 @@ video {
 
 .opacity-60 {
   opacity: 0.6;
+}
+
+.opacity-75 {
+  opacity: 0.75;
 }
 
 .opacity-80 {
@@ -2802,10 +2817,6 @@ video {
 .ring-gray-900 {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(17 24 39 / var(--tw-ring-opacity));
-}
-
-.ring-gray-900\/5 {
-  --tw-ring-color: rgb(17 24 39 / 0.05);
 }
 
 .ring-white {
@@ -3038,14 +3049,14 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 @media (prefers-color-scheme: dark) {
-  .dark\:bg-gray-400 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-  }
-
   .dark\:bg-gray-700 {
     --tw-bg-opacity: 1;
     background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+  }
+
+  .dark\:text-gray-400 {
+    --tw-text-opacity: 1;
+    color: rgb(156 163 175 / var(--tw-text-opacity));
   }
 
   .dark\:text-gray-500 {
@@ -3056,11 +3067,6 @@ input[type="color"]::-webkit-color-swatch {
   .dark\:text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
-  }
-
-  .dark\:text-gray-400 {
-    --tw-text-opacity: 1;
-    color: rgb(156 163 175 / var(--tw-text-opacity));
   }
 }
 
@@ -3199,10 +3205,6 @@ input[type="color"]::-webkit-color-swatch {
 
   .sm\:pr-0 {
     padding-right: 0px;
-  }
-
-  .sm\:pl-10 {
-    padding-left: 2.5rem;
   }
 
   .sm\:text-left {

@@ -38,7 +38,7 @@ Route::middleware(["guest"])->group(function () {
     Route::get('/email-verification/{code}',  [AuthController::class, 'verify'])->name('verify-link');
 });
 
-Route::middleware(['auth', 'verified-custom', 'remember-custom', "web"])->group(function(){
+Route::middleware(['auth', 'verified-custom', 'remember-custom', "web", "notificaciones"])->group(function(){
     Route::get('/plugins', [DashboardController::class, 'licenses'])->name('dashboard.licenses');
     Route::get('/plugins/{licenseId}/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 

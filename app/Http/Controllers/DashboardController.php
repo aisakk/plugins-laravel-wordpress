@@ -9,7 +9,7 @@ use App\Models\Plugin;
 use Inertia\Inertia;
 use App\Models\Log;
 use App\Http\Resources\PluginResource;
-
+use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function licenses()
