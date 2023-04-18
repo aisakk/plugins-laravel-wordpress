@@ -67,6 +67,16 @@ class LicenseController extends Controller
         $encryptedData=$this->encrypt($data,$secretKey);
         return $encryptedData;
     }
+    public function delete(Request $request){
+        $delete = Notifications::where('id', $request->id)->delete();
+        return response()->noContent();
+
+    }
+        public function deleteAll()
+    {
+        Notifications::truncate();
+        return response()->noContent();
+    }
 }
 
 
