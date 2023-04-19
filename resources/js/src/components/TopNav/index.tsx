@@ -7,7 +7,7 @@ import DropDownGeneral from "../DropDownGeneral/DropDownGeneral";
 import { Menu } from "@headlessui/react";
 import axios from "axios";
 import { usePage } from "@inertiajs/inertia-react";
-import { Plugin } from "../../types/DashboardTypes";
+import {LicenseIdProps} from '../../types/DashboardTypes'
 
 interface Notification {
     created_at: string;
@@ -19,12 +19,13 @@ interface Notification {
     user_id: number;
 }
 
-interface TopNavProps {
-    plugins: Plugin[];
-}
-const TopNav: React.FC<TopNavProps> = ({ plugins }) => {
+
+
+const TopNav: React.FC<LicenseIdProps> = (props) => {
     const { notifications, api_token } = usePage().props;
     const [localNotifications, setLocalNotifications] = useState(notifications);
+    const {licenseId}=props;
+
     async function deleteNotification(id: number) {
         try {
             const response = await axios.delete(`/api/notifications/${id}`, {
@@ -57,15 +58,25 @@ const TopNav: React.FC<TopNavProps> = ({ plugins }) => {
     return (
         <nav className="fixed top-0 z-30 w-full bg-white shadow-lg items-center">
             <div className="flex justify-between items-center py-2 px-4">
-                <div className="flex gap-6 sm:pl-32">
+                <div className="flex gap-6">
+                    <div className="py-2 px-6 sm:px-0">
+                        <img
+                            className="w-16 sm:mx-auto"
+                            src="https://cdn-bjgin.nitrocdn.com/LxoCvaeHElFzlCBGqsfvssGnySbvIRYM/assets/images/optimized/rev-2f83237/wp-content/uploads/2022/01/cropped-octo-300x300.png"
+                            alt=""
+                        />
+                    </div>
                     <div className="">
-                        {/* <DropdownMenu /> */}
-                        {/*     <DrawerMenu licenseId={licenseId}  /> */}
+                        {licenseId !== undefined && (
+                            <div className="hidden sm:block">
+                                <DrawerMenu/>
+                            </div>
+                        )}
                     </div>
                 </div>
 
                 <div className="flex gap-3">
-                    <MenuHorizontal plugins={plugins} />
+                    <MenuHorizontal/>
                         <div className="flex items-center">
                             <DropDownGeneral
                                 icons={<Icon name="notification" size={22} />}

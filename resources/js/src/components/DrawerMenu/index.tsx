@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DrawerMenuItem from './Item';
 import DropdownMenu from '../DropdownMenu/index';
 import Icon from '../Icon';
-import {Plugin, LicenseIdProps} from "../../types/DashboardTypes";
+import { LicenseIdProps } from "../../types/DashboardTypes";
 
 interface MenuItem {
   title: string;
@@ -11,12 +11,8 @@ interface MenuItem {
   active: boolean;
 }
 
-interface DrawerMenuProps extends LicenseIdProps{
-  plugins:Plugin[];
-}
-
-const DrawerMenu: React.FC<DrawerMenuProps> = (props) => {
-  const { licenseId, plugins } = props;
+const DrawerMenu: React.FC<LicenseIdProps> = (props) => {
+  const { licenseId } = props;
   const [isShowing, setIsShowing] = useState(false);
   const currentPath = window.location.pathname;
   const items: MenuItem[] = [
@@ -90,9 +86,7 @@ const DrawerMenu: React.FC<DrawerMenuProps> = (props) => {
             alt=""
           />
         </div>
-        <div className="px-6 sm:hidden">
-          <DropdownMenu plugins={plugins}/>
-        </div>
+        <div className="px-6 sm:hidden"></div>
         <div className="flex flex-col gap-y-2 px-6 sm:px-2 py-10">
           {items.map((item, index) => (
             <DrawerMenuItem key={index} item={{ ...item, active: currentPath === item.link }}  />
