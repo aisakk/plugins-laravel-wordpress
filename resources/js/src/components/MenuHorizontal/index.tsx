@@ -8,7 +8,7 @@ import {Plugin} from "../../types/DashboardTypes";
 
 
 interface DropDownHorizontalMenuProps{
-
+    plugins:Plugin[];
 }
 
 const DropDownHorizontalMenu: React.FC<DropDownHorizontalMenuProps> = ( ) => {
