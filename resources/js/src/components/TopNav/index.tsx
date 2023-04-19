@@ -20,15 +20,14 @@ interface Notification {
     user_id: number;
 }
 const TopNav: React.FC = () => {
-    const { notifications } = usePage().props;
+    const { notifications, api_token } = usePage().props;
     const [localNotifications, setLocalNotifications] = useState(notifications);
-
     async function deleteNotification(id:number) {
         try {
             const response = await axios.delete(`/api/notifications/${id}`,{
                 headers: {
                     Authorization:
-                        "Bearer " + localStorage.getItem("api_token"),
+                        "Bearer " + api_token,
                 },
             });
             setLocalNotifications((prevState) =>
@@ -42,7 +41,7 @@ const TopNav: React.FC = () => {
         axios.delete("/api/notifications/deleteAll",{
             headers: {
                 Authorization:
-                    "Bearer " + localStorage.getItem("api_token"),
+                    "Bearer " + api_token,
             },
         })
           .then(res => {

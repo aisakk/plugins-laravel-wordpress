@@ -13,7 +13,8 @@ interface TopNavNotSideBarProps {
 
 const TopNavNotSideBar: React.FC<TopNavNotSideBarProps> = (props) => {
     const { plugins } = props;
-    const { notifications } = usePage().props;
+    const { notifications, api_token } = usePage().props;
+
     const [localNotifications, setLocalNotifications] = useState(notifications);
 
     async function deleteNotification(id) {
@@ -21,7 +22,7 @@ const TopNavNotSideBar: React.FC<TopNavNotSideBarProps> = (props) => {
             const response = await axios.delete(`/api/notifications/${id}`,{
                 headers: {
                     Authorization:
-                        "Bearer " + localStorage.getItem("api_token"),
+                        "Bearer " + api_token,
                 },
             });
             setLocalNotifications((prevState) =>
@@ -35,7 +36,7 @@ const TopNavNotSideBar: React.FC<TopNavNotSideBarProps> = (props) => {
         axios.delete("/api/notifications/deleteAll",{
             headers: {
                 Authorization:
-                    "Bearer " + localStorage.getItem("api_token"),
+                    "Bearer " + api_token,
             },
         })
           .then(res => {
