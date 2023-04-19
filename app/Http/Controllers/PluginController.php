@@ -4,24 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Plugin;
-use App\Helpers\PluginHelper;
 
 class PluginController extends Controller
 {
-    public function updatePluginInfo()
+    public function updatePluginInfo(Request $request)
     {
-
-        $readmeFilePath = resource_path('plugins');
-        $plugins = PluginHelper::extractPluginNames($readmeFilePath);
+        $secretKey = env('AES256_LICENSE_KEY');
+        $data = $request->input('license_data');
+        $plugins=$this->decrypt($data,$secretKey);
+        $plugins = json_decode($plugins, true);
         if ($plugins) {
             foreach ($plugins as $plugin) {
-                Plugin::updateOrCreate(
-                    ['name' => $plugin->name],
-                    ['readme_path' => $readmeFilePath]
-                );
+                Plugin::updateOrCreate($plugin->data);
             }
         }
 
         return response()->json(['message' => 'Plugin information updated successfully.']);
+    }
+
+    private function decrypt($data, $secretKey)
+    {
+        $combinedData = base64_decode($data);
+        $iv = substr($combinedData, 0, 16);
+        $encryptedData = substr($combinedData, 16);
+        return openssl_decrypt($encryptedData, 'AES-256-CBC', $secretKey, OPENSSL_RAW_DATA, $iv);
     }
 }

@@ -59,19 +59,15 @@ const TopNav: React.FC<LicenseIdProps> = (props) => {
         <nav className="fixed top-0 z-30 w-full bg-white shadow-lg items-center">
             <div className="flex justify-between items-center py-2 px-4">
                 <div className="flex gap-6">
-                    <div className="py-2 px-6 sm:px-0">
+                    <div className="py-2 px-3 sm:px-0">
                         <img
                             className="w-16 sm:mx-auto"
                             src="https://cdn-bjgin.nitrocdn.com/LxoCvaeHElFzlCBGqsfvssGnySbvIRYM/assets/images/optimized/rev-2f83237/wp-content/uploads/2022/01/cropped-octo-300x300.png"
                             alt=""
                         />
                     </div>
-                    <div className="">
-                        {licenseId !== undefined && (
-                            <div className="hidden sm:block">
-                                <DrawerMenu/>
-                            </div>
-                        )}
+                    <div className="flex items-center md:hidden">
+                        <DrawerMenu licenseId={licenseId}/>
                     </div>
                 </div>
 

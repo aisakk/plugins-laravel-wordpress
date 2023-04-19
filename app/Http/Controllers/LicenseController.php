@@ -30,7 +30,7 @@ class LicenseController extends Controller
     public function store(Request $request)
     {
         try {
-            $secretKey = "aesEncryptionKeyaesEncryptionKey";
+            $secretKey = env('AES256_LICENSE_KEY');
             $data = $request->input('license_data');
             $decryptedData=$this->decrypt($data,$secretKey);
 
@@ -62,7 +62,7 @@ class LicenseController extends Controller
     }
 
     public function create(Request $request){
-        $secretKey = "aesEncryptionKeyaesEncryptionKey";
+        $secretKey = env('AES256_LICENSE_KEY');
         $data = $request->input('license_data');
         $encryptedData=$this->encrypt($data,$secretKey);
         return $encryptedData;

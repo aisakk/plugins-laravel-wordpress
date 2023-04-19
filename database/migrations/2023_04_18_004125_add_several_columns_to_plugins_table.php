@@ -12,16 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('plugins', function (Blueprint $table) {
+            $table->dropColumn('readme_path');
             $table->text('description')->after('name')->nullable();
             $table->decimal('price')->after('description');
-            $table->string('image')->after('price');
-            $table->boolean('is_new')->after('image');
+            $table->boolean('is_new')->after('price');
             $table->boolean('is_acquired')->after('is_new');
-            // $table->date('expires_on')->after('is_acquired'); $plugin->licenses($licenceId)->expiration?
-            $table->integer('rates')->after('is_acquired');
-            $table->integer('reviews')->after('rates');
-            $table->boolean('active')->default(false);
-            $table->string('link')->after('active')->nullable();
+            $table->text('images')->after('is_acquired');
+            $table->text('pricing')->after('images');
+            $table->text('plugin_info')->after('pricing');
         });
     }
 
@@ -31,15 +29,15 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('plugins', function (Blueprint $table) {
+            // $table->string('readme_path');
             $table->dropColumn([
                 'description',
                 'price',
-                'image',
                 'is_new',
                 'is_acquired',
-                'rates',
-                'reviews',
-                'active'
+                'images',
+                'pricing',
+                'plugin_info'
             ]);
         });
     }
