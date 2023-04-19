@@ -1,6 +1,6 @@
 // DrawerMenuItem.tsx
 import React, { Suspense } from 'react';
-import { Link } from "@inertiajs/react";
+import { Link } from "@inertiajs/inertia-react";
 import Icon from '../Icon';
 
 interface DrawerMenuItemProps {
@@ -15,8 +15,8 @@ interface DrawerMenuItemProps {
 const DrawerMenuItem: React.FC<DrawerMenuItemProps> = ({ item }) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Link
-        href={item.link}
+    <Link
+        href={`${item.link}`}
         className={`flex sm:flex-col gap-x-2 gap-y-1 items-center px-2 py-3 rounded-xl ${
           item.active ? 'bg-primary text-white' : ''
         }`}
