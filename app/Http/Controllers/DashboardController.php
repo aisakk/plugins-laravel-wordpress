@@ -9,6 +9,7 @@ use App\Models\Plugin;
 use Inertia\Inertia;
 use App\Models\Log;
 use App\Http\Resources\PluginResource;
+use App\Models\LicenseMeta;
 use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
@@ -39,8 +40,8 @@ class DashboardController extends Controller
         $plugins = Plugin::all();
         $pluginsArray = PluginResource::collection($plugins)->toArray(request());
         $licenseResource = (new LicenseResource($license))->toArray(request());
-
-        return Inertia::render('Pages/ChatBtnSettings', ['licenseId'=>$licenseId,'license' => $licenseResource,'plugins'=>$pluginsArray]);
+        $licenseMeta = LicenseMeta::findOrFail($licenseId);
+        return Inertia::render('Pages/ChatBtnSettings', ['licenseId'=>$licenseId,'license' => $licenseResource,'plugins'=>$pluginsArray, 'license_meta'=> $licenseMeta]);
     }
 
     public function installation($licenseId)

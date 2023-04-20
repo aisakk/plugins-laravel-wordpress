@@ -28,3 +28,13 @@ export interface License {
 export interface LicenseIdProps {
     licenseId?: number;
 }
+
+export interface LicenseMeta{
+    id:number;
+    meta_key:string;
+    meta_value:string;
+    license_id:number;
+    created_at:string;
+    updated_at:string;
+
+}
