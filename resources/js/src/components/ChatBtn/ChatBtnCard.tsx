@@ -54,9 +54,9 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
 
     return (
         <Card>
-            <div className="flex justify-between items-start border-b border-solid border-slate-400 pb-4">
-                <div>
-                    <h4 className="flex text-2xl pb-6 font-bold items-center gap-4  ">
+            <div className="flex flex-col justify-between items-start border-b border-solid border-slate-400 pb-4">
+                <div className="flex flex-wrap gap-3 mb-5">
+                    <h4 className="flex  text-2xl font-bold items-center gap-4  flex-wrap">
                         Button #{index + 1}
                         <div className="flex gap-1">
                             <Button
@@ -83,13 +83,7 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
                             </Button>
                         </div>
                     </h4>
-
-                    <h6 className="text-lg font-bold">1. Content</h6>
-                    <p className="text-xs">
-                        Select an icon type and fill the content for it
-                    </p>
-                </div>
-                <div className="flex gap-3 items-center">
+                    <div className="flex gap-3 items-center flex-wrap">
                     <Select
                         options={areaOptions}
                         selected={-1}
@@ -121,7 +115,15 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
                     >
                         <Icon name="trash" className="w-5 md:w-6" />
                     </Button>
+                    </div>
                 </div>
+                <div>
+                    <h6 className="text-lg font-bold">1. Content</h6>
+                    <p className="text-xs">
+                        Select an icon type and fill the content for it
+                    </p>
+                </div>
+
             </div>
             <div className="py-6">
                 <ChatBtnIconContent

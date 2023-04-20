@@ -304,7 +304,7 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
         <MainLayout licenseId={license.id} plugins={plugins}>
             <div className="pt-10">
                 <div>
-                    <div className="flex flex-wrap xl:flex-nowrap gap-6">
+                    <div className="flex flex-wrap xl:flex-nowrap gap-6 w-full">
 
                         <ChatBtnForm
                             setWidgetDataProperty={setWidgetDataProperty}

@@ -103,7 +103,7 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
     };
 
     return (
-        <div className="w-full xl:w-8/12">
+        <div className="w-full md:w-10/12 lg:w-8/12 xl:w-8/12">
             <Card>
                 <div className="pb-10">
                     <div className="flex justify-between items-center border-b border-solid border-slate-400 pb-4">

@@ -10,7 +10,7 @@ interface PreviewProps {
 
 const ChatBtnPreview: React.FC<PreviewProps> = ({ children, widgetData }) => {
     return (
-        <div className="w-full xl:w-4/12 fixed right-0 pl-12 pr-6">
+        <div className="w-full md:w-10/12 lg:w-4/12 xl:w-4/12 lg:fixed lg:right-0 lg:pl-12 lg:pr-6">
             <div className="shadow-xl p-6 bg-white rounded-2xl">
                 <div className="flex justify-between items-center border-b border-solid border-slate-400 pb-4">
                     <div>
