@@ -12,14 +12,15 @@ use App\Models\Log;
 
 class SettingsController extends Controller
 {
-    public function store(Request $request,$licenseId)
+    /* public function store(Request $request,$licenseId)
     {
-        $setting=LicenseMeta::create([
+
+
+       $setting=LicenseMeta::create([
             'meta_key'=>$request->meta_key,
             'meta_value'=> json_encode($request->meta_value),
             'license_id'=>(int)$licenseId
         ]);
-
         $domains=$setting->license->domains;
         foreach($domains as $domain){
             if($domain->active){
@@ -29,6 +30,28 @@ class SettingsController extends Controller
             }
         }
         return Redirect::route('dashboard.settings', ['licenseId'=>$licenseId]);
+    } */
+    public function store(Request $request, $licenseId)
+    {
+        $setting = LicenseMeta::where('license_id', $licenseId)->first();
+        if ($setting != null) {
+            $setting->meta_key = $request->meta_key;
+            $setting->meta_value = json_encode($request->meta_value);
+            $setting->save();
+            $domains = $setting->license->domains;
+            foreach ($domains as $domain) {
+                if ($domain->active) {
+                    $secretKey = $domain->license->licence_key;
+                    $url = $domain->name . '/wp-json/octorestapi/v1/update_widget';
+                    $this->httpPost($url, $secretKey, (int) $licenseId);
+                }
+            }
+            $successMessage = 'Los datos han sido guardados con éxito';
+            return back()->with('success', $successMessage);
+        } else {
+            $errorMessage = 'No se encuentra el id de dicha licencia';
+            return back()->withErrors('errors', $errorMessage);
+        }
     }
 
     private function httpPost($url, $secretKey, $licenseId)
@@ -64,15 +87,15 @@ class SettingsController extends Controller
         curl_close($curl);
 
         $responseObj = json_decode($response);
-        if(!empty($responseObj->status)){
-            $action_result='Server response with status: '.$httpStatusCode . ' ' . ($responseObj->status === 0 ? 'Completado correctamente.' : 'Error: ' . $responseObj->status);
-        }else{
-            $action_result='Server response with status: '.$httpStatusCode;
+        if (!empty($responseObj->status)) {
+            $action_result = 'Server response with status: ' . $httpStatusCode . ' ' . ($responseObj->status === 0 ? 'Completado correctamente.' : 'Error: ' . $responseObj->status);
+        } else {
+            $action_result = 'Server response with status: ' . $httpStatusCode;
         }
         $log = new Log([
             'action_name' => 'Hook de Actualización',
             'action_details' => 'Ejecucion de hook de actualizacion en el dominio "' . $url . '"',
-            'action_data' => json_encode($payload).', endpoint: ' . $url.' method: POST',
+            'action_data' => json_encode($payload) . ', endpoint: ' . $url . ' method: POST',
             'action_result' => $action_result,
             'license_id' => $licenseId,
         ]);
@@ -89,13 +112,12 @@ class SettingsController extends Controller
 
             try {
 
-                $decoded=JWT::decode($jwt, new Key($secretKey, 'HS256'));
+                $decoded = JWT::decode($jwt, new Key($secretKey, 'HS256'));
                 return response()->json([
-                    'jwt'=>$jwt,
-                    'status'=>0,
-                    'decoded'=>$decoded
+                    'jwt' => $jwt,
+                    'status' => 0,
+                    'decoded' => $decoded
                 ]);
-
             } catch (\Firebase\JWT\ExpiredException $e) {
                 echo "Error: JWT has expired.\n";
             } catch (\Firebase\JWT\SignatureInvalidException $e) {
@@ -103,12 +125,10 @@ class SettingsController extends Controller
             } catch (\Exception $e) {
                 echo "Error: " . $e->getMessage() . "\n";
             }
-
         } else {
             return response()->json([
-                'status'=>-1
+                'status' => -1
             ]);
         }
     }
-
 }

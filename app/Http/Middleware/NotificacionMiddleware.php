@@ -31,7 +31,8 @@ class NotificacionMiddleware
         } else {
             Inertia::share('notifications', []);
         }
-        Inertia::share('api_token', $token);
+
+        Inertia::share(['api_token' => $token, 'success' => session('success') ??  (object)[]]);
         return $next($request);
     }
 }

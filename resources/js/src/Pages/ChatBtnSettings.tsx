@@ -17,7 +17,8 @@ import ChatBtnPreview from "../components/ChatBtn/ChatBtnPreview";
 import Button from "../components/Form/Button";
 import ChatBtnForm from "../components/ChatBtn/ChatBtnForm";
 import ChatBtnWidgetBuilder from "../components/ChatBtn/WidgetBuilder/ChatBtnWidgetBuilder";
-
+import Alert from "../components/Alert/Alert";
+import { usePage } from "@inertiajs/inertia-react";
 interface LicenseProps {
     license: License;
     plugins: Plugin[];
@@ -34,7 +35,9 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
     const Context = React.createContext({ name: "Default" });
     const json = JSON.parse(license_meta.meta_value);
     const contextValue = useMemo(() => ({ name: "Ant Design" }), []);
-
+    const {errors, success} = usePage().props
+    const [showAlert, setShowAlert] = useState(false);
+    const [processing, setProcessing] = useState(false);
     const setWidgetDataProperty = (
         property: keyof ChatBtnWidgetProps,
         value: ChatBtnProps[]
@@ -66,25 +69,23 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
         console.log(
             renderToString(<ChatBtnWidgetBuilder widgetData={widgetData} />)
         );
-
+            console.log(widgetData)
         //   doStuff();
+        setProcessing(true)
         const payload: Record<string, string> = {
             meta_key: "settings",
             meta_value: JSON.stringify(widgetData),
         };
-        //   router.post("/plugins/${license.id}/save-settings", {
-        //       ...payload,
-        //       onSuccess: () => reset("password"),
-        //   });
         Inertia.post(`/plugins/${license.id}/save-settings`, payload, {
             preserveState: true,
-            onSuccess: (page) => {
-                console.log("success!!!");
+            onSuccess:()=>{
+                setProcessing(false)
             },
-            onError: (errors) => {
-                console.log("error!!!");
-            },
+            onError: ()=>{
+
+            }
         });
+
     }
     function convertToWidgetData(property: keyof ChatBtnWidgetProps, json) {
         let newWidgetData = {
@@ -293,16 +294,18 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
         });
         setWidgetDataProperty(property, newWidgetData[property]);
     }
-
+    function handleAlert(){
+        setShowAlert(!showAlert)
+    }
     useEffect(() => {
         convertToWidgetData("left-top", json);
     }, []);
-
     return (
         <MainLayout licenseId={license.id} plugins={plugins}>
             <div className="pt-10">
                 <div>
                     <div className="flex flex-wrap xl:flex-nowrap gap-6">
+
                         <ChatBtnForm
                             setWidgetDataProperty={setWidgetDataProperty}
                             widgetData={widgetData}
@@ -315,9 +318,21 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
                                 padding="p-3"
                                 onClick={requestWidgetSave}
                             >
-                                Save
+                                {processing ? (
+                                      <div className="animate-spin  rounded-full border-t-gray-700 border-4 border-t-4 border-gray-200 h-4 w-4"></div>
+                                ) : (
+                                    <p>Save</p>
+                                )}
+
                             </Button>
                         </ChatBtnPreview>
+                        {errors && Object.keys(errors).length > 0 && (
+                        <Alert error={errors} show={!showAlert} onClose={handleAlert} />
+                    )}
+                    {success && Object.keys(success).length > 0 && (
+                        <Alert success={success} show={!showAlert} onClose={handleAlert} />
+                    )}
+
                     </div>
                 </div>
             </div>
