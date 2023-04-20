@@ -76,7 +76,7 @@ const DrawerMenu: React.FC<LicenseIdProps> = (props) => {
                     onClick={() => setIsShowing(false)}
                     className="absolute top-6 right-6 text-slate-400 sm:hidden"
                 >
-                    <Icon name="close" size={25} />
+                    <Icon name="close" className="w-5 md:w-6" />
                 </button>
                 <div className="py-4 px-6 sm:px-2">
                     <img

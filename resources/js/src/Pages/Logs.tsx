@@ -2,7 +2,7 @@ import MainLayout from '../layouts/MainLayout';
 import LogsTable from '../components/LogsTable';
 import Card from '../components/Card';
 import {  useState } from 'react';
-import {Plugin,LicenseIdProps} from "../types/DashboardTypes";
+import {LicenseIdProps} from "../types/DashboardTypes";
 
 
 interface Log {
@@ -26,7 +26,6 @@ interface Item {
 interface LogsProps extends LicenseIdProps {
     logs: Log[];
     license: Item;
-    plugins:Plugin[];
 }
 
 const formatDate = (dateString: string) => {
@@ -60,7 +59,7 @@ const separateLogsByDay = (logs: any[]) => {
     return logsByDay;
 };
 
-const Logs: React.FC<LogsProps> = ({ logs, licenseId,plugins }) => {
+const Logs: React.FC<LogsProps> = ({ logs, licenseId }) => {
     const logsData = logs ? Object.values(logs) : [];
 
     // Crear un conjunto de fechas únicas
@@ -81,13 +80,13 @@ const Logs: React.FC<LogsProps> = ({ logs, licenseId,plugins }) => {
     const logsByDay = separateLogsByDay(filteredLogs);
 
     return (
-        <MainLayout licenseId={licenseId} plugins={plugins}>
-            <div className="py-10">
+        <MainLayout licenseId={licenseId}>
+            <div className="py-16">
                 <div className="w-full items-center">
                     <select
                         value={selectedDate || ''}
                         onChange={(e) => setSelectedDate(e.target.value)}
-                        className="w-full mb-4 sm:mb-0 sm:w-auto bg-white border border-gray-300 py-2 px-4 rounded-lg"
+                        className="w-full mb-4 md:mb-3 sm:w-auto bg-white border border-gray-300 py-2 px-4 rounded-lg"
                     >
                         <option value="">Todos los días</option>
                         {Array.from(uniqueDates).map((date) => (

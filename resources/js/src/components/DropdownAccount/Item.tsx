@@ -23,7 +23,7 @@ const DropdownAccountItem: React.FC<DrawerMenuItemProps> = ({ item, route }) => 
           } group flex gap-2 w-full items-center rounded-md px-2 py-2 text-sm`}
           onClick={route}
         >
-          <Icon name={item.icon} size={25} />
+          <Icon name={item.icon} className="w-5 md:w-6" />
           {item.name}
         </button>
       )}

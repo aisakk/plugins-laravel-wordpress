@@ -9,9 +9,7 @@ const DropDownHorizontalMenu: React.FC = () => {
                 className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
                 aria-label="Global"
             >
-                <div className="flex lg:hidden">
-                </div>
-                <Popover.Group className="hidden lg:flex lg:gap-x-12">
+                <Popover.Group className="hidden md:flex md:gap-x-3 lg:gap-x-12">
                     <a
                         href="/plugins/1/dashboard"
                         className="text-sm font-semibold leading-6 text-gray-900"

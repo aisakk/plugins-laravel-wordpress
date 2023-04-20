@@ -136,7 +136,7 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
                             </p>
                         </div>
                         <div>
-                            <Icon name="arrow-down" size={25} />
+                            <Icon name="arrow-down" className="w-5 md:w-6" />
                         </div>
                     </div>
                     <div className="flex flex-wrap sm:flex-nowrap gap-6 pb-4 pt-6">

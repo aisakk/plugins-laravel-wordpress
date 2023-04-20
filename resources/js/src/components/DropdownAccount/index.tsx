@@ -68,7 +68,7 @@ const DropdownAccount: React.FC = () => {
               <p className="text-xs">octonove@gmail.com</p>
             </div>
             <div className="hidden sm:block">
-              <Icon name="arrow-down" size={25} />
+              <Icon name="arrow-down" className="w-5 md:w-6" />
             </div>
           </Menu.Button>
         </div>

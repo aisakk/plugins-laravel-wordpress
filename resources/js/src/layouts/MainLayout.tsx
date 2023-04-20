@@ -14,7 +14,7 @@ const MainLayout: React.FC<MainLayoutProps> = (props) => {
         <div className="App">
             <main className="min-h-screen bg-slate-100">
                 <TopNav licenseId={licenseId}/>
-                <section className={(typeof licenseId !== 'undefined') ? 'px-2 sm:px-6  sm:pl-32 py-14 sm:py-20' : 'px-2 sm:px-6 py-14 sm:py-20'}>
+                <section className={(typeof licenseId !== 'undefined') ? 'px-2 sm:px-6  sm:pl-32 pt-16 lg:py-20' : 'px-2 sm:px-6 pt-16 lg:py-20'}>
                     {licenseId !== undefined && (
                         <div className="hidden sm:block">
                             <DrawerMenu licenseId={licenseId} />

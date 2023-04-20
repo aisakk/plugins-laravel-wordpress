@@ -20,7 +20,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
                     <div className="rounded-xl relative rounded-xl overflow-hidden">
                         <img src={ image.source } className="w-full shadow-xl h-60 object-cover" alt={ image.name } title={ image.name } />
                         <div className="absolute top-0 left-0 w-full h-full flex justify-center opacity-0 group-hover:opacity-100 items-center bg-black bg-opacity-[40%] text-white">
-                            <Icon name="search" size={25}/>
+                            <Icon name="search" className="w-5 md:w-6"/>
                         </div>
                     </div>
                 </div>

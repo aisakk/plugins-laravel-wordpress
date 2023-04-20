@@ -103,7 +103,7 @@
 //                                             </p>
 //                                         </div>
 //                                         <div>
-//                                             <Icon name="arrow-down" size={25} />
+//                                             <Icon name="arrow-down" className="w-5 md:w-6" />
 //                                         </div>
 //                                     </div>
 
@@ -123,7 +123,7 @@
 //                                             </p>
 //                                         </div>
 //                                         <div>
-//                                             <Icon name="arrow-down" size={25} />
+//                                             <Icon name="arrow-down" className="w-5 md:w-6" />
 //                                         </div>
 //                                     </div>
 //                                     <div className="flex flex-wrap sm:flex-nowrap gap-6 pb-4 pt-6">
@@ -212,7 +212,7 @@
 //                                                 border="border-blue-100"
 //                                                 padding="p-2"
 //                                             >
-//                                                 <Icon name="eye" size={25} />
+//                                                 <Icon name="eye" className="w-5 md:w-6" />
 //                                             </Button>
 //                                             <Button
 //                                                 background="bg-red-100 hover:bg-red-200"
@@ -220,7 +220,7 @@
 //                                                 border="border-red-100"
 //                                                 padding="p-2"
 //                                             >
-//                                                 <Icon name="trash" size={25} />
+//                                                 <Icon name="trash" className="w-5 md:w-6" />
 //                                             </Button>
 //                                         </div>
 //                                     </div>

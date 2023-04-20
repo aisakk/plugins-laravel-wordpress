@@ -33,7 +33,7 @@ const PluginCard: React.FC<PluginCardProps> = ({ plugin }) => {
                     <p className="ml-2 text-sm font-bold text-gray-900 dark:text-gray-400">{ plugin.rates }</p>
                     <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:text-gray-400"></span>
                     <a href="#" className="text-sm font-medium text-gray-900 hover:no-underline dark:text-gray-400">
-                        { plugin.reviews.toString() } reviews
+                        {/* { plugin.reviews.toString() } reviews */}
                     </a>
                 </div>
                 <p className="text-sm">{ plugin.description }</p>

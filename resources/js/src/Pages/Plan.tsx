@@ -5,15 +5,14 @@ import Button from '../components/Form/Button';
 import Card from '../components/Card';
 import Icon from '../components/Icon';
 import Badge from '../components/Badge';
-import {Plugin,License,LicenseIdProps } from '../types/DashboardTypes'
+import {License,LicenseIdProps } from '../types/DashboardTypes'
 
 interface LicenseProps extends LicenseIdProps {
     license: License;
-    plugins: Plugin[];
 }
 
 const Plan: React.FC<LicenseProps> = (props) =>{
-    const { license,licenseId, plugins } = props;
+    const { license,licenseId } = props;
     let [isOpen, setIsOpen] = useState(false);
 
     function closeModal() {
@@ -25,8 +24,8 @@ const Plan: React.FC<LicenseProps> = (props) =>{
     }
 
     return (
-        <MainLayout licenseId={licenseId} plugins={plugins}>
-            <div className="py-10">
+        <MainLayout licenseId={licenseId}>
+            <div className="pt-16">
                 <div className="flex flex-wrap sm:flex-nowrap gap-y-6 sm:gap-6 items-center">
                     <div className="w-full sm:w-6/12">
                         <Card>
@@ -72,7 +71,7 @@ const Plan: React.FC<LicenseProps> = (props) =>{
                                                 <div className="mt-2">
                                                     <div className="flex">
                                                         <span className="bg-red-100 text-red-500 p-3 rounded-xl mx-auto flex">
-                                                            <Icon name="danger" size={25} />
+                                                            <Icon name="danger" className="w-5 md:w-6" />
                                                         </span>
 
                                                     </div>

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\LicenseNotificationEvent;
-use App\Listeners\SendLicenseNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 use App\Models\License;
 use App\Models\Notifications;
 use Carbon\Carbon;
@@ -72,11 +70,9 @@ class LicenseController extends Controller
         return response()->noContent();
 
     }
-        public function deleteAll()
+    public function deleteAll()
     {
         Notifications::truncate();
         return response()->noContent();
     }
 }
-
-

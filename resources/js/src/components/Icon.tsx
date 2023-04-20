@@ -2,11 +2,13 @@ import React, { FC } from "react";
 
 interface IconProps {
       name: string;
-      size: number;
+      size?: number;
       color?: string;
+      className?: string;
 }
 
-const Icon: FC<IconProps> = ({ name, size, color }) => {
+const Icon: FC<IconProps> = ({ name, size, color, className }) => {
+
   const icon = () => {
     switch (name) {
             case "arrow-down": return <path fill={color || 'currentColor'} d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z" />;
@@ -38,12 +40,22 @@ const Icon: FC<IconProps> = ({ name, size, color }) => {
             case "desktop": return <path fill={color || 'currentColor'} d="M19,2H5A3,3,0,0,0,2,5V15a3,3,0,0,0,3,3H7.64l-.58,1a2,2,0,0,0,0,2,2,2,0,0,0,1.75,1h6.46A2,2,0,0,0,17,21a2,2,0,0,0,0-2l-.59-1H19a3,3,0,0,0,3-3V5A3,3,0,0,0,19,2ZM8.77,20,10,18H14l1.2,2ZM20,15a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V14H20Zm0-3H4V5A1,1,0,0,1,5,4H19a1,1,0,0,1,1,1Z" />;
             case "tablet": return <path fill={color || 'currentColor'} d="M17,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V5A3,3,0,0,0,17,2Zm1,17a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1Zm-5.29-2.71A1,1,0,0,0,11.8,16l-.18.06a.76.76,0,0,0-.18.09l-.15.12a1,1,0,0,0-.21.33,1,1,0,0,0,.21,1.09,1.46,1.46,0,0,0,.33.22,1,1,0,0,0,1.09-.22A1,1,0,0,0,13,17a.84.84,0,0,0-.08-.38A1.15,1.15,0,0,0,12.71,16.29Z" />;
             case "mobile": return <path fill={color || 'currentColor'} d="M16,2H8A3,3,0,0,0,5,5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V5A3,3,0,0,0,16,2Zm1,17a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V18H17Zm0-3H7V5A1,1,0,0,1,8,4h8a1,1,0,0,1,1,1Z" />;
-            case "global": return <path fill={color || 'currentColor'} d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-2.29-2.333A17.9 17.9 0 0 1 8.027 13H4.062a8.008 8.008 0 0 0 5.648 6.667zM10.03 13c.151 2.439.848 4.73 1.97 6.752A15.905 15.905 0 0 0 13.97 13h-3.94zm9.908 0h-3.965a17.9 17.9 0 0 1-1.683 6.667A8.008 8.008 0 0 0 19.938 13zM4.062 11h3.965A17.9 17.9 0 0 1 9.71 4.333 8.008 8.008 0 0 0 4.062 11zm5.969 0h3.938A15.905 15.905 0 0 0 12 4.248 15.905 15.905 0 0 0 10.03 11zm4.259-6.667A17.9 17.9 0 0 1 15.973 11h3.965a8.008 8.008 0 0 0-5.648-6.667z" />;
             default: return <path fill={color || 'currentColor'} d="" />;
         }
       };
 
-      return <svg viewBox="0 0 24 24" width={size} height={size}>{icon()}</svg>;
+      return (
+        <svg
+          className={className}
+          width={size ? size : 'auto'}
+          height={size ? size : 'auto'}
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+        >
+          {icon()}
+        </svg>
+      );
     };
 
     export default Icon;

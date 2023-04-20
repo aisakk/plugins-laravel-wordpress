@@ -51,7 +51,7 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
                         border="border-blue-100"
                         padding="p-2"
                     >
-                        <Icon name="eye" size={25} />
+                        <Icon name="eye" className="w-5 md:w-6" />
                     </Button>
                     <Button
                         background="bg-red-100 hover:bg-red-200"
@@ -62,7 +62,7 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
                             removeRequest(index);
                         }}
                     >
-                        <Icon name="trash" size={25} />
+                        <Icon name="trash" className="w-5 md:w-6" />
                     </Button>
                 </div>
             </div>

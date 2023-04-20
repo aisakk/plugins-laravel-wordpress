@@ -21,7 +21,7 @@ const DrawerMenuItem: React.FC<DrawerMenuItemProps> = ({ item }) => {
           item.active ? 'bg-primary text-white' : ''
         }`}
       >
-        <Icon name={item.icon} size={25} />
+        <Icon name={item.icon} className="w-5 md:w-6" />
         <span className="text-xs block">{item.title}</span>
       </Link>
     </Suspense>

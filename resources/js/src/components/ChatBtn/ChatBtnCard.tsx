@@ -68,7 +68,7 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
                                     changeIndexRequest(index, -1);
                                 }}
                             >
-                                <Icon name="arrow-up" size={25} />
+                                <Icon name="arrow-up" className="w-5 md:w-6" />
                             </Button>
                             <Button
                                 background="bg-blue-100 hover:bg-blue-200"
@@ -79,7 +79,7 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
                                     changeIndexRequest(index, 1);
                                 }}
                             >
-                                <Icon name="arrow-down" size={25} />
+                                <Icon name="arrow-down" className="w-5 md:w-6" />
                             </Button>
                         </div>
                     </h4>
@@ -107,7 +107,7 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
                     >
                         <Icon
                             name={buttonData.hidden ? "eye-off" : "eye"}
-                            size={25}
+                            className="w-5 md:w-6"
                         />
                     </Button>
                     <Button
@@ -119,7 +119,7 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
                             removeRequest(index);
                         }}
                     >
-                        <Icon name="trash" size={25} />
+                        <Icon name="trash" className="w-5 md:w-6" />
                     </Button>
                 </div>
             </div>

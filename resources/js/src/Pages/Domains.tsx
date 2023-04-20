@@ -119,7 +119,7 @@ const Domains: React.FC<DomainsProps> = (props) => {
 
 
     return (
-        <MainLayout licenseId={licenseId} plugins={plugins}>
+        <MainLayout licenseId={licenseId}>
 
             <div className="py-10">
                 <Card>
@@ -162,7 +162,7 @@ const Domains: React.FC<DomainsProps> = (props) => {
                                             <div className="mt-2">
                                                 <div className="flex">
                                                     <span className="bg-blue-100 text-blue-500 p-3 rounded-xl mx-auto flex">
-                                                        <Icon name="global" size={25}/>
+                                                        <Icon name="global" className="w-5 md:w-6"/>
                                                     </span>
 
                                                 </div>
@@ -248,9 +248,9 @@ const Domains: React.FC<DomainsProps> = (props) => {
                                 { item.active?<Badge background="bg-green-500">active</Badge>:<Badge background="bg-red-500">inactive</Badge> }
                             </div>
                             <div className="w-2/12">
-                                <div className="flex justify-center gap-4">
-                                    <Button background="bg-white hover:bg-slate-100" padding="p-2" onClick={() => openModalEdit(item)}><Icon name="pen" size={25}/></Button>
-                                    <Button background="bg-red-100 hover:bg-red-200 border-none" color="text-red-500" padding="p-2" onClick={() => openModalDelete(item)}><Icon name="trash" size={25}/></Button>
+                                <div className="flex justify-center gap-3">
+                                    <Button background="bg-white hover:bg-slate-100" padding="p-1 md:p-2" onClick={() => openModalEdit(item)}><Icon name="pen" className="w-5 md:w-6"/></Button>
+                                    <Button background="bg-red-100 hover:bg-red-200 border-none" color="text-red-500" padding="p-1 md:p-2" onClick={() => openModalDelete(item)}><Icon name="trash" className="w-5 lg:w-6"/></Button>
 
 
                                     <Transition appear show={isOpenEdit} as={Fragment}>
@@ -283,7 +283,7 @@ const Domains: React.FC<DomainsProps> = (props) => {
                                                     <div className="mt-2">
                                                         <div className="flex">
                                                             <span className="bg-blue-100 text-blue-500 p-3 rounded-xl mx-auto flex">
-                                                                <Icon name="global" size={25}/>
+                                                                <Icon name="global" className="w-5 md:w-6"/>
                                                             </span>
 
                                                         </div>
@@ -374,7 +374,7 @@ const Domains: React.FC<DomainsProps> = (props) => {
                                                     <div className="mt-2">
                                                         <div className="flex">
                                                             <span className="bg-blue-100 text-blue-500 p-3 rounded-xl mx-auto flex">
-                                                                <Icon name="global" size={25}/>
+                                                                <Icon name="global" className="w-5 md:w-6"/>
                                                             </span>
 
                                                         </div>

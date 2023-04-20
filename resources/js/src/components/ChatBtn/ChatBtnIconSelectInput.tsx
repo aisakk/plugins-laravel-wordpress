@@ -78,7 +78,7 @@ const ChatBtnIconSelect = ({ icon, onChange }) => {
                                         <div
                                             className={`flex h-full w-full justify-center items-center`}
                                         >
-                                            <Icon name={item.value} size={25} />
+                                            <Icon name={item.value} className="w-5 md:w-6" />
                                         </div>
                                         {checked && (
                                             <div className="absolute right-0 top-0 text-green-500">

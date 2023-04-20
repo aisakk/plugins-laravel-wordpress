@@ -47,7 +47,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = (props) => {
                     </p>
                 </div>
                 <div>
-                    <Icon name="arrow-down" size={25}/>
+                    <Icon name="arrow-down" className="w-5 md:w-6"/>
                 </div>
                 </Popover.Button>
                 <Transition
