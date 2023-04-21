@@ -11,14 +11,13 @@ class Plugin extends Model
 
     protected $fillable = [
         'name',
-        'readme_path',
+        'readme',
+        'description',
         'price',
-        'image',
-        'link',
         'is_new',
         'is_acquired',
-        'rates',
-        'reviews',
-        'active',
+        'images',
+        'pricing',
+        'plugin_info',
     ];
 }
