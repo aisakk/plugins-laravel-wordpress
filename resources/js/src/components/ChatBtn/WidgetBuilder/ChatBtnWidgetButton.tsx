@@ -3,7 +3,7 @@ import { ChatBtnProps } from "../../../types/ChatBtnTypes";
 import Icon from "../../Icon";
 import { css } from "@emotion/css";
 import { nanoid } from "nanoid";
-
+import Modal from "../Modal/Modal";
 interface ChatBtnWidgetButtonProps {
     buttonData: ChatBtnProps;
     leftSide: boolean;
@@ -16,6 +16,7 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
     let [buttonClass, setButtonClass] = useState("btn" + nanoid());
     let [labelClass, setLabelClass] = useState("label" + nanoid());
     let [mainClass, setMainClass] = useState("main" + nanoid());
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
     const mediaQueries = {
         desktop: "@media (min-width: 1024px)",
@@ -103,6 +104,17 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
         }
     `;
 
+
+    const handleButtonClick = (event) => {
+        const isTablet = window.matchMedia("(min-width: 768px) and (max-width: 1023px)").matches;
+        if (isTablet) {
+          window.open(getFormattedLink(), "_blank");
+        } else {
+          event.preventDefault();
+          setIsModalVisible(true);
+        }
+      };
+
     function getFormattedLink() {
         let userContent = buttonData.target;
         switch (buttonData.icon) {
@@ -131,6 +143,7 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
                 href={getFormattedLink()}
                 target="_blank"
                 className={buttonClass}
+                onClick={handleButtonClick}
             >
                 <Icon
                     name={buttonData.icon}
@@ -138,6 +151,10 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
                     color={buttonData.iconColor}
                 />
             </a>
+            <Modal
+        isVisible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+      />
         </div>
     );
 };

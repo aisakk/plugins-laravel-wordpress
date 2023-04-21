@@ -792,6 +792,10 @@ video {
   margin-bottom: 1rem;
 }
 
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
 .mb-6 {
   margin-bottom: 1.5rem;
 }
@@ -898,10 +902,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mb-5 {
-  margin-bottom: 1.25rem;
 }
 
 .block {
@@ -1156,6 +1156,10 @@ video {
   width: 1.75rem;
 }
 
+.w-72 {
+  width: 18rem;
+}
+
 .w-8 {
   width: 2rem;
 }
@@ -1186,10 +1190,6 @@ video {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-72 {
-  width: 18rem;
 }
 
 .min-w-max {
@@ -3307,10 +3307,6 @@ input[type="color"]::-webkit-color-swatch {
     width: auto;
   }
 
-  .sm\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .sm\:flex-col {
     flex-direction: column;
   }
@@ -3394,24 +3390,12 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 @media (min-width: 768px) {
-  .md\:fixed {
-    position: fixed;
-  }
-
-  .md\:right-0 {
-    right: 0px;
-  }
-
   .md\:col-span-1 {
     grid-column: span 1 / span 1;
   }
 
   .md\:mb-3 {
     margin-bottom: 0.75rem;
-  }
-
-  .md\:mt-8 {
-    margin-top: 2rem;
   }
 
   .md\:flex {
@@ -3462,14 +3446,6 @@ input[type="color"]::-webkit-color-swatch {
     width: 66.666667%;
   }
 
-  .md\:w-64 {
-    width: 16rem;
-  }
-
-  .md\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .md\:flex-col {
     flex-direction: column;
   }
@@ -3487,10 +3463,6 @@ input[type="color"]::-webkit-color-swatch {
     padding: 0.5rem;
   }
 
-  .md\:pl-12 {
-    padding-left: 3rem;
-  }
-
   .md\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
@@ -3504,10 +3476,6 @@ input[type="color"]::-webkit-color-swatch {
 
   .lg\:right-0 {
     right: 0px;
-  }
-
-  .lg\:mt-0 {
-    margin-top: 0px;
   }
 
   .lg\:block {
@@ -3540,10 +3508,6 @@ input[type="color"]::-webkit-color-swatch {
 
   .lg\:max-w-sm {
     max-width: 24rem;
-  }
-
-  .lg\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .lg\:flex-nowrap {
@@ -3579,10 +3543,6 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 @media (min-width: 1280px) {
-  .xl\:fixed {
-    position: fixed;
-  }
-
   .xl\:h-\[550px\] {
     height: 550px;
   }

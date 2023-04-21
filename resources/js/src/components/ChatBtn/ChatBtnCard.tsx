@@ -13,7 +13,7 @@ import UserBasedSpacingInput from "../Form/SpacingInput/UserBasedSpacingInput";
 import ChatBtnIconContent from "./ChatBtnIconContent";
 import ResponsiveRangeInput from "../Form/ResponsiveRangeInput";
 import Select from "../Form/Select";
-
+import { QRCode, Space  } from "antd";
 interface ChatBtnCardProps {
     index: number;
     buttonData: ChatBtnProps;
@@ -51,7 +51,22 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
         ].toLowerCase() as keyof ChatBtnWidgetProps;
         changeAreaRequest(index, areaKey);
     }
-
+   /*  function getFormattedLinkQRCode() {
+        let userContent = buttonData.target;
+        switch (buttonData.icon) {
+            case "whatsapp":
+                return `https://api.whatsapp.com/send?phone=${userContent}`;
+            case "facebook":
+                return `https://www.facebook.com/${userContent}`;
+            case "instagram":
+                return `https://www.instagram.com/${userContent}`;
+            case "phone":
+                return `tel:${userContent}`;
+            case "email":
+                return `mail:${userContent}`;
+        }
+        return userContent;
+    } */
     return (
         <Card>
             <div className="flex flex-col justify-between items-start border-b border-solid border-slate-400 pb-4">
@@ -126,6 +141,7 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
 
             </div>
             <div className="py-6">
+                {/* Select the content icon and input with label */}
                 <ChatBtnIconContent
                     icon={buttonData.icon}
                     value={buttonData.target}
