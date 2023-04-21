@@ -27,6 +27,7 @@ class DashboardController extends Controller
     public function index($licenseId)
     {
         $license = License::findOrFail($licenseId);
+        // $payments=$license->payment;
         $plugins = Plugin::all();
         $pluginsArray = PluginResource::collection($plugins)->toArray(request());
         $licenseResource = (new LicenseResource($license))->toArray(request());
@@ -83,7 +84,6 @@ class DashboardController extends Controller
         $plugin["readme"]=nl2br($plugin["readme"]);
         $plugins = Plugin::all();
 
-        // return $plugin;
         return Inertia::render('Pages/PluginDetails', ['plugins'=>$plugins,'plugin'=>$plugin]);
     }
 }

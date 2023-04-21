@@ -39,9 +39,6 @@ export interface PluginInfo{
     tags:Tag[];
     rating:Rating[];
 }
-export interface PluginImage{
-    image:[]
-}
 export interface Plugin{
     id:number;
     name: string;
@@ -50,7 +47,7 @@ export interface Plugin{
     price: number;
     is_new: boolean,
     is_acquired: boolean,
-    images: PluginImage;
+    images: [];
     pricing: Plan[];
     plugin_info: PluginInfo;
 }

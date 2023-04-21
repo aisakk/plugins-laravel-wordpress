@@ -48,6 +48,8 @@ export interface ChatBtnWidgetProps {
     "left-top": ChatBtnProps[];
     "left-center": ChatBtnProps[];
     "left-bottom": ChatBtnProps[];
+    "center-top": ChatBtnProps[];
+    "center-bottom": ChatBtnProps[];
     "right-top": ChatBtnProps[];
     "right-center": ChatBtnProps[];
     "right-bottom": ChatBtnProps[];
@@ -57,6 +59,8 @@ export const defaultChatBtnWidgetProps = (): ChatBtnWidgetProps => ({
     "left-top": [],
     "left-center": [],
     "left-bottom": [],
+    "center-top": [],
+    "center-bottom": [],
     "right-top": [],
     "right-center": [],
     "right-bottom": [],

@@ -39,6 +39,10 @@ class License extends Model
     {
         return $this->belongsTo(Plugin::class);
     }
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
     public function logs()
     {
         return $this->hasMany(Log::class);

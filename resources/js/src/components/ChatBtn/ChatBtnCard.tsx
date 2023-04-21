@@ -40,6 +40,8 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
         "Left-Top",
         "Left-Center",
         "Left-Bottom",
+        "Center-Top",
+        "Center-Bottom",
         "Right-Top",
         "Right-Center",
         "Right-Bottom",
