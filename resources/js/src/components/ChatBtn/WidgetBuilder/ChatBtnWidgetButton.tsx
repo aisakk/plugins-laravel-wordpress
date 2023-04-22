@@ -21,13 +21,11 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
     let [mainClass, setMainClass] = useState("main" + nanoid());
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [qrCodeImageURL, setQRCodeImageURL] = useState(null);
-    const qrCodeRef = useRef(null);
     const mediaQueries = {
         desktop: "@media (min-width: 1024px)",
         tablet: "@media (min-width: 768px) and (max-width: 1023px)",
         mobile: "@media (max-width: 767px)",
     };
-
     let dynamicCSS = `
         .${mainClass} {
             display: flex;
@@ -107,8 +105,6 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
             }
         }
     `;
-
-
     const handleButtonClick = (event) => {
         const isTablet = window.matchMedia("(min-width: 768px) and (max-width: 1023px)").matches;
         if (isTablet) {
@@ -139,9 +135,10 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
         return userContent;
     }
     const generateQRCodeImage = () => {
-        if (qrCodeRef.current) {
+        const qrCodeElement = document.getElementById(mainClass)
+        if (qrCodeElement) {
           domtoimage
-            .toPng(qrCodeRef.current)
+            .toPng(qrCodeElement)
             .then((dataUrl) => {
               setQRCodeImageURL(dataUrl);
             })
@@ -151,9 +148,79 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
         }
       };
 
+      const dynamicJS = `
+      let qrCodeImageURL = null;
+      let buttonData = ${JSON.stringify(buttonData)};
+      let mainClass = document.querySelector('.${mainClass}');
+      let enlace = mainClass.querySelector('.enlace');
+      let qrCodeImage = mainClass.querySelector('.qr-code-image');
+      let qrCodeModal = mainClass.querySelector('.qr-code-modal');
+
+      function getFormattedLink() {
+        let userContent = buttonData.target;
+        switch (buttonData.icon) {
+          case 'whatsapp':
+            return 'https://api.whatsapp.com/send?phone=' + userContent;
+          case 'facebook':
+            return 'https://www.facebook.com/' + userContent;
+          case 'instagram':
+            return 'https://www.instagram.com/' + userContent;
+          case 'phone':
+            return 'tel:' + userContent;
+          case 'email':
+            return 'mailto:' + userContent;
+        }
+        return userContent;
+      }
+
+      function handleButtonClick(event) {
+        const isTablet = window.matchMedia(
+          '(min-width: 768px) and (max-width: 1023px)'
+        ).matches;
+        if (isTablet) {
+          window.open(getFormattedLink(), '_blank');
+        } else {
+          event.preventDefault();
+          qrCodeModal.style.display = 'block';
+        }
+        if (!qrCodeImageURL) {
+          generateQRCodeImage();
+        }
+      }
+
+      const generateQRCodeImage = () => {
+        const qrCodeElement = document.getElementById(mainClass)
+        if (qrCodeElement) {
+          domtoimage
+            .toPng(qrCodeElement)
+            .then((dataUrl) => {
+                qrCodeImage.src = dataUrl;
+            })
+            .catch((error) => {
+              console.error("Error al convertir el QRCode en imagen:", error);
+            });
+        }
+      };
+
+      enlace.addEventListener('click', (e) => {
+        handleButtonClick(e);
+      });
+
+      qrCodeModal.addEventListener('click', (e) => {
+        if (e.target === qrCodeModal) {
+          qrCodeModal.style.display = 'none';
+        }
+      });
+    `;
+
+
     return (
         <div className={mainClass}>
+                    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+        </head>
             <style>{dynamicCSS}</style>
+
             {buttonData.label && (
                 <span className={labelClass}>{buttonData.label}</span>
             )}
@@ -161,8 +228,9 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
             <a
                 href={getFormattedLink()}
                 target="_blank"
-                className={buttonClass}
+                className={`${buttonClass} enlace`}
                 onClick={handleButtonClick}
+
             >
                 <Icon
                     name={buttonData.icon}
@@ -170,20 +238,23 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
                     color={buttonData.iconColor}
                 />
             </a>
-            <Modal
+            <Modal className="qr-code-modal"
         isVisible={isModalVisible}
         onClose={() => setIsModalVisible(false)}
       >
         <Space direction="vertical" align="center">
-            <div ref={qrCodeRef} className="flex">
+            <div id={mainClass}  className="flex">
                  <QRCode value={getFormattedLink()}/>
             </div>
-                {qrCodeImageURL && (
-                <img src={qrCodeImageURL} alt="QRCode generado" />
+                {qrCodeImageURL && (<>
+                    <img src={qrCodeImageURL} className="qr-code-image" alt="QRCode generado" />
+                </>
             )}
         </Space>
       </Modal>
-        </div>
+      <script>{dynamicJS}</script>
+    </div>
+
     );
 };
 
