@@ -21,6 +21,8 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
     let [mainClass, setMainClass] = useState("main" + nanoid());
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [qrCodeImageURL, setQRCodeImageURL] = useState(null);
+    const canvas = document.querySelector('canvas');
+
     const mediaQueries = {
         desktop: "@media (min-width: 1024px)",
         tablet: "@media (min-width: 768px) and (max-width: 1023px)",
@@ -147,12 +149,12 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
             });
         }
       };
-
       const dynamicJS = `
       let qrCodeImageURL = null;
       let buttonData = ${JSON.stringify(buttonData)};
       let mainClass = document.querySelector('.${mainClass}');
       let enlace = mainClass.querySelector('.enlace');
+      let canva = document.querySelector('canvas');
       let qrCodeImage = mainClass.querySelector('.qr-code-image');
       let qrCodeModal = mainClass.querySelector('.qr-code-modal');
 
@@ -246,10 +248,7 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
             <div id={mainClass}  className="flex">
                  <QRCode value={getFormattedLink()}/>
             </div>
-                {qrCodeImageURL && (<>
-                    <img src={qrCodeImageURL} className="qr-code-image" alt="QRCode generado" />
-                </>
-            )}
+                <img src={canvas?.toDataURL()} className="qr-code-image" alt="QRCode generado" />
         </Space>
       </Modal>
       <script>{dynamicJS}</script>
