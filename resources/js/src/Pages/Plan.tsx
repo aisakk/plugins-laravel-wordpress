@@ -5,10 +5,11 @@ import Button from '../components/Form/Button';
 import Card from '../components/Card';
 import Icon from '../components/Icon';
 import Badge from '../components/Badge';
-import {License,LicenseIdProps } from '../types/DashboardTypes'
+import { License,LicenseIdProps,Plugin } from '../types/DashboardTypes'
 
 interface LicenseProps extends LicenseIdProps {
     license: License;
+    // plugin:Plugin;
 }
 
 const Plan: React.FC<LicenseProps> = (props) =>{

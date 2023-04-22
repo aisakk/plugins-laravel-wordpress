@@ -14,6 +14,14 @@ const positions = [
         value: "left-bottom",
     },
     {
+        name: "Center Top",
+        value: "center-top",
+    },
+    {
+        name: "Center Bottom",
+        value: "center-bottom",
+    },
+    {
         name: "Right Top",
         value: "right-top",
     },

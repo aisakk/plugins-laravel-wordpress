@@ -1,14 +1,55 @@
+export interface FeatureItem{
+    name:string;
+    type:string;
+}
+export interface Feature{
+    name:string;
+    items:FeatureItem[];
+}
+export interface Plan{
+    name:string;
+    description:string;
+    price:number;
+    regular_price:number;
+    renew_price:number;
+    discount:number;
+    isMostPopular:boolean;
+    features:Feature[];
+}
+export interface Rating{
+    name:string;
+    count:number;
+    percentage:number;
+}
+export interface Tag{
+    name:string;
+}
+export interface Details{
+    version?:string;
+    last_updated?:string;
+    active_installations?:string;
+    wordpress_version?:string;
+    tested_up_to?:string;
+    php_version?:string;
+    languages?:string;
+    oficial_website?:string
+}
+export interface PluginInfo{
+    details:Details;
+    tags:Tag[];
+    rating:Rating[];
+}
 export interface Plugin{
     id:number;
     name: string;
+    readme?:string;
     description: string;
     price: number;
-    image: string;
     is_new: boolean,
     is_acquired: boolean,
-    expires_on: string;
-    rates: number;
-    reviews: number;
+    images: [];
+    pricing: Plan[];
+    plugin_info: PluginInfo;
 }
 export interface Domain{
     id:number;

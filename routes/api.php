@@ -14,3 +14,5 @@ Route::middleware(['auth:sanctum'])->group(function(){
 Route::post('/license/store', [LicenseController::class, 'store'])->name('license.store');
 Route::post('/license/create', [LicenseController::class, 'create'])->name('license.create');
 Route::post('/plugins/update-info', [PluginController::class, 'updatePluginInfo'])->name('plugins.update-info');
+Route::get('/plugins/build', [PluginController::class, 'getJsonData']);
+Route::get('/plugins/readme', [PluginController::class, 'getReadme']);

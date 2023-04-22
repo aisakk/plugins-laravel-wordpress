@@ -567,6 +567,10 @@ video {
   visibility: visible;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 .collapse {
   visibility: collapse;
 }
@@ -709,6 +713,10 @@ video {
 
 .m-2 {
   margin: 0.5rem;
+}
+
+.m-6 {
+  margin: 1.5rem;
 }
 
 .-mx-3 {
@@ -902,6 +910,10 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
 }
 
 .block {

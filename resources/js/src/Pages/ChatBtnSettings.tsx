@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import MainLayout from "../layouts/MainLayout";
-import { Plugin, License, LicenseMeta } from "../types/DashboardTypes";
+import { License, LicenseMeta } from "../types/DashboardTypes";
 import {
     ChatBtnProps,
     defaultChatBtnProps,
@@ -21,13 +21,11 @@ import Alert from "../components/Alert/Alert";
 import { usePage } from "@inertiajs/inertia-react";
 interface LicenseProps {
     license: License;
-    plugins: Plugin[];
     license_meta: LicenseMeta;
 }
 
 const ChatBtnSettings: React.FC<LicenseProps> = ({
     license,
-    plugins,
     license_meta,
 }) => {
     const [widgetData, setWidgetData] = useState(defaultChatBtnWidgetProps);
@@ -91,6 +89,8 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
             ...defaultChatBtnWidgetProps,
             "left-top": [],
             "right-top": [],
+            "center-top": [],
+            "center-bottom": [],
             "left-bottom": [],
             "right-bottom": [],
         };
@@ -300,7 +300,7 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
         convertToWidgetData("left-top", json);
     }, []);
     return (
-        <MainLayout licenseId={license.id} plugins={plugins}>
+        <MainLayout licenseId={license.id}>
             <div className="pt-10">
                 <div>
                     <div className="flex flex-wrap xl:flex-nowrap gap-6 w-full">
@@ -326,11 +326,11 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
                             </Button>
                         </ChatBtnPreview>
                         {errors && Object.keys(errors).length > 0 && (
-                        <Alert error={errors} show={!showAlert} onClose={handleAlert} />
-                    )}
-                    {success && Object.keys(success).length > 0 && (
-                        <Alert success={success} show={!showAlert} onClose={handleAlert} />
-                    )}
+                            <Alert error={errors} show={!showAlert} onClose={handleAlert} />
+                        )}
+                        {success && Object.keys(success).length > 0 && (
+                            <Alert success={success} show={!showAlert} onClose={handleAlert} />
+                        )}
 
                     </div>
                 </div>
