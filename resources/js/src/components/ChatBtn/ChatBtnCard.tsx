@@ -13,7 +13,7 @@ import UserBasedSpacingInput from "../Form/SpacingInput/UserBasedSpacingInput";
 import ChatBtnIconContent from "./ChatBtnIconContent";
 import ResponsiveRangeInput from "../Form/ResponsiveRangeInput";
 import Select from "../Form/Select";
-import { QRCode, Space  } from "antd";
+
 interface ChatBtnCardProps {
     index: number;
     buttonData: ChatBtnProps;

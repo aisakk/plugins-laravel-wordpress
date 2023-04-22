@@ -64,13 +64,12 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
             duration: 5,
         });
     }
-
     function requestWidgetSave() {
         console.log(
             renderToString(<ChatBtnWidgetBuilder widgetData={widgetData} />)
         );
-            console.log(widgetData)
-        //   doStuff();
+
+     /*    //   doStuff();
         setProcessing(true)
         const payload: Record<string, string> = {
             meta_key: "settings",
@@ -84,7 +83,7 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
             onError: ()=>{
 
             }
-        });
+        }); */
 
     }
     function convertToWidgetData(property: keyof ChatBtnWidgetProps, json) {

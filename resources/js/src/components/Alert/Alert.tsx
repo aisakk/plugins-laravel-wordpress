@@ -1,9 +1,9 @@
 import Icon from "../Icon";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 
 interface Props{
-    success?: string;
-    error?:string;
+    success?: string | Object | any;
+    error?:string | Object | any;
     onClose: ()=>void;
     show: boolean;
 }

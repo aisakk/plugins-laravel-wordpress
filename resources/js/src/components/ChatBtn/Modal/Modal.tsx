@@ -17,7 +17,7 @@ const Modal = ({ children,isVisible, onClose }) => {
       >
         <div
           style={{
-            backgroundColor: "#fefefe",
+            //backgroundColor: "#fefefe",
             margin: "15% auto",
             padding: "20px",
             border: "1px solid #888",

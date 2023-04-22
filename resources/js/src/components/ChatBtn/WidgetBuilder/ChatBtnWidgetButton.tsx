@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { ChatBtnProps } from "../../../types/ChatBtnTypes";
 import Icon from "../../Icon";
 import { css } from "@emotion/css";
 import { nanoid } from "nanoid";
 import Modal from "../Modal/Modal";
+import { QRCode, Space  } from "antd";
+import domtoimage from "dom-to-image";
+
 interface ChatBtnWidgetButtonProps {
     buttonData: ChatBtnProps;
     leftSide: boolean;
@@ -17,7 +20,8 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
     let [labelClass, setLabelClass] = useState("label" + nanoid());
     let [mainClass, setMainClass] = useState("main" + nanoid());
     const [isModalVisible, setIsModalVisible] = useState(false);
-
+    const [qrCodeImageURL, setQRCodeImageURL] = useState(null);
+    const qrCodeRef = useRef(null);
     const mediaQueries = {
         desktop: "@media (min-width: 1024px)",
         tablet: "@media (min-width: 768px) and (max-width: 1023px)",
@@ -113,6 +117,9 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
           event.preventDefault();
           setIsModalVisible(true);
         }
+        if (!qrCodeImageURL) {
+            generateQRCodeImage();
+        }
       };
 
     function getFormattedLink() {
@@ -131,6 +138,18 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
         }
         return userContent;
     }
+    const generateQRCodeImage = () => {
+        if (qrCodeRef.current) {
+          domtoimage
+            .toPng(qrCodeRef.current)
+            .then((dataUrl) => {
+              setQRCodeImageURL(dataUrl);
+            })
+            .catch((error) => {
+              console.error("Error al convertir el QRCode en imagen:", error);
+            });
+        }
+      };
 
     return (
         <div className={mainClass}>
@@ -154,7 +173,16 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
             <Modal
         isVisible={isModalVisible}
         onClose={() => setIsModalVisible(false)}
-      />
+      >
+        <Space direction="vertical" align="center">
+            <div ref={qrCodeRef} className="flex">
+                 <QRCode value={getFormattedLink()}/>
+            </div>
+                {qrCodeImageURL && (
+                <img src={qrCodeImageURL} alt="QRCode generado" />
+            )}
+        </Space>
+      </Modal>
         </div>
     );
 };
