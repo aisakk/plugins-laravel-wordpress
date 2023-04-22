@@ -607,6 +607,11 @@ video {
   bottom: 0px;
 }
 
+.inset-y-3 {
+  top: 0.75rem;
+  bottom: 0.75rem;
+}
+
 .-left-8 {
   left: -2rem;
 }
@@ -689,6 +694,10 @@ video {
 
 .z-50 {
   z-index: 50;
+}
+
+.z-20 {
+  z-index: 20;
 }
 
 .col-span-1 {

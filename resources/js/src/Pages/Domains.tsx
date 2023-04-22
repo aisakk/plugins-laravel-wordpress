@@ -131,9 +131,8 @@ const Domains: React.FC<DomainsProps> = (props) => {
                         <div>
                             <Button onClick={ openModalCreate }>Add</Button>
 
-
                             <Transition appear show={isOpenCreate} as={Fragment}>
-                                <Dialog as="div" className="relative z-10" onClose={closeModalCreate}>
+                                <Dialog as="div" className="relative z-50 inset-0" onClose={closeModalCreate}>
                                     <Transition.Child
                                         as={Fragment}
                                         enter="ease-out duration-300"
@@ -254,7 +253,7 @@ const Domains: React.FC<DomainsProps> = (props) => {
 
 
                                     <Transition appear show={isOpenEdit} as={Fragment}>
-                                        <Dialog as="div" className="relative z-10" onClose={closeModalEdit}>
+                                        <Dialog as="div" className="relative z-50" onClose={closeModalEdit}>
                                             <Transition.Child
                                                 as={Fragment}
                                                 enter="ease-out duration-300"
@@ -264,7 +263,7 @@ const Domains: React.FC<DomainsProps> = (props) => {
                                                 leaveFrom="opacity-100"
                                                 leaveTo="opacity-0"
                                             >
-                                            <div className="fixed inset-0 bg-black bg-opacity-25" />
+                                            <div className="fixed inset-0 bg-black bg-opacity-20" />
                                             </Transition.Child>
 
                                             <div className="fixed inset-0 overflow-y-auto">
