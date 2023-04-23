@@ -30,6 +30,38 @@ const ChatBtnWidgetBuilder: React.FC<ChatBtnWidgetBuilderProps> = ({
                 className={css`
                     ${areaBase};
                     top: 0;
+                    left: 50%;
+                    transform: translate(-50%, 0);
+                `}
+            >
+                {widgetData["center-top"].map((item, index) => (
+                    <ChatBtnWidgetButton
+                        key={index}
+                        buttonData={item}
+                        leftSide={true}
+                    />
+                ))}
+            </div>
+            <div
+                className={css`
+                    ${areaBase};
+                    bottom: 0;
+                    left: 50%;
+                    transform: translate(-50%, 0);
+                `}
+            >
+                {widgetData["center-bottom"].map((item, index) => (
+                    <ChatBtnWidgetButton
+                        key={index}
+                        buttonData={item}
+                        leftSide={true}
+                    />
+                ))}
+            </div>
+            <div
+                className={css`
+                    ${areaBase};
+                    top: 0;
                     left: 0;
                     align-items: start;
                 `}
