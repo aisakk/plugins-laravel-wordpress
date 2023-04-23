@@ -83,7 +83,6 @@ class DashboardController extends Controller
         $plugin["images"]=explode(",",$plugin["images"]);
         $plugin["readme"]=nl2br($plugin["readme"]);
         $plugins = Plugin::all();
-
         return Inertia::render('Pages/PluginDetails', ['plugins'=>$plugins,'plugin'=>$plugin]);
     }
 }

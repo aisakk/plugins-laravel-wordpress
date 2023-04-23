@@ -41,7 +41,7 @@ const PluginDetails: React.FC<LicenseProps> = (props) => {
                                         <p>{plugin.plugin_info.details.last_updated}</p>
                                     </div>
                                     <div>
-                                        <h6 className="pb-1 font-bold text-sm">Official Site</h6>
+                                     {/*    <h6 className="pb-1 font-bold text-sm">Official Site</h6> */}
                                         <p>{plugin.plugin_info.details.oficial_website}</p>
                                     </div>
                                 </div>
@@ -84,10 +84,10 @@ const PluginDetails: React.FC<LicenseProps> = (props) => {
                                     <div>Last updated:</div>
                                     <div>{plugin.plugin_info.details.last_updated}</div>
                                 </div>
-                                <div className="flex justify-between">
+                               {/*  <div className="flex justify-between">
                                     <div>Active installations:</div>
                                     <div>{plugin.plugin_info.details.active_installations}</div>
-                                </div>
+                                </div> */}
                                 <div className="flex justify-between">
                                     <div>WordPress Version:</div>
                                     <div>{plugin.plugin_info.details.wordpress_version}</div>
@@ -100,10 +100,10 @@ const PluginDetails: React.FC<LicenseProps> = (props) => {
                                     <div>PHP Version:</div>
                                     <div>{plugin.plugin_info.details.php_version}</div>
                                 </div>
-                                <div className="flex justify-between">
+                                {/* <div className="flex justify-between">
                                     <div>Languages:</div>
                                     <div><a href="" className="font-bold text-blue-400">{plugin.plugin_info.details.languages}</a></div>
-                                </div>
+                                </div> */}
                                 <div className="flex justify-between">
                                     <div className='w-24'>Tags:</div>
                                     <div className="flex gap-1 justify-end flex-wrap">
@@ -134,7 +134,7 @@ const PluginDetails: React.FC<LicenseProps> = (props) => {
 
                                 </div>
                             </div>
-                            <div className="pt-10">
+                            {/* <div className="pt-10">
                                 <h4 className="text-2xl font-bold">Support</h4>
                                 <div className="pt-6">
                                     <p>Issues resolved in last two months:</p>
@@ -142,7 +142,7 @@ const PluginDetails: React.FC<LicenseProps> = (props) => {
                                         <Button>View support forum</Button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
 
                     </div>
@@ -153,7 +153,6 @@ const PluginDetails: React.FC<LicenseProps> = (props) => {
                     <div>
                         <h6 className="text-3xl font-bold text-center">Screenshots</h6>
                     </div>
-
                     <Gallery images={ plugin.images } />
                 </div>
             </div>
