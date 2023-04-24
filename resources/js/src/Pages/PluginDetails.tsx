@@ -23,7 +23,7 @@ const PluginDetails: React.FC<LicenseProps> = (props) => {
         <div className="py-16 pb-10">
             <div className="w-full">
                 <div className="shadow-xl px-6 pt-6 pb-10 rounded-2xl bg-white relative">
-                    <img className="w-full rounded-xl h-60 object-cover" src="https://ps.w.org/tutor/assets/banner-1544x500.jpg?rev=2694448" alt="" />
+                    <img className="w-full rounded-xl h-80 object-cover" src="https://ps.w.org/tutor/assets/banner-1544x500.jpg?rev=2694448" alt="" />
                     <div className="flex flex-wrap sm:flex-nowrap justify-between gap-y-4 items-center pt-6">
                         <div className="w-full flex flex-wrap sm:flex-nowrap gap-6 justify-center items-center">
                             <span className="-mt-20 sm:mt-0">
@@ -41,8 +41,8 @@ const PluginDetails: React.FC<LicenseProps> = (props) => {
                                         <p>{plugin.plugin_info.details.last_updated}</p>
                                     </div>
                                     <div>
-                                     {/*    <h6 className="pb-1 font-bold text-sm">Official Site</h6> */}
-                                        <p>{plugin.plugin_info.details.oficial_website}</p>
+                                     {/*    <h6 className="pb-1 font-bold text-sm">Official Site</h6>
+                                        <p>{plugin.plugin_info.details.oficial_website}</p>*/}
                                     </div>
                                 </div>
                             </div>
