@@ -26,6 +26,7 @@ interface ChatBtnFormProps {
     onValueChange: any;
     selectedDevice: any;
     onDeviceChange: any;
+    redistributeMacBookStyleButtons: () => void;
 }
 
 const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
@@ -35,9 +36,21 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
     onValueChange,
     selectedDevice,
     onDeviceChange,
+    redistributeMacBookStyleButtons
 }) => {
     const [area, setArea] = useState("left-top");
     const [userType, setUserType] = useState(FormType.Basic);
+    const [styleType, setStyleType] = useState("fixed");
+
+    const macBookChatBtnProps = (selectedDevice: any): ChatBtnProps => ({
+        ...defaultChatBtnProps(),
+        buttonBorderRadius: {
+            desktop: [99, 99, 99, 99],
+            tablet: [99, 99, 99, 99],
+            mobile: [99, 99, 99, 99],
+        },
+        device: selectedDevice,
+    });
 
     const updateChatBtnWidgetProps = (
         index: number,
@@ -45,10 +58,18 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
         value: any
     ) => {
         const updatedChatBtnPropsArray = [...widgetData[area]];
-        updatedChatBtnPropsArray[index] = {
-            ...updatedChatBtnPropsArray[index],
-            [name]: value,
-        };
+        if (styleType === "macbook") {
+            updatedChatBtnPropsArray[index] = {
+                ...updatedChatBtnPropsArray[index],
+                [name]: value,
+                borderRadius: macBookChatBtnProps(selectedDevice).buttonBorderRadius,
+            };
+        } else {
+            updatedChatBtnPropsArray[index] = {
+                ...updatedChatBtnPropsArray[index],
+                [name]: value,
+            };
+        }
 
         setWidgetDataProperty(
             area as keyof ChatBtnWidgetProps,
@@ -58,9 +79,17 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
 
     const createNewButtonInCurrentArea = () => {
         const updatedChatBtnPropsArray = [...widgetData[area]];
-        const newChatBtnProps = defaultChatBtnProps();
-        newChatBtnProps.device = selectedDevice;
-        updatedChatBtnPropsArray.push(newChatBtnProps);
+        let newButtonProps;
+        if (styleType === "macbook") {
+
+            newButtonProps = macBookChatBtnProps(selectedDevice);
+            if (area === "center-top" || area === "center-bottom") {
+                updatedChatBtnPropsArray.push(newButtonProps);
+            }
+        } else {
+            newButtonProps = defaultChatBtnProps();
+            updatedChatBtnPropsArray.push(newButtonProps);
+        }
 
 
         setWidgetDataProperty(
@@ -68,6 +97,8 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
             updatedChatBtnPropsArray
         );
     };
+
+
 
     const removeButtonOfCurrentArea = (index: number) => {
         const updatedChatBtnPropsArray = [...widgetData[area]];
@@ -136,7 +167,35 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
                             }}
                             selectedArea={area}
                         />
+                        <div className="flex gap-3 pt-4">
+                            <Button
+                                isSelected={styleType === "fixed"}
+                                onClick={() => {
+                                    setStyleType("fixed");
+                                }}
+                            >
+                                Fixed Style
+                            </Button>
+                            <Button
+                                isSelected={styleType === "macbook"}
+                                onClick={() => {
+                                    setStyleType("macbook");
+                                    redistributeMacBookStyleButtons()
+                                }}
+                            >
+                                MacBook Style
+                            </Button>
+                            <Button
+                                isSelected={styleType === "floating"}
+                                onClick={() => {
+                                    setStyleType("floating");
+                                }}
+                            >
+                                Floating Style
+                            </Button>
+                        </div>
                     </div>
+
                 </div>
                 {/* <div className="pb-10">
                     <div className="flex justify-between items-center border-b border-solid border-slate-400 pb-4">

@@ -36,6 +36,7 @@ const ChatBtnPreview: React.FC<PreviewProps> = ({ children, widgetData,selectedD
             (btn) => btn.device === selectedDevice
         ),
     };
+
     return (
         <div className="w-full md:w-10/12 lg:w-4/12 xl:w-4/12 lg:fixed lg:right-0 lg:pl-12 lg:pr-6">
             <div className="shadow-xl p-6 bg-white rounded-2xl">

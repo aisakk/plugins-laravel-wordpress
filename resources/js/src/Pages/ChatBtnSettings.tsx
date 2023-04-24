@@ -6,12 +6,10 @@ import {
     defaultChatBtnProps,
     ChatBtnWidgetProps,
     defaultChatBtnWidgetProps,
+    BreakpointValues
 } from "../types/ChatBtnTypes";
-import { Inertia } from "@inertiajs/inertia";
 import { notification } from "antd";
 import { renderToString } from "react-dom/server";
-import type { NotificationPlacement } from "antd/es/notification/interface";
-import { router } from "@inertiajs/react";
 
 import ChatBtnPreview from "../components/ChatBtn/ChatBtnPreview";
 import Button from "../components/Form/Button";
@@ -19,14 +17,14 @@ import ChatBtnForm from "../components/ChatBtn/ChatBtnForm";
 import ChatBtnWidgetBuilder from "../components/ChatBtn/WidgetBuilder/ChatBtnWidgetBuilder";
 import Alert from "../components/Alert/Alert";
 import { usePage } from "@inertiajs/inertia-react";
-import { BreakpointValues } from "../types/ChatBtnTypes";
-import DeviceSwitchButtons from "../components/Form/DeviceSwitchButtons";
+
 
 interface LicenseProps {
     license: License;
     license_meta: LicenseMeta;
     values: BreakpointValues<number>;
     onValueChange: (newValues: BreakpointValues<number>) => void;
+    updateWidgetData: (newWidgetData: ChatBtnWidgetProps) => void;
 }
 
 const ChatBtnSettings: React.FC<LicenseProps> = ({
@@ -38,13 +36,60 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
     const [selectedDevice, setSelectedDevice] = useState<"desktop" | "tablet" | "mobile">("desktop");
 
     const [widgetData, setWidgetData] = useState(defaultChatBtnWidgetProps);
-    const [api, contextHolder] = notification.useNotification();
     const Context = React.createContext({ name: "Default" });
     const json = JSON.parse(license_meta.meta_value);
     const contextValue = useMemo(() => ({ name: "Ant Design" }), []);
     const {errors, success} = usePage().props
     const [showAlert, setShowAlert] = useState(false);
     const [processing, setProcessing] = useState(false);
+
+    const updateWidgetData = (newWidgetData: ChatBtnWidgetProps) => {
+        setWidgetData(newWidgetData);
+      };
+    const redistributeMacBookStyleButtons = () => {
+        const allButtons = [
+            ...widgetData["left-top"],
+            ...widgetData["left-bottom"],
+            ...widgetData["right-top"],
+            ...widgetData["right-bottom"],
+            ...widgetData["left-center"],
+            ...widgetData["center-top"],
+            ...widgetData["center-bottom"],
+            ...widgetData["right-center"],
+        ];
+
+        const macBookStyleButtons = allButtons.map((button) => ({
+            ...button,
+            buttonBorderRadius: {
+                desktop: [99, 99, 99, 99],
+                tablet: [99, 99, 99, 99],
+                mobile: [99, 99, 99, 99],
+            },
+        }));
+
+        const centerTopButtons = macBookStyleButtons.slice(
+            0,
+            Math.ceil(macBookStyleButtons.length / 2)
+        );
+        const centerBottomButtons = macBookStyleButtons.slice(
+            Math.ceil(macBookStyleButtons.length / 2)
+        );
+
+        const updatedWidgetData: ChatBtnWidgetProps = {
+            ...widgetData,
+            "center-top": centerTopButtons,
+            "center-bottom": centerBottomButtons,
+        };
+
+        Object.keys(updatedWidgetData).forEach((key) => {
+            if (key !== "center-top" && key !== "center-bottom") {
+                updatedWidgetData[key as keyof ChatBtnWidgetProps] = [];
+            }
+        });
+
+        updateWidgetData(updatedWidgetData);
+    };
+
 
     const handleDeviceChange = (newDevice: "desktop" | "tablet" | "mobile") => {
         setSelectedDevice(newDevice);
@@ -63,40 +108,11 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
         });
     };
 
-    function doStuff() {
-        api.success({
-            message: `Widget Saved Successfully!`,
-            description: (
-                <Context.Consumer>
-                    {({ name }) =>
-                        `Your settings were saved and sent to your website. Your widget will be updated in some minutes.`
-                    }
-                </Context.Consumer>
-            ),
-            placement: "bottomRight",
-            duration: 5,
-        });
-    }
+
     function requestWidgetSave() {
         console.log(
             renderToString(<ChatBtnWidgetBuilder widgetData={widgetData} />)
         );
-
-     /*    //   doStuff();
-        setProcessing(true)
-        const payload: Record<string, string> = {
-            meta_key: "settings",
-            meta_value: JSON.stringify(widgetData),
-        };
-        Inertia.post(`/plugins/${license.id}/save-settings`, payload, {
-            preserveState: true,
-            onSuccess:()=>{
-                setProcessing(false)
-            },
-            onError: ()=>{
-
-            }
-        }); */
 
     }
     function convertToWidgetData(property: keyof ChatBtnWidgetProps, json) {
@@ -330,10 +346,15 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
                             onValueChange={onValueChange}
                             selectedDevice={selectedDevice}
                             onDeviceChange={handleDeviceChange}
+                            redistributeMacBookStyleButtons={
+                                redistributeMacBookStyleButtons
+                            }
                         />
 
 
-                        <ChatBtnPreview widgetData={widgetData} selectedDevice={selectedDevice}>
+                        <ChatBtnPreview widgetData={widgetData}
+                        selectedDevice={selectedDevice}
+                        >
                             <Button
                                 background="bg-primary hover:bg-blue-900"
                                 color="text-white"

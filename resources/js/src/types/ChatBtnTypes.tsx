@@ -126,6 +126,7 @@ export const defaultChatBtnProps = (): ChatBtnProps => ({
     iconMargin: defaultMultipleNumericBreakpointValue(),
 });
 
+
 export const defaultMultipleNumericBreakpointValue = (): BreakpointValues<
     number[]
 > => ({
