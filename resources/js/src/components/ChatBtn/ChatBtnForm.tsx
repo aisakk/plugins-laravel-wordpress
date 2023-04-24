@@ -84,10 +84,13 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
 
             newButtonProps = macBookChatBtnProps(selectedDevice);
             if (area === "center-top" || area === "center-bottom") {
+                newButtonProps.device = selectedDevice;
                 updatedChatBtnPropsArray.push(newButtonProps);
             }
         } else {
             newButtonProps = defaultChatBtnProps();
+            newButtonProps.device = selectedDevice;
+
             updatedChatBtnPropsArray.push(newButtonProps);
         }
 
@@ -98,6 +101,18 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
         );
     };
 
+    // const createNewButtonInCurrentArea = () => {
+    //     const updatedChatBtnPropsArray = [...widgetData[area]];
+    //     const newChatBtnProps = defaultChatBtnProps();
+    //     newChatBtnProps.device = selectedDevice;
+    //     updatedChatBtnPropsArray.push(newChatBtnProps);
+
+
+    //     setWidgetDataProperty(
+    //         area as keyof ChatBtnWidgetProps,
+    //         updatedChatBtnPropsArray
+    //     );
+    // };
 
 
     const removeButtonOfCurrentArea = (index: number) => {
