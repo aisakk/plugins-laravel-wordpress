@@ -19,15 +19,24 @@ import ChatBtnForm from "../components/ChatBtn/ChatBtnForm";
 import ChatBtnWidgetBuilder from "../components/ChatBtn/WidgetBuilder/ChatBtnWidgetBuilder";
 import Alert from "../components/Alert/Alert";
 import { usePage } from "@inertiajs/inertia-react";
+import { BreakpointValues } from "../types/ChatBtnTypes";
+import DeviceSwitchButtons from "../components/Form/DeviceSwitchButtons";
+
 interface LicenseProps {
     license: License;
     license_meta: LicenseMeta;
+    values: BreakpointValues<number>;
+    onValueChange: (newValues: BreakpointValues<number>) => void;
 }
 
 const ChatBtnSettings: React.FC<LicenseProps> = ({
     license,
     license_meta,
+    values,
+    onValueChange,
 }) => {
+    const [selectedDevice, setSelectedDevice] = useState<"desktop" | "tablet" | "mobile">("desktop");
+
     const [widgetData, setWidgetData] = useState(defaultChatBtnWidgetProps);
     const [api, contextHolder] = notification.useNotification();
     const Context = React.createContext({ name: "Default" });
@@ -36,6 +45,12 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
     const {errors, success} = usePage().props
     const [showAlert, setShowAlert] = useState(false);
     const [processing, setProcessing] = useState(false);
+
+    const handleDeviceChange = (newDevice: "desktop" | "tablet" | "mobile") => {
+        setSelectedDevice(newDevice);
+    };
+
+
     const setWidgetDataProperty = (
         property: keyof ChatBtnWidgetProps,
         value: ChatBtnProps[]
@@ -116,6 +131,7 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
             if (position) {
                 const newButton = {
                     id: button.id,
+                    device: selectedDevice,
                     label: button.labelText,
                     target: button.link || "",
                     icon: button.icon || "",
@@ -299,6 +315,8 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
     useEffect(() => {
         convertToWidgetData("left-top", json);
     }, []);
+
+
     return (
         <MainLayout licenseId={license.id}>
             <div className="pt-10">
@@ -308,8 +326,14 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
                         <ChatBtnForm
                             setWidgetDataProperty={setWidgetDataProperty}
                             widgetData={widgetData}
+                            values={values}
+                            onValueChange={onValueChange}
+                            selectedDevice={selectedDevice}
+                            onDeviceChange={handleDeviceChange}
                         />
-                        <ChatBtnPreview widgetData={widgetData}>
+
+
+                        <ChatBtnPreview widgetData={widgetData} selectedDevice={selectedDevice}>
                             <Button
                                 background="bg-primary hover:bg-blue-900"
                                 color="text-white"
