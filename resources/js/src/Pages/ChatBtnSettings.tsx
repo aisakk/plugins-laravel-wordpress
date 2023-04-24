@@ -42,7 +42,6 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
     const {errors, success} = usePage().props
     const [showAlert, setShowAlert] = useState(false);
     const [processing, setProcessing] = useState(false);
-
     const updateWidgetData = (newWidgetData: ChatBtnWidgetProps) => {
         setWidgetData(newWidgetData);
       };

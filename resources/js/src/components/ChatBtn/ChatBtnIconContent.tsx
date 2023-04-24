@@ -7,7 +7,7 @@ interface ChatBtnIconContentProps {
     icon: string;
     value: string;
     onChange: (name: string, newValue: string) => void;
-    children?: ReactElement;
+    children?: ReactElement | any;
 }
 const ChatBtnIconContent: React.FC<ChatBtnIconContentProps> = ({
     icon,

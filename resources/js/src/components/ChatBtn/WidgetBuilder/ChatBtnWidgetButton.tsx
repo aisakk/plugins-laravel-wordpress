@@ -22,19 +22,65 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [qrCodeImageURL, setQRCodeImageURL] = useState(null);
     const canvas = document.querySelector('canvas');
-
     const mediaQueries = {
         desktop: "@media (min-width: 1024px)",
         tablet: "@media (min-width: 768px) and (max-width: 1023px)",
         mobile: "@media (max-width: 767px)",
     };
+    function Animation(){
+        if(buttonData.animation == "Expand"){
+            return `@keyframes ${buttonData.animation} {
+                0% {
+                  transform: scale(1);
+                }
+                50% {
+                  transform: scale(1.2);
+                }
+                100% {
+                  transform: scale(1);
+                }
+              }`
+        }
+        if(buttonData.animation == "Breathing"){
+            return `@keyframes ${buttonData.animation} {
+                0% {
+                  transform: scale(1);
+                  opacity: 1;
+                }
+                50% {
+                  transform: scale(1.1);
+                  opacity: 0.7;
+                }
+                100% {
+                  transform: scale(1);
+                  opacity: 1;
+                }
+              }`
+        }
+        if(buttonData.animation == "Levitate"){
+            return `@keyframes ${buttonData.animation} {
+                0% {
+                  transform: translateY(0);
+                }
+                50% {
+                  transform: translateY(-20px);
+                }
+                100% {
+                  transform: translateY(0);
+                }
+              }`
+        }
+    }
     let dynamicCSS = `
         .${mainClass} {
             display: flex;
             flex-direction: row${leftSide ? "-reverse" : ""};
             align-items: center;
         }
-
+        .${mainClass}:hover{
+            animation: ${buttonData.animation} 2s ease-in-out infinite;
+        }
+        ${Animation()}
         .${labelClass} {
             height:fit-content;
             background-color: ${buttonData.labelBackgroundColor};

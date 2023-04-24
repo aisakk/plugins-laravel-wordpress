@@ -46,29 +46,18 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
         "Right-Center",
         "Right-Bottom",
     ];
-
+    const animationOptions = [
+        "Expand",
+        "Breathing",
+        "Levitate"
+    ];
     function requestChangeToArea(areaIndex) {
         let areaKey: keyof ChatBtnWidgetProps = areaOptions[
             areaIndex
         ].toLowerCase() as keyof ChatBtnWidgetProps;
         changeAreaRequest(index, areaKey);
     }
-   /*  function getFormattedLinkQRCode() {
-        let userContent = buttonData.target;
-        switch (buttonData.icon) {
-            case "whatsapp":
-                return `https://api.whatsapp.com/send?phone=${userContent}`;
-            case "facebook":
-                return `https://www.facebook.com/${userContent}`;
-            case "instagram":
-                return `https://www.instagram.com/${userContent}`;
-            case "phone":
-                return `tel:${userContent}`;
-            case "email":
-                return `mail:${userContent}`;
-        }
-        return userContent;
-    } */
+
     return (
         <Card>
             <div className="flex flex-col justify-between items-start border-b border-solid border-slate-400 pb-4">
@@ -160,6 +149,15 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
                                 onValueChange(index, "label", value);
                             }}
                         />
+                    </div>
+                    <div className="w-full sm:w-4/12">
+                        <Label>Animation</Label>
+                        <Select
+                        options={animationOptions}
+                        selected={-1}
+                        onChange={(value)=> onValueChange(index, "animation", animationOptions[value])}
+                    //    label="Move to "
+                    />
                     </div>
                 </ChatBtnIconContent>
             </div>
