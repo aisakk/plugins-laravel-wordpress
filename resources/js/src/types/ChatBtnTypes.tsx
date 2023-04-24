@@ -22,6 +22,7 @@ export interface ChatBtnProps {
     visibility: Visibility;
     hidden: boolean;
     isSelected: boolean;
+    device: "desktop" | "mobile";
 
     // ButtonDesign
     buttonBackgroundColor: string;
@@ -74,6 +75,7 @@ export const defaultChatBtnProps = (): ChatBtnProps => ({
     visibility: { desktop: true, tablet: true, mobile: true },
     hidden: false,
     isSelected: false,
+    device: "desktop",
 
     // Propiedades de ButtonDesign
     buttonBackgroundColor: "#15C515",

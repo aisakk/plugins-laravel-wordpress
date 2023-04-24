@@ -4,6 +4,7 @@ import Card from "../../components/Card";
 import AreaSelector from "./AreaSelector";
 import { arrayMoveImmutable } from "array-move";
 
+
 import {
     ChatBtnProps,
     defaultChatBtnProps,
@@ -13,6 +14,7 @@ import {
 import { FormType } from "../../types/FormTypes";
 import ChatBtnCard from "./ChatBtnCard";
 import ResponsiveRangeInput from "../Form/ResponsiveRangeInput";
+import DeviceSwitchButtons from "../Form/DeviceSwitchButtons";
 
 interface ChatBtnFormProps {
     setWidgetDataProperty: (
@@ -20,11 +22,19 @@ interface ChatBtnFormProps {
         value: ChatBtnProps[]
     ) => void;
     widgetData: ChatBtnWidgetProps;
+    values: any;
+    onValueChange: any;
+    selectedDevice: any;
+    onDeviceChange: any;
 }
 
 const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
     setWidgetDataProperty,
     widgetData,
+    values,
+    onValueChange,
+    selectedDevice,
+    onDeviceChange,
 }) => {
     const [area, setArea] = useState("left-top");
     const [userType, setUserType] = useState(FormType.Basic);
@@ -48,7 +58,10 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
 
     const createNewButtonInCurrentArea = () => {
         const updatedChatBtnPropsArray = [...widgetData[area]];
-        updatedChatBtnPropsArray.push(defaultChatBtnProps());
+        const newChatBtnProps = defaultChatBtnProps();
+        newChatBtnProps.device = selectedDevice;
+        updatedChatBtnPropsArray.push(newChatBtnProps);
+
 
         setWidgetDataProperty(
             area as keyof ChatBtnWidgetProps,
@@ -116,6 +129,7 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
                     </div>
 
                     <div className="pt-6">
+                        <DeviceSwitchButtons twoDevices={true} device={selectedDevice} onValueChange={onDeviceChange} />
                         <AreaSelector
                             onSelect={(newArea: string) => {
                                 setArea(newArea);
@@ -191,18 +205,23 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
             </Card>
 
             <div className="flex gap-6 flex-col pt-6">
-                {widgetData[area].map((item, index) => (
-                    <ChatBtnCard
-                        key={index}
-                        index={index}
-                        buttonData={item}
-                        userType={userType}
-                        onValueChange={updateChatBtnWidgetProps}
-                        removeRequest={removeButtonOfCurrentArea}
-                        changeAreaRequest={changeButtonArea}
-                        changeIndexRequest={changeButtonIndex}
-                    ></ChatBtnCard>
-                ))}
+                {widgetData[area].map((item, index) => {
+                    if (item.device === selectedDevice) {
+                        return (
+                            <ChatBtnCard
+                                key={index}
+                                index={index}
+                                buttonData={item}
+                                userType={userType}
+                                onValueChange={updateChatBtnWidgetProps}
+                                removeRequest={removeButtonOfCurrentArea}
+                                changeAreaRequest={changeButtonArea}
+                                changeIndexRequest={changeButtonIndex}
+                            ></ChatBtnCard>
+                        );
+                    }
+                    return null;
+                })}
             </div>
         </div>
     );

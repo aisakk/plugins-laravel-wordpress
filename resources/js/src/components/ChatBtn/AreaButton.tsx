@@ -9,9 +9,11 @@ const area_position_class = [
     "justify-start items-start",
     "justify-start items-center",
     "justify-start items-end",
+    "justify-center items-start",
+    "justify-center items-end",
     "justify-end items-start",
-    "justify-end tems-center",
-    "justify-end items-end",
+    "justify-end items-center",
+    "justify-end items-end"
 ];
 
 const AreaButton: React.FC<AreaButtonProps> = ({ index, title }) => {
