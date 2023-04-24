@@ -41,8 +41,8 @@ const PluginDetails: React.FC<LicenseProps> = (props) => {
                                         <p>{plugin.plugin_info.details.last_updated}</p>
                                     </div>
                                     <div>
-                                     {/*    <h6 className="pb-1 font-bold text-sm">Official Site</h6> */}
-                                        <p>{plugin.plugin_info.details.oficial_website}</p>
+                                     {/*    <h6 className="pb-1 font-bold text-sm">Official Site</h6>
+                                        <p>{plugin.plugin_info.details.oficial_website}</p>*/}
                                     </div>
                                 </div>
                             </div>
