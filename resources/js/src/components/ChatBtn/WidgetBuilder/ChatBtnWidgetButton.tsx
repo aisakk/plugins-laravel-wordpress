@@ -166,11 +166,23 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
         }
       };
 
+    function formatTextForWhatsApp(text) {
+        if(!text){
+            return ''
+        }else{
+            const formattedText = text
+            .replace(/\n/g, '%0A') // Reemplaza los saltos de línea con %0A
+            .replace(/ /g, '%20'); // Reemplaza los espacios con %20
+            return formattedText;
+        }
+
+      }
     function getFormattedLink() {
         let userContent = buttonData.target;
+        const formattedMessage = formatTextForWhatsApp(buttonData.extraField)
         switch (buttonData.icon) {
             case "whatsapp":
-                return `https://api.whatsapp.com/send?phone=${userContent}`;
+                return `https://api.whatsapp.com/send?phone=${userContent}&text=${formattedMessage}`;
             case "facebook":
                 return `https://www.facebook.com/${userContent}`;
             case "instagram":

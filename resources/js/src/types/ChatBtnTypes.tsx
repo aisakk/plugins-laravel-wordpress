@@ -18,6 +18,7 @@ export interface ChatBtnProps {
     id: string;
     label: string;
     target: string;
+    extraField: string;
     icon: string;
     visibility: Visibility;
     hidden: boolean;
@@ -71,6 +72,7 @@ export const defaultChatBtnProps = (): ChatBtnProps => ({
     id: "",
     label: "",
     target: "",
+    extraField: "",
     icon: "whatsapp",
     visibility: { desktop: true, tablet: true, mobile: true },
     hidden: false,

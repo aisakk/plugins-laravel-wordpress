@@ -136,6 +136,7 @@ const ChatBtnCard: React.FC<ChatBtnCardProps> = ({
                 <ChatBtnIconContent
                     icon={buttonData.icon}
                     value={buttonData.target}
+                    extraFieldValue={buttonData.extraField}
                     onChange={(name, value) => {
                         onValueChange(index, name, value);
                     }}

@@ -7,11 +7,13 @@ interface ChatBtnIconContentProps {
     icon: string;
     value: string;
     onChange: (name: string, newValue: string) => void;
+    extraFieldValue: string;
     children?: ReactElement | any;
 }
 const ChatBtnIconContent: React.FC<ChatBtnIconContentProps> = ({
     icon,
     value,
+    extraFieldValue,
     onChange,
     children,
 }) => {
@@ -37,6 +39,19 @@ const ChatBtnIconContent: React.FC<ChatBtnIconContentProps> = ({
                             type={currentData.input}
                             placeholder={currentData.placeholder}
                         />
+                        {currentData.extraField && (
+                            <div className="mt-4">
+                             <Label>{currentData.extraField.label}</Label>
+                             <Input
+                                 value={extraFieldValue}
+                                 onChange={(newValue) => {
+                                     onChange("extraField", newValue);
+                                 }}
+                                 type={currentData.extraField.input}
+                                 placeholder={currentData.extraField.placeholder}
+                             />
+                         </div>
+                        )}
                     </div>
                     {children}
                 </div>
@@ -53,6 +68,11 @@ const icon_data = {
         description: "",
         input: "number",
         placeholder: "+1 123 456 789",
+        extraField: {
+            label: "Mensaje Predeterminado",
+            input: "text",
+            placeholder: "Escriba aquí el texto predeterminado",
+        },
     },
     facebook: {
         label: "Facebook Username",
