@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LicenseController;
 use App\Http\Controllers\PluginController;
 
+Route::post('/license/{code_verify}', [LicenseController::class, 'verify']);
 
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::delete('/notifications/deleteAll', [LicenseController::class, 'deleteAll'])->name('deleteAllNotification');
@@ -16,3 +17,4 @@ Route::post('/license/create', [LicenseController::class, 'create'])->name('lice
 Route::post('/plugins/update-info', [PluginController::class, 'updatePluginInfo'])->name('plugins.update-info');
 Route::get('/plugins/build', [PluginController::class, 'getJsonData']);
 Route::get('/plugins/readme', [PluginController::class, 'getReadme']);
+

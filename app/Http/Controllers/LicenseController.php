@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\LicenseNotificationEvent;
+use App\Models\Domain;
 use Illuminate\Http\Request;
 use App\Models\License;
 use App\Models\Notifications;
@@ -74,5 +75,35 @@ class LicenseController extends Controller
     {
         Notifications::truncate();
         return response()->noContent();
+    }
+    public function verify(Request $request, $code_verify){
+        $searchLicenseKey = License::where('licence_key', $request->license_key)->first();
+        $searchLicenseCode = License::where('code_verify', $code_verify)->first();
+        if($searchLicenseKey == null){
+            return response()->json(["licence_key" => "No hay ninguna Licencia con dicha clave"]);
+        }
+        if($searchLicenseCode == null){
+            return response()->json(["licence_key" => "No hay ninguna Licencia con dicho codigo de verificacion"]);
+        }
+        $searchDomain = Domain::where('license_id', $searchLicenseKey->id)->get();
+        if($searchDomain->isEmpty()){
+            return response()->json(["domain" => "no hay ningun dominio segun su licencia"]);
+        }
+        $badRequestForEach = [];
+        $successRequestForEach = [];
+        foreach ($searchDomain as $domain) {
+            # code...
+          if($domain->active == 0){
+            array_push($badRequestForEach, response()->json(["License Desactive"=> "La licencia en su dominio no se encuentra activo $domain->name"]));
+          }
+          if($domain->name !== $request->ip()){
+            array_push($badRequestForEach, response()->json(["Domain Name" => "Su nombre de dominio donde esta realizando la peticion, no se encuentra en nuestra coleccion $request->ip()"]));
+          }
+           if($domain->active == 1 && $domain->name == $request->ip()){
+            array_push($successRequestForEach, response()->json(["Licence_Domain" => "Esta licencia y dominio estan listo para usarla, $domain"]));
+           }
+        }
+        return response()->json(["bad_request"=> $badRequestForEach, "success_request"=>$successRequestForEach]);
+
     }
 }

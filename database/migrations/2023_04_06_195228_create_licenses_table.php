@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('licence_key');
             $table->unsignedBigInteger('type_license_id'); // Agrega la columna type_license_id después de la columna id
             $table->boolean('status')->default(false);
+            $table->string('code_verify');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('plugin_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
