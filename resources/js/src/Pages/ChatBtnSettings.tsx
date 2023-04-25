@@ -378,7 +378,7 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
                         {errors && Object.keys(errors).length > 0 && (
                             <Alert error={errors} show={!showAlert} onClose={handleAlert} />
                         )}
-                        {success && Object.keys(success).length > 0 && (
+                        {typeof success === 'string' && Object.keys(success).length > 0 && (
                             <Alert success={success} show={!showAlert} onClose={handleAlert} />
                         )}
 

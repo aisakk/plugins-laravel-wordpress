@@ -10,6 +10,7 @@ interface ChatBtnWidgetBuilderProps {
 const ChatBtnWidgetBuilder: React.FC<ChatBtnWidgetBuilderProps> = ({
     widgetData,
 }) => {
+
     const paddingArea = widgetData["left-top"][0]?.areaPadding?.desktop
     const areaBase = css`
         position: absolute;
@@ -19,9 +20,7 @@ const ChatBtnWidgetBuilder: React.FC<ChatBtnWidgetBuilderProps> = ({
         flex-direction: column;
         padding: ${paddingArea}px;
     `;
-   /*  useEffect(()=>{
 
-    },[]) */
     return (
         <div
             className={css`
