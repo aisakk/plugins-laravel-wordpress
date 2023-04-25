@@ -318,6 +318,12 @@ const ChatBtnSettings: React.FC<LicenseProps> = ({
                             [0, 0, 0, 0]
                         ),
                     },
+                    areaPadding:{
+                        desktop: button.cssDesign.buttonDesign.areaPadding.desktop,
+                        tablet: button.cssDesign.buttonDesign.areaPadding.tablet,
+                        mobile: button.cssDesign.buttonDesign.areaPadding.mobile
+                    }
+
                 };
                 newWidgetData[position].push(newButton);
             }

@@ -5,7 +5,7 @@ import InputRange from "./InputRange";
 
 interface ResponsiveRangeInputProps {
     label: string;
-    values: BreakpointValues<number>;
+    values: BreakpointValues<number> ;
     onValueChange: (newValues: BreakpointValues<number>) => void;
 }
 
@@ -29,7 +29,6 @@ const ResponsiveRangeInput: React.FC<ResponsiveRangeInputProps> = ({
 
         onValueChange(modifiedValues);
     };
-
     return (
         <>
             <div>

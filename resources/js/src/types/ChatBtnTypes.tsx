@@ -44,6 +44,7 @@ export interface ChatBtnProps {
     iconColor: string;
     iconSize: FontSize;
     iconMargin: Margin;
+    areaPadding: FontSize;
 }
 
 export interface ChatBtnWidgetProps {
@@ -79,6 +80,7 @@ export const defaultChatBtnProps = (): ChatBtnProps => ({
     isSelected: false,
     device: "desktop",
     animation: "",
+
     // Propiedades de ButtonDesign
     buttonBackgroundColor: "#15C515",
     buttonBorderRadius: {
@@ -126,6 +128,11 @@ export const defaultChatBtnProps = (): ChatBtnProps => ({
         mobile: 40,
     },
     iconMargin: defaultMultipleNumericBreakpointValue(),
+    areaPadding:{
+        desktop: 0,
+        tablet: 0,
+        mobile: 0,
+    }
 });
 
 

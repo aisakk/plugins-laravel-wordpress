@@ -16,6 +16,7 @@ import ChatBtnCard from "./ChatBtnCard";
 import ResponsiveRangeInput from "../Form/ResponsiveRangeInput";
 import DeviceSwitchButtons from "../Form/DeviceSwitchButtons";
 
+
 interface ChatBtnFormProps {
     setWidgetDataProperty: (
         property: keyof ChatBtnWidgetProps,
@@ -160,7 +161,7 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
             updatedChatBtnPropsArray
         );
     };
-
+    console.log(widgetData[area])
     return (
         <div className="w-full md:w-10/12 lg:w-8/12 xl:w-8/12">
             <Card>
@@ -172,6 +173,20 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
                                 Select a page area to handle your buttons
                             </p>
                         </div>
+                        <div>
+                        {
+                            widgetData[area].length > 0 && (
+                                <ResponsiveRangeInput
+                                values={widgetData[area][0].areaPadding.desktop}
+                                label="Area Padding"
+                                onValueChange={(newValue) =>
+                                    updateChatBtnWidgetProps(0, "areaPadding", newValue)
+                                }
+                                />
+                            )
+                            }
+
+                        </div>
                     </div>
 
                     <div className="pt-6">
@@ -182,6 +197,7 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
                             }}
                             selectedArea={area}
                         />
+
                         <div className="flex gap-3 pt-4">
                             <Button
                                 isSelected={styleType === "fixed"}
@@ -209,6 +225,7 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
                                 Floating Style
                             </Button>
                         </div>
+
                     </div>
 
                 </div>
