@@ -161,7 +161,6 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
             updatedChatBtnPropsArray
         );
     };
-    console.log(widgetData[area])
     return (
         <div className="w-full md:w-10/12 lg:w-8/12 xl:w-8/12">
             <Card>

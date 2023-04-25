@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ChatBtnWidgetProps } from "../../../types/ChatBtnTypes";
 import { css } from "@emotion/css";
 import ChatBtnWidgetButton from "./ChatBtnWidgetButton";
@@ -10,7 +10,7 @@ interface ChatBtnWidgetBuilderProps {
 const ChatBtnWidgetBuilder: React.FC<ChatBtnWidgetBuilderProps> = ({
     widgetData,
 }) => {
-    const paddingArea = widgetData["left-top"][0].areaPadding.desktop;
+    const paddingArea = widgetData["left-top"][0]?.areaPadding?.desktop
     const areaBase = css`
         position: absolute;
         height: fit-content;
@@ -19,7 +19,9 @@ const ChatBtnWidgetBuilder: React.FC<ChatBtnWidgetBuilderProps> = ({
         flex-direction: column;
         padding: ${paddingArea}px;
     `;
+   /*  useEffect(()=>{
 
+    },[]) */
     return (
         <div
             className={css`
