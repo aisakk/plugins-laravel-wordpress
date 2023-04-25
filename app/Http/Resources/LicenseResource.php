@@ -21,6 +21,7 @@ class LicenseResource extends JsonResource
             'id' => $this->id,
             'date' => $this->created_at->format('d M Y'),
             'code' => $this->licence_key,
+            "type_license" => $this->type_license_id,
             'pluginName' => $this->plugin->name,
             'expiration' => $expirationDate,
             'domains' => $this->domainsOrderedDesc,

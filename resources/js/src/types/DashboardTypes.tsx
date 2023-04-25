@@ -54,7 +54,7 @@ export interface Plugin{
 export interface Domain{
     id:number;
     name:string;
-    active:boolean;
+    active:boolean | number;
 }
 
 export interface License {
@@ -65,6 +65,7 @@ export interface License {
     expiration: string;
     domains: Domain[];
     status: string;
+    type_license: number;
 }
 export interface LicenseIdProps {
     licenseId?: number;

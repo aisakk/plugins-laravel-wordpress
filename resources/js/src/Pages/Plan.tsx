@@ -6,7 +6,7 @@ import Card from '../components/Card';
 import Icon from '../components/Icon';
 import Badge from '../components/Badge';
 import { License,LicenseIdProps,Plugin } from '../types/DashboardTypes'
-
+import { Link } from '@inertiajs/inertia-react';
 interface LicenseProps extends LicenseIdProps {
     license: License;
     // plugin:Plugin;
@@ -23,7 +23,17 @@ const Plan: React.FC<LicenseProps> = (props) =>{
     function openModal() {
         setIsOpen(true);
     }
+    function getDinamycCountLicense() {
+        const domainsActive = license.domains.filter(domain => domain.active === 1);
+        const totalActive = domainsActive.length;
 
+        if (totalActive === 0) {
+          return `${0}/${10}`;
+        }
+
+        const totalCount = Math.min(totalActive, 10);
+        return `${totalCount}/${10}`;
+      }
     return (
         <MainLayout licenseId={licenseId}>
             <div className="pt-16">
@@ -125,8 +135,8 @@ const Plan: React.FC<LicenseProps> = (props) =>{
                                     <div className="w-full sm:w-4/12">
                                         <h6 className="font-bold text-xs uppercase mb-2">Site Activations</h6>
                                         <div className="flex gap-2 items-center">
-                                            <p>1/10</p>
-                                            <span className="bg-blue-100 py-1 px-4 rounded-xl font-bold text-primary text-xs">View Sites</span>
+                                            <p>{getDinamycCountLicense()}</p>
+                                            <Link href={`/plugins/${licenseId}/domains`}><span className="bg-blue-100 py-1 px-4 rounded-xl font-bold text-primary text-xs">View Domains</span></Link>
                                         </div>
                                     </div>
                                 </div>
@@ -141,10 +151,13 @@ const Plan: React.FC<LicenseProps> = (props) =>{
                                 <li className="flex items-center gap-2"><span className="text-primary"><Icon size={4} name="check-circle" /></span> Superfast internal linking suggestions</li>
                                 <li className="flex items-center gap-2"><span className="text-primary"><Icon size={4} name="check-circle" /></span> 24/7 email support</li>
                             </ul>
-                            <Button background="bg-primary" color="text-white">
-                                <span>Get Premium</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
-                            </Button>
+                            {license.type_license < 3 && (
+                                                <Link href={`/plugin/${licenseId}/details`}>  <Button background="bg-primary" color="text-white">
+                                                <span>Get Premium</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
+                                            </Button></Link>
+                            )}
+
                         </Card>
                     </div>
                 </div>

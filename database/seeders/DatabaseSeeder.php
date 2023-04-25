@@ -11,7 +11,8 @@ use App\Models\Plugin;
 use App\Models\Domain;
 use App\Models\LicenseMeta;
 use App\Models\Notifications;
-
+use App\Models\TypeLicense;
+use Faker\Factory as Faker;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -20,6 +21,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
+        $typeLicenses = ['Basic', 'Advanced', 'Premium'];
+        $faker = Faker::create();
+        foreach ($typeLicenses as $typeLicense) {
+            TypeLicense::create([
+                'type_license' => $typeLicense
+            ]);
+        }
 
         User::factory()->create([
             'username' => 'testUser',
@@ -35,6 +43,7 @@ class DatabaseSeeder extends Seeder
         foreach($plugins as $plugin){
             License::factory(3)->create([
                 'plugin_id' => $plugin->id,
+                'type_license_id' => $faker->randomElement(TypeLicense::pluck('id')->toArray()), // Selecciona un tipo de licencia aleatoriamente
             ])->each(function ($license) {
                 Domain::factory($license->max_domains)->create([
                     'license_id' => $license->id,

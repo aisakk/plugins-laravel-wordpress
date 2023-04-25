@@ -14,14 +14,13 @@ return new class extends Migration
         Schema::create('licenses', function (Blueprint $table) {
             $table->id();
             $table->string('licence_key');
+            $table->unsignedBigInteger('type_license_id'); // Agrega la columna type_license_id después de la columna id
             $table->boolean('status')->default(false);
-
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('plugin_id');
-
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('plugin_id')->references('id')->on('plugins')->onDelete('cascade');
-
+            $table->foreign('type_license_id')->references('id')->on('type_licenses')->onDelete('cascade');
             $table->timestamps();
         });
     }
