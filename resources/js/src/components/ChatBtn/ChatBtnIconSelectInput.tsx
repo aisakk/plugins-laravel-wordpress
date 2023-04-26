@@ -32,6 +32,10 @@ const buttons: ButtonOption[] = [
         name: "Link",
         value: "link",
     },
+    {
+        name: "ChatBot Whatsapp",
+        value: "global"
+    }
 ];
 
 interface ChatBtnIconSelect {
@@ -73,7 +77,7 @@ const ChatBtnIconSelect = ({ icon, onChange }) => {
                             checked
                                 ? "bg-slate-50 border-primary"
                                 : "bg-white border-slate-50"
-                        } relative p-2 w-full h-20  border-2 rounded-lg p-2 shadow-md`}
+                        } relative p-2 w-full h-20  border-2 rounded-lg shadow-md`}
                                     >
                                         <div
                                             className={`flex h-full w-full justify-center items-center`}

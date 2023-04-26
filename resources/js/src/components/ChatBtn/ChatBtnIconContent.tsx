@@ -18,7 +18,10 @@ const ChatBtnIconContent: React.FC<ChatBtnIconContentProps> = ({
     children,
 }) => {
     let currentData = icon_data[icon];
-
+    function handleSubmit(e){
+        e.preventDefault()
+       // console.log(extraFieldValue, value)
+    }
     return (
         <>
             <div className="pt-6">
@@ -29,30 +32,62 @@ const ChatBtnIconContent: React.FC<ChatBtnIconContentProps> = ({
                     }}
                 />
                 <div className="flex flex-wrap sm:flex-nowrap gap-6 pb-4 pt-4">
-                    <div className="w-full sm:w-4/12">
-                        <Label>{currentData.label}</Label>
-                        <Input
-                            value={value}
-                            onChange={(newValue) => {
-                                onChange("target", newValue);
-                            }}
-                            type={currentData.input}
-                            placeholder={currentData.placeholder}
-                        />
-                        {currentData.extraField && (
-                            <div className="mt-4">
-                             <Label>{currentData.extraField.label}</Label>
-                             <Input
-                                 value={extraFieldValue}
-                                 onChange={(newValue) => {
-                                     onChange("extraField", newValue);
-                                 }}
-                                 type={currentData.extraField.input}
-                                 placeholder={currentData.extraField.placeholder}
-                             />
-                         </div>
-                        )}
+                    {currentData.description !== 'chatbot' ? (
+                           <div className="w-full sm:w-4/12">
+                           <Label>{currentData.label}</Label>
+                           <Input
+                               value={value}
+                               onChange={(newValue) => {
+                                   onChange("target", newValue);
+                               }}
+                               type={currentData.input}
+                               placeholder={currentData.placeholder}
+                           />
+                           {currentData.extraField && (
+                               <div className="mt-4">
+                                <Label>{currentData.extraField.label}</Label>
+                                <Input
+                                    value={extraFieldValue}
+                                    onChange={(newValue) => {
+                                        onChange("extraField", newValue);
+                                    }}
+                                    type={currentData.extraField.input}
+                                    placeholder={currentData.extraField.placeholder}
+                                />
+                             </div>
+                           )}
+                       </div>
+                    ):(
+                        <div className="w-full sm:w-4/12">
+                        <form onSubmit={handleSubmit}>
+                             <Label>{currentData.label}</Label>
+                                <Input
+                                value={value}
+                                onChange={(newValue) => {
+                                    onChange("target", newValue);
+                                }}
+                                type={currentData.input}
+                                placeholder={currentData.placeholder}
+                            />
+                            {currentData.extraField && (
+                                <div className="mt-4">
+                                <Label>{currentData.extraField.label}</Label>
+                                <Input
+                                    value={extraFieldValue}
+                                    onChange={(newValue) => {
+                                        onChange("extraField", newValue);
+                                    }}
+                                    type={currentData.extraField.input}
+                                    placeholder={currentData.extraField.placeholder}
+                                />
+                            </div>
+                            )}
+                            <button type="submit"></button>
+                        </form>
+
                     </div>
+                    )}
+
                     {children}
                 </div>
             </div>
@@ -104,4 +139,15 @@ const icon_data = {
         input: "text",
         placeholder: "https://www.example.com",
     },
+    global:{
+        label: "Ingresar Pregunta",
+        description: "chatbot",
+        input: "text",
+        placeholder: "¿Quieres nuestra Info?",
+        extraField: {
+            label: "Ingresar Respuesta",
+            input: "text",
+            placeholder: "Escriba aquí la respuesta predeterminada",
+        },
+    }
 };

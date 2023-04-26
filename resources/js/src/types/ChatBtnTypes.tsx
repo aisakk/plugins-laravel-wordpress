@@ -25,6 +25,7 @@ export interface ChatBtnProps {
     isSelected: boolean;
     device: "desktop" | "mobile";
     animation: string;
+    chatbot: Object[];
     // ButtonDesign
     buttonBackgroundColor: string;
     buttonBorderRadius: BorderRadius;
@@ -80,7 +81,7 @@ export const defaultChatBtnProps = (): ChatBtnProps => ({
     isSelected: false,
     device: "desktop",
     animation: "",
-
+    chatbot: [],
     // Propiedades de ButtonDesign
     buttonBackgroundColor: "#15C515",
     buttonBorderRadius: {

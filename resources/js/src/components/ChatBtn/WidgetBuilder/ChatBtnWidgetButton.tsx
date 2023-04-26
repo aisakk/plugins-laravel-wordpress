@@ -11,7 +11,25 @@ interface ChatBtnWidgetButtonProps {
     buttonData: ChatBtnProps;
     leftSide: boolean;
 }
-
+let chatBot = [{
+    pregunta: '¿Se puede realizar una Compra?',
+    respuesta: "Si se puede realizar una compra"
+},{
+    pregunta: '¿Se puede realizar una Compra?',
+    respuesta: "Si se puede realizar una compra"
+},{
+    pregunta: '¿Se puede realizar una Compra?',
+    respuesta: "Si se puede realizar una compra"
+},{
+    pregunta: '¿Se puede realizar una Compra?',
+    respuesta: "Si se puede realizar una compra"
+},{
+    pregunta: '¿Se puede realizar una Compra?',
+    respuesta: "Si se puede realizar una compra"
+},{
+    pregunta: '¿Se puede realizar una Compra?',
+    respuesta: "Si se puede realizar una compra"
+}]
 const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
     buttonData,
     leftSide,
@@ -22,6 +40,10 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [qrCodeImageURL, setQRCodeImageURL] = useState(null);
     const canvas = document.querySelector('canvas');
+    chatBot =[{
+        pregunta: buttonData.target,
+        respuesta: buttonData.extraField
+    }]
     const mediaQueries = {
         desktop: "@media (min-width: 1024px)",
         tablet: "@media (min-width: 768px) and (max-width: 1023px)",
@@ -71,7 +93,38 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
               }`
         }
     }
+    function handleOpenChat(){
+        let containerBot = document.querySelector('.chatbot');
+        if( containerBot.style.display == 'none'){
+             containerBot.style.display = 'block';
+        }else{
+            containerBot.style.display = 'none';
+        }
+
+    }
+
     let dynamicCSS = `
+    .${mainClass}-chatcontainer{
+        display: flex;
+        flex-direction: column;
+    }
+    .${mainClass}-chatwidget{
+        display:flex;
+        flex-direction: row${leftSide ? "-reverse" : ""};
+        align-items: center;
+    }
+    .enlace-chatbot{
+        cursor:pointer
+    }
+        .chatbot{
+            display: none;
+            width:300px;
+            height:300px;
+            overflow-y: auto;
+            background-color:#ffff;
+            position:relative;
+            padding: 10px;
+        }
         .${mainClass} {
             display: flex;
             flex-direction: row${leftSide ? "-reverse" : ""};
@@ -153,7 +206,7 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
             }
         }
     `;
-    const handleButtonClick = (event) => {
+    const handleButtonEnlaceClick = (event) => {
         const isTablet = window.matchMedia("(min-width: 768px) and (max-width: 1023px)").matches;
         if (isTablet) {
           window.open(getFormattedLink(), "_blank");
@@ -280,8 +333,9 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
         </head>
             <style>{dynamicCSS}</style>
-
-            {buttonData.label && (
+            {buttonData.icon !== 'global' ? (
+            <>
+                  {buttonData.label && (
                 <span className={labelClass}>{buttonData.label}</span>
             )}
 
@@ -289,7 +343,7 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
                 href={getFormattedLink()}
                 target="_blank"
                 className={`${buttonClass} enlace`}
-                onClick={handleButtonClick}
+                onClick={handleButtonEnlaceClick}
 
             >
                 <Icon
@@ -309,6 +363,41 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
                 <img src={canvas?.toDataURL()} className="qr-code-image" alt="QRCode generado" />
         </Space>
       </Modal>
+            </>
+            ) : (
+            <>
+            <div className={`${mainClass}-chatcontainer`}>
+
+                <div className={`${mainClass}-chatwidget`}>
+                            {buttonData.label && (
+                                <span className={labelClass}>{buttonData.label}</span>
+                            )}
+                            <a
+                                //href={getFormattedLink()}
+                                target="_blank"
+                                className={`${buttonClass} enlace-chatbot`}
+                                onClick={handleOpenChat}
+                            >
+                                <Icon
+                                    name={buttonData.icon}
+                                    size={buttonData.iconSize["desktop"]}
+                                    color={buttonData.iconColor}
+                                />
+                            </a>
+                    </div>
+                    <div className="chatbot">
+                        {chatBot.map((item, index)=>{
+                            return (<>
+                                <p>{item.pregunta}</p>
+                                <p>{item.respuesta}</p><br/>
+                            </>)
+                        })}
+                     </div>
+
+            </div>
+
+            </>)}
+
       <script>{dynamicJS}</script>
     </div>
 
