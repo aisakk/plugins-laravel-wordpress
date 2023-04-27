@@ -25,7 +25,7 @@ export interface ChatBtnProps {
     isSelected: boolean;
     device: "desktop" | "mobile";
     animation: string;
-    chatbot: Object[];
+    chatbot: Array<{ pregunta: string; respuesta: string }>;
     // ButtonDesign
     buttonBackgroundColor: string;
     buttonBorderRadius: BorderRadius;

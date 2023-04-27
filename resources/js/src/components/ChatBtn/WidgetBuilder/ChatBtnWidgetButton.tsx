@@ -40,10 +40,6 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [qrCodeImageURL, setQRCodeImageURL] = useState(null);
     const canvas = document.querySelector('canvas');
-    chatBot =[{
-        pregunta: buttonData.target,
-        respuesta: buttonData.extraField
-    }]
     const mediaQueries = {
         desktop: "@media (min-width: 1024px)",
         tablet: "@media (min-width: 768px) and (max-width: 1023px)",
@@ -104,6 +100,51 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
     }
 
     let dynamicCSS = `
+    details {
+        background: #282828;
+        box-shadow: 0 .1rem 1rem -.5rem rgba(0,0,0,.4);
+        border-radius: 5px;
+        overflow: hidden;
+        color: white;
+        margin-bottom: .5rem;
+      }
+
+      summary {
+        padding: 1rem;
+        display: block;
+        background: #333;
+        padding-left: 2.2rem;
+        position: relative;
+        cursor: pointer;
+      }
+
+      summary:before {
+        content: '';
+        border-width: .4rem;
+        border-style: solid;
+        border-color: transparent transparent transparent #fff;
+        position: absolute;
+        top: 1.3rem;
+        left: 1rem;
+        transform: rotate(0);
+        transform-origin: .2rem 50%;
+        transition: .25s transform ease;
+      }
+
+      /* THE MAGIC 🧙‍♀️ */
+      details[open] > summary:before {
+        transform: rotate(90deg);
+      }
+
+
+      details summary::-webkit-details-marker {
+        display:none;
+      }
+
+      details > ul {
+        padding-bottom: 1rem;
+        margin-bottom: 0;
+      }
     .${mainClass}-chatcontainer{
         display: flex;
         flex-direction: column;
@@ -386,10 +427,15 @@ const ChatBtnWidgetButton: React.FC<ChatBtnWidgetButtonProps> = ({
                             </a>
                     </div>
                     <div className="chatbot">
-                        {chatBot.map((item, index)=>{
+                        {buttonData.chatbot?.map((item, index)=>{
                             return (<>
-                                <p>{item.pregunta}</p>
-                                <p>{item.respuesta}</p><br/>
+                              <details>
+                                <summary>{item.pregunta}</summary>
+                                <ul>
+                                    <li>{item.respuesta}</li>
+
+                                </ul>
+                                </details>
                             </>)
                         })}
                      </div>

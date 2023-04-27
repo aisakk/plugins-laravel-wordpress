@@ -71,7 +71,6 @@ const ChatBtnForm: React.FC<ChatBtnFormProps> = ({
                 [name]: value,
             };
         }
-
         setWidgetDataProperty(
             area as keyof ChatBtnWidgetProps,
             updatedChatBtnPropsArray

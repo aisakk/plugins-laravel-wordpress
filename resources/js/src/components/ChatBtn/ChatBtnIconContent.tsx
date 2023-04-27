@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import ChatBtnIconSelect from "./ChatBtnIconSelectInput";
 import Input from "../Form/Input";
 import Label from "../Form/Label";
@@ -18,9 +18,20 @@ const ChatBtnIconContent: React.FC<ChatBtnIconContentProps> = ({
     children,
 }) => {
     let currentData = icon_data[icon];
+    const [chatbot, setChatbot] = useState([]);
+    const [localValue, setLocalValue] = useState(value);
+    const [localExtraFieldValue, setLocalExtraFieldValue] = useState(extraFieldValue);
+
+
     function handleSubmit(e){
         e.preventDefault()
-       // console.log(extraFieldValue, value)
+        const updatedChatbot = [...chatbot, { pregunta: value, respuesta: extraFieldValue }];
+
+        // Actualiza el estado con el nuevo array
+        setChatbot(updatedChatbot);
+        onChange("chatbot", updatedChatbot);
+        setLocalValue("");
+        setLocalExtraFieldValue("");
     }
     return (
         <>
@@ -36,8 +47,9 @@ const ChatBtnIconContent: React.FC<ChatBtnIconContentProps> = ({
                            <div className="w-full sm:w-4/12">
                            <Label>{currentData.label}</Label>
                            <Input
-                               value={value}
+                               value={localValue}
                                onChange={(newValue) => {
+                                    setLocalValue(newValue)
                                    onChange("target", newValue);
                                }}
                                type={currentData.input}
@@ -47,8 +59,9 @@ const ChatBtnIconContent: React.FC<ChatBtnIconContentProps> = ({
                                <div className="mt-4">
                                 <Label>{currentData.extraField.label}</Label>
                                 <Input
-                                    value={extraFieldValue}
+                                    value={localExtraFieldValue}
                                     onChange={(newValue) => {
+                                        setLocalExtraFieldValue(newValue)
                                         onChange("extraField", newValue);
                                     }}
                                     type={currentData.extraField.input}
@@ -58,23 +71,29 @@ const ChatBtnIconContent: React.FC<ChatBtnIconContentProps> = ({
                            )}
                        </div>
                     ):(
-                        <div className="w-full sm:w-4/12">
+                        <div className="w-full sm:w-10/12">
                         <form onSubmit={handleSubmit}>
-                             <Label>{currentData.label}</Label>
+                            <div className="flex gap-3">
+                                <div className="flex flex-col">
+                                <Label>{currentData.label}</Label>
                                 <Input
-                                value={value}
+                                value={localValue}
                                 onChange={(newValue) => {
+                                    setLocalValue(newValue)
                                     onChange("target", newValue);
                                 }}
                                 type={currentData.input}
                                 placeholder={currentData.placeholder}
                             />
-                            {currentData.extraField && (
-                                <div className="mt-4">
+                                </div>
+                           <div className="flex flex-col">
+                           {currentData.extraField && (
+                                <div>
                                 <Label>{currentData.extraField.label}</Label>
                                 <Input
-                                    value={extraFieldValue}
+                                    value={localExtraFieldValue}
                                     onChange={(newValue) => {
+                                        setLocalExtraFieldValue(newValue)
                                         onChange("extraField", newValue);
                                     }}
                                     type={currentData.extraField.input}
@@ -82,6 +101,10 @@ const ChatBtnIconContent: React.FC<ChatBtnIconContentProps> = ({
                                 />
                             </div>
                             )}
+                           </div>
+
+                            </div>
+
                             <button type="submit"></button>
                         </form>
 
